@@ -47,19 +47,19 @@ def main():
                     else:
                         screen = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
                 if event.key == pygame.K_DOWN:
-                    if (pi < (MAPHEIGHT - 1)) and (TAB[pi+1][pj] == 0):
+                    if (pi < (MAPHEIGHT - 1)) and (TAB[pi+1][pj] != 0):
                         jogador.move_ip(0,TILESIZE)
                         pi += 1
                 if event.key == pygame.K_RIGHT:
-                    if pj < (MAPWIDTH - 1) and (TAB[pi][pj+1] == 0):
+                    if pj < (MAPWIDTH - 1) and (TAB[pi][pj+1] != 0):
                         jogador.move_ip(TILESIZE,0)
                         pj += 1
                 if event.key == pygame.K_UP:
-                    if pi > 0 and (TAB[pi-1][pj] == 0):
+                    if pi > 0 and (TAB[pi-1][pj] != 0):
                         jogador.move_ip(0,-TILESIZE)
                         pi -= 1
                 if event.key == pygame.K_LEFT:
-                    if pj > 0 and (TAB[pi][pj-1] == 0):
+                    if pj > 0 and (TAB[pi][pj-1] != 0):
                         jogador.move_ip(-TILESIZE,0)
                         pj -= 1
 
