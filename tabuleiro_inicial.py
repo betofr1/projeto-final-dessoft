@@ -1,11 +1,11 @@
 import pygame
-from tabuleiro import *
+import tabuleiro
 def main():
     
     
     TILESIZE = 20
-    MAPWIDTH = len(TAB[0])
-    MAPHEIGHT = len(TAB)
+    MAPWIDTH = len(tabuleiro.TAB[0])
+    MAPHEIGHT = len(tabuleiro.TAB)
     pygame.init()
     tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
     pygame.display.set_caption("LABIRINTO DOS INFERNO")
@@ -17,8 +17,11 @@ def main():
     VERDE = (0,255,0)
     ROSA = (214,34,191)
     jogador = pygame.Rect(0,0,TILESIZE,TILESIZE)
+    monstro = pygame.Rect(16*TILESIZE,15*TILESIZE,TILESIZE,TILESIZE)
     lanterna_pos = pygame.Rect(7*TILESIZE,3*TILESIZE,TILESIZE,TILESIZE)
     arma_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
+    mi = 15
+    mj = 16
     pi = 0
     pj = 0
     LUZ1 = pygame.Surface((TILESIZE*3,TILESIZE*7))
@@ -47,23 +50,24 @@ def main():
                     else:
                         screen = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
                 if event.key == pygame.K_DOWN:
-                    if (pi < (MAPHEIGHT - 1)) and (TAB[pi+1][pj] != 0):
+                    if (pi < (MAPHEIGHT - 1)) and (tabuleiro.TAB[pi+1][pj] != 1):
                         jogador.move_ip(0,TILESIZE)
                         pi += 1
                 if event.key == pygame.K_RIGHT:
-                    if pj < (MAPWIDTH - 1) and (TAB[pi][pj+1] != 0):
+                    if pj < (MAPWIDTH - 1) and (tabuleiro.TAB[pi][pj+1] != 1):
                         jogador.move_ip(TILESIZE,0)
                         pj += 1
                 if event.key == pygame.K_UP:
-                    if pi > 0 and (TAB[pi-1][pj] != 0):
+                    if pi > 0 and (tabuleiro.TAB[pi-1][pj] != 1):
                         jogador.move_ip(0,-TILESIZE)
                         pi -= 1
                 if event.key == pygame.K_LEFT:
-                    if pj > 0 and (TAB[pi][pj-1] != 0):
+                    if pj > 0 and (tabuleiro.TAB[pi][pj-1] != 1):
                         jogador.move_ip(-TILESIZE,0)
                         pj -= 1
 
-
+        if pi == mi and pj == mj:
+            break
         relogio.tick(30)
         tela.fill(PRETO)
         
@@ -84,7 +88,7 @@ def main():
             
         for coluna in range(MAPWIDTH):
             for linha in range(MAPHEIGHT):
-                if TAB[linha][coluna] == 1:
+                if tabuleiro.TAB[linha][coluna] == 1:
                     PAREDE = pygame.Rect(coluna*TILESIZE,linha*TILESIZE,TILESIZE,TILESIZE)
                     pygame.draw.rect(tela,PRETO,PAREDE)
         pygame.draw.rect(tela,ROSA,jogador)
@@ -96,7 +100,7 @@ def main():
         if arma == False: 
              pygame.draw.rect(tela,VERDE,arma_pos)
             
-                
+        pygame.draw.rect(tela,VERMELHO,monstro)
         
         pygame.display.update()
     pygame.quit()
