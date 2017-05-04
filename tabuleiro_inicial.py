@@ -1,9 +1,9 @@
 import pygame
 def main():
     TAB = [
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -47,7 +47,8 @@ def main():
     VERMELHO = (255,0,0)
     VERDE = (0,255,0)
     ROSA = (214,34,191)
-    ret = pygame.Rect(0,0,TILESIZE,TILESIZE)
+    jogador = pygame.Rect(0,0,TILESIZE,TILESIZE)
+    lanterna_pos = pygame.Rect(7*TILESIZE,3*TILESIZE,TILESIZE,TILESIZE)
     pi = 0
     pj = 0
     LUZ1 = pygame.Surface((TILESIZE*3,TILESIZE*7))
@@ -59,6 +60,8 @@ def main():
     
     Fullscreen = False
     sair = False
+    lanterna = False
+    
 
     while sair != True:
         for event in pygame.event.get():
@@ -73,34 +76,47 @@ def main():
                         screen = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
                 if event.key == pygame.K_DOWN:
                     if (pi < (MAPHEIGHT - 1)) and (TAB[pi+1][pj] == 0):
-                        ret.move_ip(0,TILESIZE)
+                        jogador.move_ip(0,TILESIZE)
                         pi += 1
                 if event.key == pygame.K_RIGHT:
                     if pj < (MAPWIDTH - 1) and (TAB[pi][pj+1] == 0):
-                        ret.move_ip(TILESIZE,0)
+                        jogador.move_ip(TILESIZE,0)
                         pj += 1
                 if event.key == pygame.K_UP:
                     if pi > 0 and (TAB[pi-1][pj] == 0):
-                        ret.move_ip(0,-TILESIZE)
+                        jogador.move_ip(0,-TILESIZE)
                         pi -= 1
                 if event.key == pygame.K_LEFT:
                     if pj > 0 and (TAB[pi][pj-1] == 0):
-                        ret.move_ip(-TILESIZE,0)
+                        jogador.move_ip(-TILESIZE,0)
                         pj -= 1
 
 
         relogio.tick(30)
         tela.fill(PRETO)
-        tela.blit(LUZ1,[(pj-1)*TILESIZE,(pi-3)*TILESIZE])
-        tela.blit(LUZ2,[(pj-3)*TILESIZE,(pi-1)*TILESIZE])
-        tela.blit(LUZ3,[(pj-2)*TILESIZE,(pi-2)*TILESIZE])
         
+        
+        if pi == 3 and pj == 7:
+            
+            lanterna = True
+            
+        if lanterna == True: 
+            
+            tela.blit(LUZ1,[(pj-1)*TILESIZE,(pi-3)*TILESIZE])
+            tela.blit(LUZ2,[(pj-3)*TILESIZE,(pi-1)*TILESIZE])
+            tela.blit(LUZ3,[(pj-2)*TILESIZE,(pi-2)*TILESIZE])
+            
         for coluna in range(MAPWIDTH):
             for linha in range(MAPHEIGHT):
                 if TAB[linha][coluna] == 1:
                     PAREDE = pygame.Rect(coluna*TILESIZE,linha*TILESIZE,TILESIZE,TILESIZE)
                     pygame.draw.rect(tela,PRETO,PAREDE)
-        pygame.draw.rect(tela,ROSA,ret)
+        pygame.draw.rect(tela,ROSA,jogador)
+        
+        if lanterna == False: 
+            
+            pygame.draw.rect(tela,AZUL,lanterna_pos)
+        
         pygame.display.update()
     pygame.quit()
 main()
