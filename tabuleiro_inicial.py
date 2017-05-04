@@ -8,6 +8,9 @@ def main():
     MAPHEIGHT = len(tabuleiro.TAB)
     pygame.init()
     tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
+    tela2 = pygame.Surface((TILESIZE*5,TILESIZE*30))
+    tela3 = pygame.Surface((TILESIZE*4,TILESIZE*24))
+    tela4 = pygame.Surface((TILESIZE*5,TILESIZE*8))
     pygame.display.set_caption("LABIRINTO DOS INFERNO")
     relogio = pygame.time.Clock()
     BRANCO = (255,255,255)
@@ -68,8 +71,16 @@ def main():
 
         if pi == mi and pj == mj:
             break
+        
         relogio.tick(30)
+        
         tela.fill(PRETO)
+        tela2.fill(BRANCO)
+        tela3.fill(BRANCO)
+        tela4.fill(BRANCO)
+        tela.blit(tela2,[0,0])
+        tela.blit(tela3,[5*TILESIZE,0])
+        tela.blit(tela4,[9*TILESIZE,0])
         
         
         if pi == 3 and pj == 7:
@@ -86,12 +97,14 @@ def main():
             
             pygame.draw.rect(tela,AZUL,lanterna_pos)
             
+            
         for coluna in range(MAPWIDTH):
             for linha in range(MAPHEIGHT):
                 if tabuleiro.TAB[linha][coluna] == 1:
                     PAREDE = pygame.Rect(coluna*TILESIZE,linha*TILESIZE,TILESIZE,TILESIZE)
                     pygame.draw.rect(tela,PRETO,PAREDE)
         pygame.draw.rect(tela,ROSA,jogador)
+        
         
         if pi == 11 and pj == 11: 
             
@@ -101,6 +114,8 @@ def main():
              pygame.draw.rect(tela,VERDE,arma_pos)
             
         pygame.draw.rect(tela,VERMELHO,monstro)
+        
+        
         
         pygame.display.update()
     pygame.quit()
