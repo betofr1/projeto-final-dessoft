@@ -38,7 +38,6 @@ def main():
     CINZA_MEDIO = (129, 126, 143)
     CINZA_MEIO_ESCURO = (105, 104, 119)
     CINZA_ESCURO = (79, 78, 88)
-
     jogador = pygame.Rect(0,0,TILESIZE,TILESIZE)
     monstro = pygame.Rect(16*TILESIZE,15*TILESIZE,TILESIZE,TILESIZE)
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
@@ -58,7 +57,8 @@ def main():
     sair = False
     lanterna = False
     arma = False
-    
+    key_pressed = pygame.key.get_pressed()
+
     
 
     while sair != True:
@@ -72,27 +72,30 @@ def main():
                         tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE], pygame.FULLSCREEN, 32)
                     else:
                         screen = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
-                if event.key == pygame.K_DOWN:
-                    if (pi < (MAPHEIGHT - 1)) and (tabuleiro.TAB[pi+1][pj] != 1):
-                        jogador.move_ip(0,TILESIZE)
-                        pi += 1
-                if event.key == pygame.K_RIGHT:
-                    if pj < (MAPWIDTH - 1) and (tabuleiro.TAB[pi][pj+1] != 1):
-                        jogador.move_ip(TILESIZE,0)
-                        pj += 1
-                if event.key == pygame.K_UP:
-                    if pi > 0 and (tabuleiro.TAB[pi-1][pj] != 1):
-                        jogador.move_ip(0,-TILESIZE)
-                        pi -= 1
-                if event.key == pygame.K_LEFT:
-                    if pj > 0 and (tabuleiro.TAB[pi][pj-1] != 1):
-                        jogador.move_ip(-TILESIZE,0)
-                        pj -= 1
+
+        key_pressed = pygame.key.get_pressed()
+        if key_pressed[pygame.K_RIGHT]:
+            if pj < (MAPWIDTH - 1) and (tabuleiro.TAB[pi][pj+1] != 1):
+                jogador.move_ip(TILESIZE,0)
+                pj += 1
+        if key_pressed[pygame.K_UP]:
+            if pi > 0 and (tabuleiro.TAB[pi-1][pj] != 1):
+                jogador.move_ip(0,-TILESIZE)
+                pi -= 1
+        if key_pressed[pygame.K_LEFT]:
+            if pj > 0 and (tabuleiro.TAB[pi][pj-1] != 1):
+                jogador.move_ip(-TILESIZE,0)
+                pj -= 1
+        if key_pressed[pygame.K_DOWN]:
+            if (pi < (MAPHEIGHT - 1)) and (tabuleiro.TAB[pi+1][pj] != 1):
+                jogador.move_ip(0,TILESIZE)
+                pi += 1
+
 
         if pi == mi and pj == mj:
             break
         
-        relogio.tick(30)
+        relogio.tick(10)
         
         tela.fill(PRETO)
         tela2.fill(BRANCO)
