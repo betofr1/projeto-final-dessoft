@@ -9,6 +9,8 @@ def main():
     MAPWIDTH = len(tabuleiro.TAB[0])
     MAPHEIGHT = len(tabuleiro.TAB)
     pygame.init()
+    
+    # definindo telas: 
     tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
     tela2 = pygame.Surface((TILESIZE*5,TILESIZE*30))
     telag_2= pygame.Surface((TILESIZE*4,TILESIZE*9))
@@ -34,6 +36,8 @@ def main():
 
     pygame.display.set_caption("LABIRINTO DOS INFERNO")
     relogio = pygame.time.Clock()
+    
+    #definindo cores: 
     BRANCO = (255,255,255)
     AZUL = (0,0,255)
     PRETO = (0,0,0)
@@ -45,17 +49,27 @@ def main():
     CINZA_MEDIO = (129, 126, 143)
     CINZA_MEIO_ESCURO = (105, 104, 119)
     CINZA_ESCURO = (79, 78, 88)
+    
     jogador = pygame.Rect(0,0,TILESIZE,TILESIZE)
-    monstro = pygame.Rect(16*TILESIZE,15*TILESIZE,TILESIZE,TILESIZE)
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
     arma_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
     mi = 15
     mj = 16
+    m2i = 3
+    m2j = 25
+    m3i = 27
+    m3j = 35
     pi = 0
     pj = 0
     A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
     A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
     A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
+    
+    # definindo monstros: 
+    monstro = pygame.Rect(mj*TILESIZE,mi*TILESIZE,TILESIZE,TILESIZE)
+    monstro2 = pygame.Rect(m2j*TILESIZE,m2i*TILESIZE,TILESIZE,TILESIZE)
+    monstro3 = pygame.Rect(m3j*TILESIZE,m3i*TILESIZE,TILESIZE,TILESIZE)
+    
     #BOTAO_QUIT = pygame.Rect(6*TILESIZE,6*TILESIZE,TILESIZE*5,TILESIZE*5)
     
     #LUZ1.fill(BRANCO)
@@ -72,6 +86,7 @@ def main():
 
     count = 0    
 
+# definindo codigo geral 
     while sair != True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -103,7 +118,9 @@ def main():
                 pi += 1
 
 
-        if pi == mi and pj == mj:
+        
+
+        if pi == mi and pj == mj or pi == m2i and pj ==m2j or pi == m3i and pj == m3j:
             
             QUIT = True
 
@@ -200,6 +217,12 @@ def main():
          
         if monstro.colliderect(A_LUZ1) == True or monstro.colliderect(A_LUZ2) == True or monstro.colliderect(A_LUZ3) == True:    
             pygame.draw.rect(tela,VERMELHO,monstro)
+        if monstro2.colliderect(A_LUZ1) == True or monstro2.colliderect(A_LUZ2) == True or monstro2.colliderect(A_LUZ3) == True: 
+            pygame.draw.rect(tela,VERMELHO,monstro2)
+        if monstro3.colliderect(A_LUZ1) == True or monstro3.colliderect(A_LUZ2) == True or monstro3.colliderect(A_LUZ3) == True: 
+            pygame.draw.rect(tela,VERMELHO,monstro3)
+            
+            
             
         
         
