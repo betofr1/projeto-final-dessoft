@@ -1,6 +1,7 @@
 import pygame
 import tabuleiro
 import time
+
 def main():
     
     
@@ -25,6 +26,11 @@ def main():
     telag_14 = pygame.Surface((TILESIZE*2,TILESIZE*1))
     telag_15 = pygame.Surface((TILESIZE*2,TILESIZE*5))
     telag_16 = pygame.Surface((TILESIZE*2,TILESIZE*5))
+    
+    # texto 
+    
+    fonte = pygame.font.SysFont("Arial", 100)
+
 
     pygame.display.set_caption("LABIRINTO DOS INFERNO")
     relogio = pygame.time.Clock()
@@ -50,6 +56,8 @@ def main():
     A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
     A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
     A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
+    #BOTAO_QUIT = pygame.Rect(6*TILESIZE,6*TILESIZE,TILESIZE*5,TILESIZE*5)
+    
     #LUZ1.fill(BRANCO)
     #LUZ2.fill(BRANCO)
     #LUZ3.fill(BRANCO)
@@ -60,6 +68,7 @@ def main():
     arma = False
     key_pressed = pygame.key.get_pressed()
     luz = True
+    QUIT = False
 
     count = 0    
 
@@ -95,8 +104,9 @@ def main():
 
 
         if pi == mi and pj == mj:
-            #print ( "você perdeu...")
-            break
+            
+            QUIT = True
+
         
         relogio.tick(15)
         
@@ -190,9 +200,34 @@ def main():
          
         if monstro.colliderect(A_LUZ1) == True or monstro.colliderect(A_LUZ2) == True or monstro.colliderect(A_LUZ3) == True:    
             pygame.draw.rect(tela,VERMELHO,monstro)
+            
         
         
         
+        if QUIT == True: 
+            
+            tela.fill(PRETO)
+            
+            time.sleep(0.5)
+            
+            label1 = fonte.render("VOCÊ PERDEU...", True, VERMELHO)
+    
+            tela.blit(label1, (5*TILESIZE, 3*TILESIZE))
+            
+            #label2 = fonte.render("QUIT", True, VERMELHO)
+            
+            #BOTAO_QUIT.blit(label2, (0,0))
+            
+            #if key_pressed[pygame.K_RIGHT]:
+            
+            
+            
+            
+        
+            
+            
+            
+            
         pygame.display.update()
     pygame.quit()
 main()
