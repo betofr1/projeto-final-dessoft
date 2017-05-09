@@ -1,5 +1,6 @@
 import pygame
 import tabuleiro
+import time
 def main():
     
     
@@ -46,20 +47,21 @@ def main():
     mj = 16
     pi = 0
     pj = 0
-    LUZ1 = pygame.Surface((TILESIZE*3,TILESIZE*7))
-    LUZ2 = pygame.Surface((TILESIZE*7,TILESIZE*3))
-    LUZ3 = pygame.Surface((TILESIZE*5,TILESIZE*5))
-    LUZ1.fill(BRANCO)
-    LUZ2.fill(BRANCO)
-    LUZ3.fill(BRANCO)
+    A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
+    A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
+    A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
+    #LUZ1.fill(BRANCO)
+    #LUZ2.fill(BRANCO)
+    #LUZ3.fill(BRANCO)
     
     Fullscreen = False
     sair = False
     lanterna = False
     arma = False
     key_pressed = pygame.key.get_pressed()
+    luz = True
 
-    
+    count = 0    
 
     while sair != True:
         for event in pygame.event.get():
@@ -93,12 +95,21 @@ def main():
 
 
         if pi == mi and pj == mj:
+            #print ( "você perdeu...")
             break
         
-        relogio.tick(10)
+        relogio.tick(15)
+        
+        
+        
         
         tela.fill(PRETO)
+        
+        
         tela2.fill(BRANCO)
+        tela.blit(tela2,[0,0])
+        
+    
         telag_2.fill(CINZA_SUPER_CLARO)
         telag_3.fill(CINZA_CLARO)
         telag_4.fill(CINZA_MEDIO)
@@ -114,32 +125,46 @@ def main():
         telag_14.fill(CINZA_MEDIO)
         telag_15.fill(CINZA_MEIO_ESCURO)
         telag_16.fill(CINZA_ESCURO)
-        tela.blit(tela2,[0,0])
-        tela.blit(telag_2,[5*TILESIZE,10*TILESIZE])
-        tela.blit(telag_3,[5*TILESIZE,8*TILESIZE])
-        tela.blit(telag_4,[5*TILESIZE,5*TILESIZE])
-        tela.blit(telag_5,[8*TILESIZE,5*TILESIZE])
-        tela.blit(telag_6,[9*TILESIZE,5*TILESIZE])
-        tela.blit(telag_7,[12*TILESIZE,5*TILESIZE])
-        tela.blit(telag_8,[10*TILESIZE,0*TILESIZE])
-        tela.blit(telag_9,[8*TILESIZE,0*TILESIZE])
-        tela.blit(telag_10,[5*TILESIZE,0*TILESIZE])
-        tela.blit(telag_11,[5*TILESIZE,19*TILESIZE])
-        tela.blit(telag_12,[5*TILESIZE,22*TILESIZE])
-        tela.blit(telag_13,[8*TILESIZE,22*TILESIZE])
-        tela.blit(telag_14,[9*TILESIZE,21*TILESIZE])
-        tela.blit(telag_15,[11*TILESIZE,21*TILESIZE])
-        tela.blit(telag_16,[13*TILESIZE,21*TILESIZE])
         
+        count += 1
+
+        if count == 5:
+            count = 0
+            luz = not luz
+
+        if luz == True:     
+            
+            tela.blit(telag_2,[5*TILESIZE,10*TILESIZE])
+            tela.blit(telag_3,[5*TILESIZE,8*TILESIZE])
+            tela.blit(telag_4,[5*TILESIZE,5*TILESIZE])
+            tela.blit(telag_5,[8*TILESIZE,5*TILESIZE])
+            tela.blit(telag_6,[9*TILESIZE,5*TILESIZE])
+            tela.blit(telag_7,[12*TILESIZE,5*TILESIZE])
+            tela.blit(telag_8,[10*TILESIZE,0*TILESIZE])
+            tela.blit(telag_9,[8*TILESIZE,0*TILESIZE])
+            tela.blit(telag_10,[5*TILESIZE,0*TILESIZE])
+            tela.blit(telag_11,[5*TILESIZE,19*TILESIZE])
+            tela.blit(telag_12,[5*TILESIZE,22*TILESIZE])
+            tela.blit(telag_13,[8*TILESIZE,22*TILESIZE])
+            tela.blit(telag_14,[9*TILESIZE,21*TILESIZE])
+            tela.blit(telag_15,[11*TILESIZE,21*TILESIZE])
+            tela.blit(telag_16,[13*TILESIZE,21*TILESIZE])
+    
         if pi == 2 and pj == 6:
             
             lanterna = True
             
         if lanterna == True: 
+            A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
+            A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
+            A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
+            pygame.draw.rect(tela,BRANCO,A_LUZ1)
+            pygame.draw.rect(tela,BRANCO,A_LUZ2)
+            pygame.draw.rect(tela,BRANCO,A_LUZ3)
             
-            tela.blit(LUZ1,[(pj-1)*TILESIZE,(pi-3)*TILESIZE])
-            tela.blit(LUZ2,[(pj-3)*TILESIZE,(pi-1)*TILESIZE])
-            tela.blit(LUZ3,[(pj-2)*TILESIZE,(pi-2)*TILESIZE])
+            #tela.blit(LUZ1,[(pj-1)*TILESIZE,(pi-3)*TILESIZE])
+            #tela.blit(LUZ2,[(pj-3)*TILESIZE,(pi-1)*TILESIZE])
+            #tela.blit(LUZ3,[(pj-2)*TILESIZE,(pi-2)*TILESIZE])
         
         if lanterna == False: 
             
@@ -153,15 +178,18 @@ def main():
                     pygame.draw.rect(tela,PRETO,PAREDE)
         pygame.draw.rect(tela,ROSA,jogador)
         
+        # arma: 
         
         if pi == 11 and pj == 11: 
             
             arma = True
                 
-        if arma == False: 
-             pygame.draw.rect(tela,VERDE,arma_pos)
-            
-        pygame.draw.rect(tela,VERMELHO,monstro)
+        if arma == False:
+            if arma_pos.colliderect(A_LUZ1) == True or arma_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
+                pygame.draw.rect(tela,VERDE,arma_pos)
+         
+        if monstro.colliderect(A_LUZ1) == True or monstro.colliderect(A_LUZ2) == True or monstro.colliderect(A_LUZ3) == True:    
+            pygame.draw.rect(tela,VERMELHO,monstro)
         
         
         
