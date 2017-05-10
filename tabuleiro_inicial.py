@@ -19,7 +19,7 @@ def main():
     telag_7 = pygame.Surface((TILESIZE*1,TILESIZE*4))
     telag_8 = pygame.Surface((TILESIZE*4,TILESIZE*5))
     telag_9 = pygame.Surface((TILESIZE*2,TILESIZE*5))
-    telag_10 = pygame.Surface((TILESIZE*3,TILESIZE*5))
+    telag_10= pygame.Surface((TILESIZE*3,TILESIZE*5))
     telag_11 = pygame.Surface((TILESIZE*4,TILESIZE*3))
     telag_12 = pygame.Surface((TILESIZE*3,TILESIZE*4))
     telag_13 = pygame.Surface((TILESIZE*3,TILESIZE*4))
@@ -56,6 +56,8 @@ def main():
     A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
     A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
     A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
+
+    font = pygame.font.SysFont('Arial', 25)
     #BOTAO_QUIT = pygame.Rect(6*TILESIZE,6*TILESIZE,TILESIZE*5,TILESIZE*5)
     
     #LUZ1.fill(BRANCO)
@@ -72,6 +74,20 @@ def main():
 
     count = 0    
 
+    def botao(texto,x,y,l,a,cor1,cor2, action = None):
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        if x*TILESIZE+l*TILESIZE > mouse[0] > x*TILESIZE and y*TILESIZE+a*TILESIZE > mouse[1] > y*TILESIZE:
+            pygame.draw.rect(tela, cor2, (x*TILESIZE,y*TILESIZE, l*TILESIZE, a*TILESIZE))
+            if click[0] == 1 and action != None:
+                if action == 'play':
+                    main()
+                if action == 'quit':
+                    pygame.quit()
+        else:
+            pygame.draw.rect(tela, cor1, (x*TILESIZE,y*TILESIZE, l*TILESIZE, a*TILESIZE))
+        tela.blit(font.render(texto, True, (0,0,0)), (x*TILESIZE, y*TILESIZE))
+        
     while sair != True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -108,7 +124,7 @@ def main():
             QUIT = True
 
         
-        relogio.tick(15)
+        relogio.tick(30)
         
         
         
@@ -213,7 +229,8 @@ def main():
             label1 = fonte.render("VOCÊ PERDEU...", True, VERMELHO)
     
             tela.blit(label1, (5*TILESIZE, 3*TILESIZE))
-            
+            botao("play again",7,22,5,3,VERMELHO,ROSA,'play')
+            botao("sair",25,22,5,3,VERMELHO,ROSA,'quit')
             #label2 = fonte.render("QUIT", True, VERMELHO)
             
             #BOTAO_QUIT.blit(label2, (0,0))
