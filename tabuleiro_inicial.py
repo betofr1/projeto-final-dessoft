@@ -1,6 +1,7 @@
 import pygame
 import tabuleiro
 import time
+import random 
 
 def main():
     
@@ -9,6 +10,8 @@ def main():
     MAPWIDTH = len(tabuleiro.TAB[0])
     MAPHEIGHT = len(tabuleiro.TAB)
     pygame.init()
+    
+    # definindo telas: 
     tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
     tela2 = pygame.Surface((TILESIZE*5,TILESIZE*30))
     telag_2= pygame.Surface((TILESIZE*4,TILESIZE*9))
@@ -34,6 +37,8 @@ def main():
 
     pygame.display.set_caption("LABIRINTO DOS INFERNO")
     relogio = pygame.time.Clock()
+    
+    #definindo cores: 
     BRANCO = (255,255,255)
     AZUL = (0,0,255)
     PRETO = (0,0,0)
@@ -45,19 +50,32 @@ def main():
     CINZA_MEDIO = (129, 126, 143)
     CINZA_MEIO_ESCURO = (105, 104, 119)
     CINZA_ESCURO = (79, 78, 88)
+    
     jogador = pygame.Rect(0,0,TILESIZE,TILESIZE)
-    monstro = pygame.Rect(16*TILESIZE,15*TILESIZE,TILESIZE,TILESIZE)
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
     arma_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
     mi = 15
     mj = 16
+    m2i = 3
+    m2j = 25
+    m3i = 27
+    m3j = 35
     pi = 0
     pj = 0
     A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
     A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
     A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
+<<<<<<< HEAD
 
     font = pygame.font.SysFont('Arial', 25)
+=======
+    
+    # definindo monstros: 
+    monstro = pygame.Rect(mj*TILESIZE,mi*TILESIZE,TILESIZE,TILESIZE)
+    monstro2 = pygame.Rect(m2j*TILESIZE,m2i*TILESIZE,TILESIZE,TILESIZE)
+    monstro3 = pygame.Rect(m3j*TILESIZE,m3i*TILESIZE,TILESIZE,TILESIZE)
+    
+>>>>>>> e7c4adc42a1fec8d6ec741b71a1715b02090a87c
     #BOTAO_QUIT = pygame.Rect(6*TILESIZE,6*TILESIZE,TILESIZE*5,TILESIZE*5)
     
     #LUZ1.fill(BRANCO)
@@ -71,7 +89,9 @@ def main():
     key_pressed = pygame.key.get_pressed()
     luz = True
     QUIT = False
+    MONSTRO = False
 
+<<<<<<< HEAD
     count = 0    
 
     def botao(texto,x,y,l,a,cor1,cor2, action = None):
@@ -88,6 +108,13 @@ def main():
             pygame.draw.rect(tela, cor1, (x*TILESIZE,y*TILESIZE, l*TILESIZE, a*TILESIZE))
         tela.blit(font.render(texto, True, (0,0,0)), (x*TILESIZE, y*TILESIZE))
         
+=======
+    count = 0       # contagem da luz piscando 
+    count_m1 = 0    # contagem do movimento do monstro1 
+    count_m2 = 0    # contagem do movimento do monstro 2
+    count_m3 = 0    # contagem do movimento do monstro 3
+# definindo codigo geral 
+>>>>>>> e7c4adc42a1fec8d6ec741b71a1715b02090a87c
     while sair != True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -119,12 +146,99 @@ def main():
                 pi += 1
 
 
-        if pi == mi and pj == mj:
-            
-            QUIT = True
 
+# monstro: 
+    
+    # monstro 1
+        count_m1 += 1 
+        count_m2 += 1 
+        count_m3 += 1 
         
+        if count_m1 == 3: 
+            count_m1 = 0 
+            num = random.randint(0,4)
+            
+            if tabuleiro.TAB[mi][mj+1] != 1 and tabuleiro.TAB[mi][mj+1] != 5:
+                if num == 0:
+                    monstro.move_ip(1*TILESIZE,0)
+                    mj += 1
+            if tabuleiro.TAB[mi+1][mj] != 1 and tabuleiro.TAB[mi+1][mj] != 5:
+                if num == 1:
+                    monstro.move_ip(0,1*TILESIZE)
+                    mi += 1
+            if tabuleiro.TAB[mi-1][mj] != 1 and tabuleiro.TAB[mi-1][mj] != 5:
+                if num == 2:
+                    monstro.move_ip(0,-1*TILESIZE)
+                    mi -= 1
+            if tabuleiro.TAB[mi][mj-1] != 1 and tabuleiro.TAB[mi][mj-1] != 5:
+                if num == 3:
+                    monstro.move_ip(-1*TILESIZE,0)
+                    mj -= 1
+      
+            # montro2
+              
+        if count_m2 == 3: 
+            count_m2 = 0 
+            num = random.randint(0,4)
+            
+            if tabuleiro.TAB[m2i][m2j+1] != 1 and tabuleiro.TAB[m2i][m2j+1] != 5:
+                if num == 0:
+                    monstro2.move_ip(1*TILESIZE,0)
+                    m2j += 1
+            if tabuleiro.TAB[m2i+1][m2j] != 1 and tabuleiro.TAB[m2i+1][m2j] != 5:
+                if num == 1:
+                    monstro2.move_ip(0,1*TILESIZE)
+                    m2i += 1
+            if tabuleiro.TAB[m2i-1][m2j] != 1 and tabuleiro.TAB[m2i-1][m2j] != 5:
+                if num == 2:
+                    monstro2.move_ip(0,-1*TILESIZE)
+                    m2i -= 1
+            if tabuleiro.TAB[m2i][m2j-1] != 1 and tabuleiro.TAB[m2i][m2j-1] != 5:
+                if num == 3:
+                    monstro2.move_ip(-1*TILESIZE,0)
+                    m2j -= 1
+        
+        #monstro 3
+        
+<<<<<<< HEAD
         relogio.tick(30)
+=======
+        if count_m3 == 3: 
+            count_m3 = 0 
+            num = random.randint(0,4)
+            if tabuleiro.TAB[m3i][m3j+1] != 1 and tabuleiro.TAB[m3i][m3j+1] != 5:
+                if num == 0:
+                    monstro3.move_ip(1*TILESIZE,0)
+                    m3j += 1
+            if tabuleiro.TAB[m3i+1][m3j] != 1 and tabuleiro.TAB[m3i+1][m3j] != 5:
+                if num == 1:
+                    monstro3.move_ip(0,1*TILESIZE)
+                    m3i += 1
+            if tabuleiro.TAB[m3i-1][m3j] != 1 and tabuleiro.TAB[m3i-1][m3j] != 5:
+                if num == 2:
+                    monstro3.move_ip(0,-1*TILESIZE)
+                    m3i -= 1
+            if tabuleiro.TAB[m3i][m3j-1] != 1 and tabuleiro.TAB[m3i][m3j-1] != 5:
+                if num == 3:
+                    monstro3.move_ip(-1*TILESIZE,0)
+                    m3j -= 1
+        
+# se tocar no monstro: 
+        
+        if pi == mi and pj == mj or pi == m2i and pj ==m2j or pi == m3i and pj == m3j:
+            MONSTRO = True
+            if arma == False: 
+                QUIT = True
+            if arma == True:
+                QUIT = False
+                
+                
+            
+        
+    
+    
+        relogio.tick(12)
+>>>>>>> e7c4adc42a1fec8d6ec741b71a1715b02090a87c
         
         
         
@@ -213,9 +327,17 @@ def main():
         if arma == False:
             if arma_pos.colliderect(A_LUZ1) == True or arma_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
                 pygame.draw.rect(tela,VERDE,arma_pos)
-         
-        if monstro.colliderect(A_LUZ1) == True or monstro.colliderect(A_LUZ2) == True or monstro.colliderect(A_LUZ3) == True:    
-            pygame.draw.rect(tela,VERMELHO,monstro)
+                
+        
+        if MONSTRO == False:  
+            if monstro.colliderect(A_LUZ1) == True or monstro.colliderect(A_LUZ2) == True or monstro.colliderect(A_LUZ3) == True:    
+                pygame.draw.rect(tela,VERMELHO,monstro)
+            if monstro2.colliderect(A_LUZ1) == True or monstro2.colliderect(A_LUZ2) == True or monstro2.colliderect(A_LUZ3) == True: 
+                pygame.draw.rect(tela,VERMELHO,monstro2)
+            if monstro3.colliderect(A_LUZ1) == True or monstro3.colliderect(A_LUZ2) == True or monstro3.colliderect(A_LUZ3) == True: 
+                pygame.draw.rect(tela,VERMELHO,monstro3)
+            
+            
             
         
         
