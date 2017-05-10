@@ -1,6 +1,7 @@
 import pygame
 import tabuleiro
 import time
+import random 
 
 def main():
     
@@ -118,14 +119,36 @@ def main():
                 pi += 1
 
 
-        
 
+# monstro: 
+        num = random.randint(0,4)
+        if tabuleiro.TAB[mi][mj+1] != 1 and tabuleiro.TAB[mi][mj+1] != 5:
+            if num == 0:
+                monstro.move_ip(1*TILESIZE,0)
+                mj += 1
+        if tabuleiro.TAB[mi+1][mj] != 1 and tabuleiro.TAB[mi+1][mj] != 5:
+            if num == 1:
+                monstro.move_ip(0,1*TILESIZE)
+                mi += 1
+        if tabuleiro.TAB[mi-1][mj] != 1 and tabuleiro.TAB[mi-1][mj] != 5:
+            if num == 2:
+                monstro.move_ip(0,-1*TILESIZE)
+                mi -= 1
+        if tabuleiro.TAB[mi][mj-1] != 1 and tabuleiro.TAB[mi][mj-1] != 5:
+            if num == 3:
+                monstro.move_ip(-1*TILESIZE,0)
+                mj -= 1
+        
+# se tocar no monstro: 
+        
         if pi == mi and pj == mj or pi == m2i and pj ==m2j or pi == m3i and pj == m3j:
             
             QUIT = True
-
-        
-        relogio.tick(15)
+            
+            
+    
+    
+        relogio.tick(12)
         
         
         
@@ -214,6 +237,8 @@ def main():
         if arma == False:
             if arma_pos.colliderect(A_LUZ1) == True or arma_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
                 pygame.draw.rect(tela,VERDE,arma_pos)
+                
+        
          
         if monstro.colliderect(A_LUZ1) == True or monstro.colliderect(A_LUZ2) == True or monstro.colliderect(A_LUZ3) == True:    
             pygame.draw.rect(tela,VERMELHO,monstro)
