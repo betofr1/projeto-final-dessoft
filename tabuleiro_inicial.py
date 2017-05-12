@@ -2,13 +2,15 @@ import pygame
 import tabuleiro
 import time
 import random 
+import ala_norte
+import ala_sul
 
 def main():
     
-    
+    tab = tabuleiro.TAB
     TILESIZE = 20
-    MAPWIDTH = len(tabuleiro.TAB[0])
-    MAPHEIGHT = len(tabuleiro.TAB)
+    MAPWIDTH = len(tab[0])
+    MAPHEIGHT = len(tab)
     pygame.init()
     
     # definindo telas: 
@@ -65,17 +67,17 @@ def main():
     A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
     A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
     A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
-<<<<<<< HEAD
+
 
     font = pygame.font.SysFont('Arial', 25)
-=======
+
     
     # definindo monstros: 
     monstro = pygame.Rect(mj*TILESIZE,mi*TILESIZE,TILESIZE,TILESIZE)
     monstro2 = pygame.Rect(m2j*TILESIZE,m2i*TILESIZE,TILESIZE,TILESIZE)
     monstro3 = pygame.Rect(m3j*TILESIZE,m3i*TILESIZE,TILESIZE,TILESIZE)
     
->>>>>>> e7c4adc42a1fec8d6ec741b71a1715b02090a87c
+
     #BOTAO_QUIT = pygame.Rect(6*TILESIZE,6*TILESIZE,TILESIZE*5,TILESIZE*5)
     
     #LUZ1.fill(BRANCO)
@@ -91,7 +93,7 @@ def main():
     QUIT = False
     MONSTRO = False
 
-<<<<<<< HEAD
+
     count = 0    
 
     def botao(texto,x,y,l,a,cor1,cor2, action = None):
@@ -107,14 +109,12 @@ def main():
         else:
             pygame.draw.rect(tela, cor1, (x*TILESIZE,y*TILESIZE, l*TILESIZE, a*TILESIZE))
         tela.blit(font.render(texto, True, (0,0,0)), (x*TILESIZE, y*TILESIZE))
-        
-=======
     count = 0       # contagem da luz piscando 
     count_m1 = 0    # contagem do movimento do monstro1 
     count_m2 = 0    # contagem do movimento do monstro 2
     count_m3 = 0    # contagem do movimento do monstro 3
 # definindo codigo geral 
->>>>>>> e7c4adc42a1fec8d6ec741b71a1715b02090a87c
+
     while sair != True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -129,19 +129,19 @@ def main():
 
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_RIGHT]:
-            if pj < (MAPWIDTH - 1) and (tabuleiro.TAB[pi][pj+1] != 1):
+            if pj < (MAPWIDTH - 1) and (tab[pi][pj+1] != 1):
                 jogador.move_ip(TILESIZE,0)
                 pj += 1
         if key_pressed[pygame.K_UP]:
-            if pi > 0 and (tabuleiro.TAB[pi-1][pj] != 1):
+            if pi > 0 and (tab[pi-1][pj] != 1):
                 jogador.move_ip(0,-TILESIZE)
                 pi -= 1
         if key_pressed[pygame.K_LEFT]:
-            if pj > 0 and (tabuleiro.TAB[pi][pj-1] != 1):
+            if pj > 0 and (tab[pi][pj-1] != 1):
                 jogador.move_ip(-TILESIZE,0)
                 pj -= 1
         if key_pressed[pygame.K_DOWN]:
-            if (pi < (MAPHEIGHT - 1)) and (tabuleiro.TAB[pi+1][pj] != 1):
+            if (pi < (MAPHEIGHT - 1)) and (tab[pi+1][pj] != 1):
                 jogador.move_ip(0,TILESIZE)
                 pi += 1
 
@@ -158,19 +158,19 @@ def main():
             count_m1 = 0 
             num = random.randint(0,4)
             
-            if tabuleiro.TAB[mi][mj+1] != 1 and tabuleiro.TAB[mi][mj+1] != 5:
+            if tab[mi][mj+1] != 1 and tab[mi][mj+1] != 5:
                 if num == 0:
                     monstro.move_ip(1*TILESIZE,0)
                     mj += 1
-            if tabuleiro.TAB[mi+1][mj] != 1 and tabuleiro.TAB[mi+1][mj] != 5:
+            if tab[mi+1][mj] != 1 and tab[mi+1][mj] != 5:
                 if num == 1:
                     monstro.move_ip(0,1*TILESIZE)
                     mi += 1
-            if tabuleiro.TAB[mi-1][mj] != 1 and tabuleiro.TAB[mi-1][mj] != 5:
+            if tab[mi-1][mj] != 1 and tab[mi-1][mj] != 5:
                 if num == 2:
                     monstro.move_ip(0,-1*TILESIZE)
                     mi -= 1
-            if tabuleiro.TAB[mi][mj-1] != 1 and tabuleiro.TAB[mi][mj-1] != 5:
+            if tab[mi][mj-1] != 1 and tab[mi][mj-1] != 5:
                 if num == 3:
                     monstro.move_ip(-1*TILESIZE,0)
                     mj -= 1
@@ -181,44 +181,44 @@ def main():
             count_m2 = 0 
             num = random.randint(0,4)
             
-            if tabuleiro.TAB[m2i][m2j+1] != 1 and tabuleiro.TAB[m2i][m2j+1] != 5:
+            if tab[m2i][m2j+1] != 1 and tab[m2i][m2j+1] != 5:
                 if num == 0:
                     monstro2.move_ip(1*TILESIZE,0)
                     m2j += 1
-            if tabuleiro.TAB[m2i+1][m2j] != 1 and tabuleiro.TAB[m2i+1][m2j] != 5:
+            if tab[m2i+1][m2j] != 1 and tab[m2i+1][m2j] != 5:
                 if num == 1:
                     monstro2.move_ip(0,1*TILESIZE)
                     m2i += 1
-            if tabuleiro.TAB[m2i-1][m2j] != 1 and tabuleiro.TAB[m2i-1][m2j] != 5:
+            if tab[m2i-1][m2j] != 1 and tab[m2i-1][m2j] != 5:
                 if num == 2:
                     monstro2.move_ip(0,-1*TILESIZE)
                     m2i -= 1
-            if tabuleiro.TAB[m2i][m2j-1] != 1 and tabuleiro.TAB[m2i][m2j-1] != 5:
+            if tab[m2i][m2j-1] != 1 and tab[m2i][m2j-1] != 5:
                 if num == 3:
                     monstro2.move_ip(-1*TILESIZE,0)
                     m2j -= 1
         
         #monstro 3
         
-<<<<<<< HEAD
+
         relogio.tick(30)
-=======
+
         if count_m3 == 3: 
             count_m3 = 0 
             num = random.randint(0,4)
-            if tabuleiro.TAB[m3i][m3j+1] != 1 and tabuleiro.TAB[m3i][m3j+1] != 5:
+            if tab[m3i][m3j+1] != 1 and tab[m3i][m3j+1] != 5:
                 if num == 0:
                     monstro3.move_ip(1*TILESIZE,0)
                     m3j += 1
-            if tabuleiro.TAB[m3i+1][m3j] != 1 and tabuleiro.TAB[m3i+1][m3j] != 5:
+            if tab[m3i+1][m3j] != 1 and tab[m3i+1][m3j] != 5:
                 if num == 1:
                     monstro3.move_ip(0,1*TILESIZE)
                     m3i += 1
-            if tabuleiro.TAB[m3i-1][m3j] != 1 and tabuleiro.TAB[m3i-1][m3j] != 5:
+            if tab[m3i-1][m3j] != 1 and tab[m3i-1][m3j] != 5:
                 if num == 2:
                     monstro3.move_ip(0,-1*TILESIZE)
                     m3i -= 1
-            if tabuleiro.TAB[m3i][m3j-1] != 1 and tabuleiro.TAB[m3i][m3j-1] != 5:
+            if tab[m3i][m3j-1] != 1 and tab[m3i][m3j-1] != 5:
                 if num == 3:
                     monstro3.move_ip(-1*TILESIZE,0)
                     m3j -= 1
@@ -238,16 +238,16 @@ def main():
     
     
         relogio.tick(12)
->>>>>>> e7c4adc42a1fec8d6ec741b71a1715b02090a87c
+
         
         
         
         
         tela.fill(PRETO)
         
-        
-        tela2.fill(BRANCO)
-        tela.blit(tela2,[0,0])
+        if tab == tabuleiro.TAB: 
+            tela2.fill(BRANCO)
+            tela.blit(tela2,[0,0])
         
     
         telag_2.fill(CINZA_SUPER_CLARO)
@@ -268,27 +268,29 @@ def main():
         
         count += 1
 
-        if count == 5:
-            count = 0
-            luz = not luz
-
-        if luz == True:     
+        if tab == tabuleiro.TAB:
             
-            tela.blit(telag_2,[5*TILESIZE,10*TILESIZE])
-            tela.blit(telag_3,[5*TILESIZE,8*TILESIZE])
-            tela.blit(telag_4,[5*TILESIZE,5*TILESIZE])
-            tela.blit(telag_5,[8*TILESIZE,5*TILESIZE])
-            tela.blit(telag_6,[9*TILESIZE,5*TILESIZE])
-            tela.blit(telag_7,[12*TILESIZE,5*TILESIZE])
-            tela.blit(telag_8,[10*TILESIZE,0*TILESIZE])
-            tela.blit(telag_9,[8*TILESIZE,0*TILESIZE])
-            tela.blit(telag_10,[5*TILESIZE,0*TILESIZE])
-            tela.blit(telag_11,[5*TILESIZE,19*TILESIZE])
-            tela.blit(telag_12,[5*TILESIZE,22*TILESIZE])
-            tela.blit(telag_13,[8*TILESIZE,22*TILESIZE])
-            tela.blit(telag_14,[9*TILESIZE,21*TILESIZE])
-            tela.blit(telag_15,[11*TILESIZE,21*TILESIZE])
-            tela.blit(telag_16,[13*TILESIZE,21*TILESIZE])
+            if count == 5:
+                count = 0
+                luz = not luz
+    
+            if luz == True:     
+                
+                tela.blit(telag_2,[5*TILESIZE,10*TILESIZE])
+                tela.blit(telag_3,[5*TILESIZE,8*TILESIZE])
+                tela.blit(telag_4,[5*TILESIZE,5*TILESIZE])
+                tela.blit(telag_5,[8*TILESIZE,5*TILESIZE])
+                tela.blit(telag_6,[9*TILESIZE,5*TILESIZE])
+                tela.blit(telag_7,[12*TILESIZE,5*TILESIZE])
+                tela.blit(telag_8,[10*TILESIZE,0*TILESIZE])
+                tela.blit(telag_9,[8*TILESIZE,0*TILESIZE])
+                tela.blit(telag_10,[5*TILESIZE,0*TILESIZE])
+                tela.blit(telag_11,[5*TILESIZE,19*TILESIZE])
+                tela.blit(telag_12,[5*TILESIZE,22*TILESIZE])
+                tela.blit(telag_13,[8*TILESIZE,22*TILESIZE])
+                tela.blit(telag_14,[9*TILESIZE,21*TILESIZE])
+                tela.blit(telag_15,[11*TILESIZE,21*TILESIZE])
+                tela.blit(telag_16,[13*TILESIZE,21*TILESIZE])
     
         if pi == 2 and pj == 6:
             
@@ -313,16 +315,18 @@ def main():
             
         for coluna in range(MAPWIDTH):
             for linha in range(MAPHEIGHT):
-                if tabuleiro.TAB[linha][coluna] == 1:
+                if tab[linha][coluna] == 1:
                     PAREDE = pygame.Rect(coluna*TILESIZE,linha*TILESIZE,TILESIZE,TILESIZE)
                     pygame.draw.rect(tela,PRETO,PAREDE)
         pygame.draw.rect(tela,ROSA,jogador)
         
         # arma: 
         
-        if pi == 11 and pj == 11: 
-            
-            arma = True
+        if tab == tabuleiro.TAB: 
+        
+            if pi == 11 and pj == 11: 
+                
+                arma = True
                 
         if arma == False:
             if arma_pos.colliderect(A_LUZ1) == True or arma_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
@@ -338,8 +342,11 @@ def main():
                 pygame.draw.rect(tela,VERMELHO,monstro3)
             
             
+                
+        if tab[pi][pj] == 11: 
             
-        
+            tab = ala_norte.TAB_2
+            
         
         
         if QUIT == True: 
