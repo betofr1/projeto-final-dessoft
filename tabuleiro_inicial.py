@@ -52,8 +52,10 @@ def main():
     CINZA_MEDIO = (129, 126, 143)
     CINZA_MEIO_ESCURO = (105, 104, 119)
     CINZA_ESCURO = (79, 78, 88)
+    pi = 0
+    pj = 0
     
-    jogador = pygame.Rect(0,0,TILESIZE,TILESIZE)
+    jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
     arma_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
     mi = 15
@@ -62,8 +64,6 @@ def main():
     m2j = 25
     m3i = 27
     m3j = 35
-    pi = 0
-    pj = 0
     A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
     A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
     A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
@@ -116,6 +116,8 @@ def main():
 # definindo codigo geral 
 
     while sair != True:
+        
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sair = True
@@ -323,7 +325,8 @@ def main():
         # arma: 
         
         if tab == tabuleiro.TAB: 
-        
+            
+            
             if pi == 11 and pj == 11: 
                 
                 arma = True
@@ -342,11 +345,19 @@ def main():
                 pygame.draw.rect(tela,VERMELHO,monstro3)
             
             
-                
+        
         if tab[pi][pj] == 11: 
             
             tab = ala_norte.TAB_2
+            pj = 20
+            pi = 29 
+            jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
             
+        if tab == ala_norte.TAB_2:    
+            if tab[pi][pj] == 2:
+                pj = 20
+                pi = 0 
+                jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
         
         
         if QUIT == True: 
