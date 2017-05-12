@@ -109,7 +109,7 @@ def main():
                     pygame.quit()
         else:
             pygame.draw.rect(tela, cor1, (x*TILESIZE,y*TILESIZE, l*TILESIZE, a*TILESIZE))
-        tela.blit(font.render(texto, True, (0,0,0)), (x*TILESIZE, y*TILESIZE))
+        tela.blit(fonte_2.render(texto, True, (0,0,0)), (x*TILESIZE, y*TILESIZE))
     count = 0       # contagem da luz piscando 
     count_m1 = 0    # contagem do movimento do monstro1 
     count_m2 = 0    # contagem do movimento do monstro 2
@@ -361,15 +361,27 @@ def main():
             label2 = fonte_2.render("Ala norte", True, VERMELHO)
             tela.blit(label2, (19*TILESIZE, 26*TILESIZE))
             
-            
+        
 # ir para o hall: 
     
         if tab[pi][pj] == 2:
+            
+            
             
             tab = tabuleiro.TAB
             pj = 20
             pi = 1
             jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+        
+        if tab == tabuleiro.TAB and pj == 20 and pi == 1: 
+            
+            label3 = fonte_2.render("Hall", True, VERMELHO)
+            tela.blit(label3, (19*TILESIZE, 2*TILESIZE))
+            
+        if tab == tabuleiro.TAB and pj == 20 and pi == 28: 
+            
+            label5 = fonte_2.render("Hall", True, VERMELHO)
+            tela.blit(label5, (19*TILESIZE, 27*TILESIZE))
         
         
 # ala sul:
@@ -393,6 +405,18 @@ def main():
             label1 = fonte_2.render("A porta esta trancada, vá para a ala norte", True, VERMELHO)
             tela.blit(label1, (19*TILESIZE, 27*TILESIZE))
         
+        if tab[pi][pj] == 4:
+            
+            tab = tabuleiro.TAB
+            pj = 20
+            pi = 29
+            jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+        
+        if tab == ala_sul.TAB_3 and pj == 20 and pi == 1: 
+            
+            label4 = fonte_2.render("Ala Sul", True, VERMELHO)
+            tela.blit(label4, (19*TILESIZE, 2*TILESIZE))
+            
         
         
         if QUIT == True: 
