@@ -8,6 +8,7 @@ import ala_sul
 def main():
     
     tab = tabuleiro.TAB
+    
     TILESIZE = 20
     MAPWIDTH = len(tab[0])
     MAPHEIGHT = len(tab)
@@ -35,6 +36,7 @@ def main():
     # texto 
     
     fonte = pygame.font.SysFont("Arial", 100)
+    fonte_2 = pygame.font.SysFont('Arial', 25)
 
 
     pygame.display.set_caption("LABIRINTO DOS INFERNO")
@@ -54,6 +56,7 @@ def main():
     CINZA_ESCURO = (79, 78, 88)
     pi = 0
     pj = 0
+    chave1 = False
     
     jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
@@ -68,8 +71,6 @@ def main():
     A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
     A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
 
-
-    font = pygame.font.SysFont('Arial', 25)
 
     
     # definindo monstros: 
@@ -345,19 +346,53 @@ def main():
                 pygame.draw.rect(tela,VERMELHO,monstro3)
             
             
-        
+ # ir para a ala norte: 
+    
+       
         if tab[pi][pj] == 11: 
             
             tab = ala_norte.TAB_2
             pj = 20
-            pi = 29 
+            pi = 28 
+            jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+        
+        if tab == ala_norte.TAB_2 and pj == 20 and pi == 28: 
+            
+            label2 = fonte_2.render("Ala norte", True, VERMELHO)
+            tela.blit(label2, (19*TILESIZE, 26*TILESIZE))
+            
+            
+# ir para o hall: 
+    
+        if tab[pi][pj] == 2:
+            
+            tab = tabuleiro.TAB
+            pj = 20
+            pi = 1
+            jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+        
+        
+# ala sul:
+    
+        if tab == ala_norte.TAB_2: 
+            
+            if pi == 3 and pj == 37: 
+                
+                chave1 = True
+            
+            
+        if tab[pi][pj] == 6 and chave1 == True: 
+            
+            tab = ala_sul.TAB_3
+            pj = 20
+            pi = 1
             jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
             
-        if tab == ala_norte.TAB_2:    
-            if tab[pi][pj] == 2:
-                pj = 20
-                pi = 0 
-                jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+        if tab[pi][pj] == 6 and chave1 == False: 
+            
+            label1 = fonte_2.render("A porta esta trancada, vá para a ala norte", True, VERMELHO)
+            tela.blit(label1, (19*TILESIZE, 27*TILESIZE))
+        
         
         
         if QUIT == True: 
@@ -366,9 +401,9 @@ def main():
             
             time.sleep(0.5)
             
-            label1 = fonte.render("VOCÊ PERDEU...", True, VERMELHO)
+            label2 = fonte.render("VOCÊ PERDEU...", True, VERMELHO)
     
-            tela.blit(label1, (5*TILESIZE, 3*TILESIZE))
+            tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
             botao("play again",7,22,5,3,VERMELHO,ROSA,'play')
             botao("sair",25,22,5,3,VERMELHO,ROSA,'quit')
             #label2 = fonte.render("QUIT", True, VERMELHO)
