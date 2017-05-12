@@ -8,6 +8,7 @@ import ala_sul
 def main():
     
     tab = tabuleiro.TAB
+    
     TILESIZE = 20
     MAPWIDTH = len(tab[0])
     MAPHEIGHT = len(tab)
@@ -54,6 +55,7 @@ def main():
     CINZA_ESCURO = (79, 78, 88)
     pi = 0
     pj = 0
+    chave1 = False
     
     jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
@@ -345,19 +347,41 @@ def main():
                 pygame.draw.rect(tela,VERMELHO,monstro3)
             
             
-        
+ # ala norte: 
+       
         if tab[pi][pj] == 11: 
             
             tab = ala_norte.TAB_2
             pj = 20
-            pi = 29 
+            pi = 28 
             jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
             
-        if tab == ala_norte.TAB_2:    
-            if tab[pi][pj] == 2:
-                pj = 20
-                pi = 0 
-                jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+            
+        if tab[pi][pj] == 2 :
+            
+            tab = tabuleiro.TAB
+            pj = 21
+            pi = 1
+            jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+            
+        
+        
+# ala sul:
+    
+        if tab == ala_norte.TAB_2: 
+            
+            if pi == 3 and pj == 37: 
+                
+                chave1 = True
+            
+            
+        if tab[pi][pj] == 6 and chave1 == True: 
+            
+            tab = ala_sul.TAB_3
+            pj = 20
+            pi = 1
+            jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+        
         
         
         if QUIT == True: 
