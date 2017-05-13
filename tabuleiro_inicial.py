@@ -1,6 +1,5 @@
 import pygame
 import tabuleiro
-import time
 import random 
 import ala_norte
 import ala_sul
@@ -30,6 +29,8 @@ class Monstro:
         self.y = y
         self.cor = cor
         self.ret =pygame.Rect(self.x*self.tamanho,self.y*self.tamanho,self.tamanho,self.tamanho)
+        self.MAPWIDTH = len(tab[0])
+        self.MAPHEIGHT = len(tab)
 
 
 
@@ -46,19 +47,19 @@ class Monstro:
         if self.count == 0:
             
             num = random.randint(0,4)    
-            if self.tab[self.y][self.x+1] != 1 and self.tab[self.y][self.x+1] != 5:
+            if self.x < (self.MAPWIDTH - 1) and self.tab[self.y][self.x+1] != 1 and self.tab[self.y][self.x+1] != 5:
                 if num == 0:
                     self.ret.move_ip(1*self.tamanho,0)
                     self.x += 1
-            if self.tab[self.y+1][self.x] != 1 and self.tab[self.y+1][self.x] != 5:
+            if self.y < (self.MAPHEIGHT -1) and self.tab[self.y+1][self.x] != 1 and self.tab[self.y+1][self.x] != 5:
                 if num == 1:
                     self.ret.move_ip(0,1*self.tamanho)
                     self.y += 1
-            if self.tab[self.y-1][self.x] != 1 and self.tab[self.y-1][self.x] != 5:
+            if self.y >0 and self.tab[self.y-1][self.x] != 1 and self.tab[self.y-1][self.x] != 5:
                 if num == 2:
                     self.ret.move_ip(0,-1*self.tamanho)
                     self.y -= 1
-            if self.tab[self.y][self.x-1] != 1 and self.tab[self.y][self.x-1] != 5:
+            if self.x > 0 and self.tab[self.y][self.x-1] != 1 and self.tab[self.y][self.x-1] != 5:
                 if num == 3:
                     self.ret.move_ip(-1*self.tamanho,0)
                     self.x -= 1
@@ -92,7 +93,7 @@ def main():
     
     # texto 
     fonte = pygame.font.SysFont("Arial", 100)
-    font = pygame.font.SysFont('Arial', 25)
+    fonte_2 = pygame.font.SysFont('Arial', 25)
 
 
     pygame.display.set_caption("LABIRINTO DOS INFERNO")
@@ -116,15 +117,32 @@ def main():
     pj = 0
     jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
     #definindo monstros
-    mi = 15
-    mj = 16
-    m2i = 3
-    m2j = 25
-    m3i = 27
-    m3j = 35
-    monstro = Monstro(mj,mi,VERMELHO,TILESIZE,tela,tab)
-    monstro2 = Monstro(m2j,m2i,VERMELHO,TILESIZE,tela,tab)
-    monstro3 = Monstro(m3j,m3i,VERMELHO,TILESIZE,tela,tab)
+    mi_hall = 15
+    mj_hall= 16
+    m2i_hall = 3
+    m2j_hall = 25
+    m3i_hall = 27
+    m3j_hall = 35
+    mi_norte = 19
+    mj_norte = 6
+    m2i_norte = 17
+    m2j_norte = 2
+    m3i_norte = 22
+    m3j_norte = 17
+    m4i_norte = 3
+    m4j_norte = 21
+    
+    
+    
+    
+    monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tab)
+    monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tab)
+    monstro3_hall = Monstro(m3j_hall,m3i_hall,VERMELHO,TILESIZE,tela,tab)
+    monstro_norte = Monstro(mj_norte,mi_norte,VERMELHO,TILESIZE,tela,tab)
+    monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,tab)
+    monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,tab)
+    monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,tab)
+
 
     arma_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
     #definindo lanterna
@@ -141,16 +159,26 @@ def main():
     key_pressed = pygame.key.get_pressed()
     luz = True
     QUIT = False
-    MONSTRO = False
+    MONSTRO1_HALL = True
+    MONSTRO2_HALL = True
+    MONSTRO3_HALL = True
+    MONSTRO1_NORTE = True
+    MONSTRO2_NORTE = True
+    MONSTRO3_NORTE = True
+    MONSTRO4_NORTE = True
+    
     count = 0  
     count_m = 0  
     nome_tela = 'jogo'
+   
 
 # definindo loop
 
     while sair != True:
-        if nome_tela == 'jogo':
         
+        if nome_tela == 'jogo':
+          
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sair = True
@@ -161,7 +189,9 @@ def main():
                             tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE], pygame.FULLSCREEN, 32)
                         else:
                             screen = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
-
+                        
+                        
+                          
             #movimento jogador
             key_pressed = pygame.key.get_pressed()
             if key_pressed[pygame.K_RIGHT]:
@@ -184,15 +214,64 @@ def main():
             
     # se tocar no monstro: 
             
-            if pi == monstro.y and pj == monstro.x or pi == monstro2.y and pj ==monstro2.x or pi == monstro3.y and pj == monstro3.x:
-                MONSTRO = True
-                if arma == False: 
-                    QUIT = True
-                if arma == True:
-                    QUIT = False
-                    
-                    
+            if tab == tabuleiro.TAB:
                 
+                if pi == monstro_hall.y and pj == monstro_hall.x: 
+                    MONSTRO1_HALL = False
+                    if arma == False: 
+                        QUIT = True
+                    if arma == True:
+                        QUIT = False
+                        
+                if pi == monstro2_hall.y and pj ==monstro2_hall.x: 
+                    
+                    MONSTRO2_HALL = False
+                    if arma == False: 
+                        QUIT = True
+                    if arma == True:
+                        QUIT = False
+                
+                if pi == monstro3_hall.y and pj == monstro3_hall.x:
+                    
+                    MONSTRO3_HALL = False
+                    if arma == False: 
+                        QUIT = True
+                    if arma == True:
+                        QUIT = False
+                        
+            if tab == ala_norte.TAB_2: 
+               
+                if pi == monstro_norte.y and pj == monstro_norte.x: 
+                    MONSTRO1_NORTE = False
+                    if arma == False: 
+                        QUIT = True
+                    if arma == True:
+                        QUIT = False
+                        
+                if pi == monstro2_norte.y and pj == monstro2_norte.x: 
+                    MONSTRO2_NORTE = False
+                    if arma == False: 
+                        QUIT = True
+                    if arma == True:
+                        QUIT = False
+                        
+                if pi == monstro3_norte.y and pj == monstro3_norte.x: 
+                    MONSTRO3_NORTE = False
+                    if arma == False: 
+                        QUIT = True
+                    if arma == True:
+                        QUIT = False
+                        
+                if pi == monstro4_norte.y and pj == monstro4_norte.x: 
+                    MONSTRO4_NORTE = False
+                    if arma == False: 
+                        QUIT = True
+                    if arma == True:
+                        QUIT = False
+               
+            
+               
+            
             
         
         
@@ -288,10 +367,32 @@ def main():
             if arma == False:
                 if arma_pos.colliderect(A_LUZ1) == True or arma_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
                     pygame.draw.rect(tela,VERDE,arma_pos)
+            
+            
+            if tab == tabuleiro.TAB: 
+                
+                if MONSTRO1_HALL == True: 
+                    monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
                     
-            monstro.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
-            monstro2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
-            monstro3.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                if MONSTRO2_HALL == True: 
+                    monstro2_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    
+                if MONSTRO3_HALL== True: 
+                    monstro3_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+            
+            if tab == ala_norte.TAB_2: 
+                
+                if MONSTRO1_NORTE == True: 
+                    monstro_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    
+                if MONSTRO2_NORTE == True: 
+                    monstro2_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    
+                if MONSTRO3_NORTE == True: 
+                    monstro3_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+            
+                if MONSTRO4_NORTE == True:
+                    monstro4_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
             
             count_m += 1
             if count_m == 2:
@@ -372,27 +473,33 @@ def main():
                 
             
             
-            if QUIT == True: 
-                nome_tela = 'quit'
-
-        elif nome_tela == 'quit':
-
-            tela.fill(PRETO)
+        if QUIT == True: 
+                
+            nome_tela = 'quit'
             
-            label2 = fonte.render("VOCÊ PERDEU...", True, VERMELHO)
-    
-            tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
 
-            b1 = botao("play again",7,22,5,3,VERMELHO,tela,font,'play')
-            if b1 == 1:
-                nome_tela = 'jogo'
-            else: 
-                pass
-            b2 = botao("sair",25,22,5,3,VERMELHO,tela,font,'quit')
-            if b2 == 2:
-                pygame.quit()
-            else:
-                pass
+            if nome_tela == 'quit':
+        
+                tela.fill(PRETO)
+                        
+                label2 = fonte.render("VOCÊ PERDEU...", True, VERMELHO)
+                
+                tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
+            
+                b1 = botao("play again",7,22,5,3,VERMELHO,tela,fonte_2,'play')
+                        
+                if b1 == 1:
+                    nome_tela = 'jogo'
+                    #pygame.init()
+                else: 
+                    pass
+                        
+                b2 = botao("sair",25,22,5,3,VERMELHO,tela,fonte_2,'quit')
+                        
+                if b2 == 2:
+                    pygame.quit()
+                else:
+                    pass
 
         pygame.display.update()
     pygame.quit()
