@@ -113,7 +113,7 @@ def main():
     CINZA_ESCURO = (79, 78, 88)
     chave1 = False
     #definindo jogador
-    pi = 0
+    pi = 14
     pj = 0
     jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
     #definindo monstros
@@ -170,6 +170,11 @@ def main():
     count = 0  
     count_m = 0  
     nome_tela = 'jogo'
+    background_hall= pygame.image.load("entrada.png")
+    background_alanorte = pygame.image.load("ala-norte.png")
+    background_alasul = pygame.image.load("ala sul.png")
+    background_alaleste1 = pygame.image.load("ala-leste-1.png")
+    background_alaleste2 = pygame.image.load("ala-leste-final.png")
    
 
 # definindo loop
@@ -281,28 +286,32 @@ def main():
             
             
             
-            tela.fill(PRETO)
+            #tela.fill(PRETO)
             
+            if tab == ala_norte.TAB_2:
+                tela.blit(background_alanorte, [0,0])
+
             if tab == tabuleiro.TAB: 
-                tela2.fill(BRANCO)
-                tela.blit(tela2,[0,0])
+                tela.blit(background_hall,[0,0])
             
         
-            telag_2.fill(CINZA_SUPER_CLARO)
-            telag_3.fill(CINZA_CLARO)
-            telag_4.fill(CINZA_MEDIO)
-            telag_5.fill(CINZA_MEDIO)
-            telag_6.fill(CINZA_MEIO_ESCURO)
-            telag_7.fill(CINZA_ESCURO)
-            telag_8.fill(CINZA_MEDIO)
-            telag_9.fill(CINZA_MEIO_ESCURO)
-            telag_10.fill(CINZA_ESCURO)
-            telag_11.fill(CINZA_SUPER_CLARO)
-            telag_12.fill(CINZA_CLARO)
-            telag_13.fill(CINZA_MEDIO)
-            telag_14.fill(CINZA_MEDIO)
-            telag_15.fill(CINZA_MEIO_ESCURO)
-            telag_16.fill(CINZA_ESCURO)
+                tela2.fill(PRETO)
+                telag_2.fill(PRETO)
+                telag_3.fill(PRETO)
+                telag_4.fill(PRETO)
+                telag_5.fill(PRETO)
+                telag_6.fill(PRETO)
+                telag_7.fill(PRETO)
+                telag_8.fill(PRETO)
+                telag_9.fill(PRETO)
+                telag_10.fill(PRETO)
+                telag_11.fill(PRETO)
+                telag_12.fill(PRETO)
+                telag_13.fill(PRETO)
+                telag_13.fill(PRETO)
+                telag_14.fill(PRETO)
+                telag_15.fill(PRETO)
+                telag_16.fill(PRETO)
             
             count += 1
 
@@ -338,9 +347,21 @@ def main():
                 A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
                 A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
                 A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
-                pygame.draw.rect(tela,BRANCO,A_LUZ1)
-                pygame.draw.rect(tela,BRANCO,A_LUZ2)
-                pygame.draw.rect(tela,BRANCO,A_LUZ3)
+                #pygame.draw.rect(tela,BRANCO,A_LUZ1)
+                #pygame.draw.rect(tela,BRANCO,A_LUZ2)
+                #pygame.draw.rect(tela,BRANCO,A_LUZ3)
+                s2 = pygame.Surface((TILESIZE*7,TILESIZE*3))  
+                s2.set_alpha(50)                
+                s2.fill((255,255,255))           
+                tela.blit(s2, ((pj-3)*TILESIZE,(pi-1)*TILESIZE))
+                s3 = pygame.Surface((TILESIZE*5,TILESIZE*5))  
+                s3.set_alpha(50)                
+                s3.fill((255,255,255))           
+                tela.blit(s3, ((pj-2)*TILESIZE,(pi-2)*TILESIZE))
+                s1 = pygame.Surface((TILESIZE*3,TILESIZE*7))  
+                s1.set_alpha(50)                
+                s1.fill((255,255,255))           
+                tela.blit(s1, ((pj-1)*TILESIZE,(pi-3)*TILESIZE))
                 
             
             if lanterna == False: 
@@ -348,11 +369,11 @@ def main():
                 pygame.draw.rect(tela,AZUL,lanterna_pos)
                 
                 
-            for coluna in range(MAPWIDTH):
-                for linha in range(MAPHEIGHT):
-                    if tab[linha][coluna] == 1:
-                        PAREDE = pygame.Rect(coluna*TILESIZE,linha*TILESIZE,TILESIZE,TILESIZE)
-                        pygame.draw.rect(tela,PRETO,PAREDE)
+            #for coluna in range(MAPWIDTH):
+            #    for linha in range(MAPHEIGHT):
+            #        if tab[linha][coluna] == 1:
+            #            PAREDE = pygame.Rect(coluna*TILESIZE,linha*TILESIZE,TILESIZE,TILESIZE)
+            #            pygame.draw.rect(tela,PRETO,PAREDE)
             pygame.draw.rect(tela,ROSA,jogador)
             
             # arma: 
