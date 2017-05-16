@@ -21,7 +21,7 @@ def botao(texto,x,y,l,a,cor1,tela,font,action = None):
 
 
 class Monstro:
-    def __init__(self,x,y,cor,tamanho,tela,tab):
+    def __init__(self,x,y,cor,tamanho,tela,tab,vida_m):
         self.tab = tab
         self.tela = tela
         self.tamanho = tamanho
@@ -31,6 +31,8 @@ class Monstro:
         self.ret =pygame.Rect(self.x*self.tamanho,self.y*self.tamanho,self.tamanho,self.tamanho)
         self.MAPWIDTH = len(tab[0])
         self.MAPHEIGHT = len(tab)
+        self.vida_m = vida_m
+       
 
 
 
@@ -40,6 +42,7 @@ class Monstro:
         self.l1 = l1
         self.l2 = l2
         self.l3 = l3
+       
         
         if self.ret.colliderect(self.l1) == True or self.ret.colliderect(self.l2) == True or self.ret.colliderect(self.l3) == True:    
             pygame.draw.rect(self.tela, self.cor, self.ret)
@@ -63,6 +66,48 @@ class Monstro:
                 if num == 3:
                     self.ret.move_ip(-1*self.tamanho,0)
                     self.x -= 1
+                    
+    
+        
+    def vida(self,vida_a,MONSTRO,arma,QUIT):
+        
+        self.vida_a = vida_a
+        self.MONSTRO = MONSTRO
+        self.arma = arma
+        self.QUIT = QUIT
+        
+        if self.arma == True:
+            
+            if self.vida_m > 0 and self.vida_a > 0:
+                self.vida_m = self.vida_m - self.vida_a
+                
+                print("vida monstro: ", self.vida_m)
+                print("vida arma", self.vida_a)
+                
+            if self.vida_m <= 0: 
+                self.MONSTRO = False
+                print("morreu")
+            
+            if self.vida_a <= 0 and self.vida_m > 0:
+                self.MONSTRO = True 
+                self.QUIT = True
+            
+            if self.vida_a <= 0: 
+                self.arma = False
+                
+                
+        if self.arma == False: 
+            self.QUIT = True
+            
+            
+            
+        
+            
+        
+        
+        
+            
+        
 def main():
     
     tab = tabuleiro.TAB
@@ -133,18 +178,32 @@ def main():
     m4j_norte = 21
     
     
+    catana = 10
+    soco_ingles = 2.5
     
-    
-    monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tab)
-    monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tab)
-    monstro3_hall = Monstro(m3j_hall,m3i_hall,VERMELHO,TILESIZE,tela,tab)
-    monstro_norte = Monstro(mj_norte,mi_norte,VERMELHO,TILESIZE,tela,tab)
-    monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,tab)
-    monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,tab)
-    monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,tab)
+    monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tab,10)
+    monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tab,10)
+    monstro3_hall = Monstro(m3j_hall,m3i_hall,VERMELHO,TILESIZE,tela,tab,10)
+    monstro_norte = Monstro(mj_norte,mi_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
+    monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
+    monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
+    monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
 
 
-    arma_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
+    arma_hall_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
+    arma1_norte_pos = pygame.Rect(2*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
+    arma2_norte_pos = pygame.Rect(2*TILESIZE,27*TILESIZE,TILESIZE,TILESIZE)
+    arma3_norte_pos = pygame.Rect(37*TILESIZE,24*TILESIZE,TILESIZE,TILESIZE)
+    arma1_sul_pos = pygame.Rect(2*TILESIZE,19*TILESIZE,TILESIZE,TILESIZE)
+    arma2_sul_pos = pygame.Rect(33*TILESIZE,4*TILESIZE,TILESIZE,TILESIZE)
+    arma3_sul_pos = pygame.Rect(30*TILESIZE,27*TILESIZE,TILESIZE,TILESIZE)
+    arma1_leste1_pos = pygame.Rect(6*TILESIZE,27*TILESIZE,TILESIZE,TILESIZE)
+    arma2_leste1_pos = pygame.Rect(25*TILESIZE,6*TILESIZE,TILESIZE,TILESIZE)
+    arma1_leste2_pos = pygame.Rect(12*TILESIZE,23*TILESIZE,TILESIZE,TILESIZE)
+    arma2_leste2_pos = pygame.Rect(32*TILESIZE,6*TILESIZE,TILESIZE,TILESIZE)
+    arma3_leste2_pos = pygame.Rect(32*TILESIZE,7*TILESIZE,TILESIZE,TILESIZE)
+    
+    
     #definindo lanterna
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
     A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
@@ -166,6 +225,7 @@ def main():
     MONSTRO2_NORTE = True
     MONSTRO3_NORTE = True
     MONSTRO4_NORTE = True
+    vida_a = 5
     
     count = 0  
     count_m = 0  
@@ -222,57 +282,45 @@ def main():
             if tab == tabuleiro.TAB:
                 
                 if pi == monstro_hall.y and pj == monstro_hall.x: 
-                    MONSTRO1_HALL = False
-                    if arma == False: 
-                        QUIT = True
-                    if arma == True:
-                        QUIT = False
+                    
+                    monstro_hall.vida(soco_ingles,MONSTRO1_HALL,arma_soco,QUIT)
+                    QUIT = monstro_hall.QUIT
+                    MONSTRO1_HALL= monstro_hall.MONSTRO
                         
                 if pi == monstro2_hall.y and pj ==monstro2_hall.x: 
                     
-                    MONSTRO2_HALL = False
-                    if arma == False: 
-                        QUIT = True
-                    if arma == True:
-                        QUIT = False
+                    monstro2_hall.vida(vida_a,MONSTRO2_HALL,arma,QUIT)
+                    QUIT = monstro2_hall.QUIT
+                    MONSTRO2_HALL= monstro2_hall.MONSTRO
                 
                 if pi == monstro3_hall.y and pj == monstro3_hall.x:
                     
-                    MONSTRO3_HALL = False
-                    if arma == False: 
-                        QUIT = True
-                    if arma == True:
-                        QUIT = False
+                    monstro3_hall.vida(vida_a,MONSTRO3_HALL,arma,QUIT)
+                    QUIT = monstro3_hall.QUIT
+                    MONSTRO3_HALL= monstro3_hall.MONSTRO
                         
             if tab == ala_norte.TAB_2: 
                
                 if pi == monstro_norte.y and pj == monstro_norte.x: 
-                    MONSTRO1_NORTE = False
-                    if arma == False: 
-                        QUIT = True
-                    if arma == True:
-                        QUIT = False
+                    monstro_norte.vida(vida_a,MONSTRO1_NORTE,arma,QUIT)
+                    QUIT = monstro_norte.QUIT
+                    MONSTRO1_NORTE= monstro_norte.MONSTRO
                         
                 if pi == monstro2_norte.y and pj == monstro2_norte.x: 
-                    MONSTRO2_NORTE = False
-                    if arma == False: 
-                        QUIT = True
-                    if arma == True:
-                        QUIT = False
+                    monstro2_norte.vida(vida_a,MONSTRO2_NORTE,arma,QUIT)
+                    QUIT = monstro2_norte.QUIT
+                    MONSTRO2_NORTE= monstro2_norte.MONSTRO
                         
                 if pi == monstro3_norte.y and pj == monstro3_norte.x: 
-                    MONSTRO3_NORTE = False
-                    if arma == False: 
-                        QUIT = True
-                    if arma == True:
-                        QUIT = False
-                        
+                    
+                    monstro3_norte.vida(vida_a,MONSTRO3_NORTE,arma,QUIT)
+                    QUIT = monstro3_norte.QUIT
+                    MONSTRO3_NORTE= monstro3_norte.MONSTRO
+                    
                 if pi == monstro4_norte.y and pj == monstro4_norte.x: 
-                    MONSTRO4_NORTE = False
-                    if arma == False: 
-                        QUIT = True
-                    if arma == True:
-                        QUIT = False
+                    monstro4_norte.vida(vida_a,MONSTRO4_NORTE,arma,QUIT)
+                    QUIT = monstro4_norte.QUIT
+                    MONSTRO4_NORTE= monstro4_norte.MONSTRO
                
             
                
@@ -383,11 +431,22 @@ def main():
                 
                 if pi == 11 and pj == 11: 
                     
-                    arma = True
+                    arma_soco = True
                     
             if arma == False:
-                if arma_pos.colliderect(A_LUZ1) == True or arma_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
+                if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
                     pygame.draw.rect(tela,VERDE,arma_pos)
+                    
+             #if tab == ala_norte.TAB_2: 
+                
+                
+                #if pi == 11 and pj == 11: 
+                    
+                   # arma_soco = True
+                    
+           # if arma == False:
+                #if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
+                  #  pygame.draw.rect(tela,VERDE,arma_pos)
             
             
             if tab == tabuleiro.TAB: 
