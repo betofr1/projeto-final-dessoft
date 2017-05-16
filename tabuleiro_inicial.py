@@ -214,7 +214,14 @@ def main():
     Fullscreen = False
     sair = False
     lanterna = False
-    arma = False
+    arma_soco_hall = False
+    arma_soco_norte = False
+    arma1_catana_norte = False
+    arma2_catana_norte = False
+    
+    
+    
+    arma_catana = False
     key_pressed = pygame.key.get_pressed()
     luz = True
     QUIT = False
@@ -283,7 +290,7 @@ def main():
                 
                 if pi == monstro_hall.y and pj == monstro_hall.x: 
                     
-                    monstro_hall.vida(soco_ingles,MONSTRO1_HALL,arma_soco,QUIT)
+                    monstro_hall.vida(arma,MONSTRO1_HALL,arma_soco,QUIT)
                     QUIT = monstro_hall.QUIT
                     MONSTRO1_HALL= monstro_hall.MONSTRO
                         
@@ -416,38 +423,11 @@ def main():
                 
                 pygame.draw.rect(tela,AZUL,lanterna_pos)
                 
-                
-            #for coluna in range(MAPWIDTH):
-            #    for linha in range(MAPHEIGHT):
-            #        if tab[linha][coluna] == 1:
-            #            PAREDE = pygame.Rect(coluna*TILESIZE,linha*TILESIZE,TILESIZE,TILESIZE)
-            #            pygame.draw.rect(tela,PRETO,PAREDE)
             pygame.draw.rect(tela,ROSA,jogador)
             
-            # arma: 
             
-            if tab == tabuleiro.TAB: 
-                
-                
-                if pi == 11 and pj == 11: 
-                    
-                    arma_soco = True
-                    
-            if arma == False:
-                if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
-                    pygame.draw.rect(tela,VERDE,arma_pos)
-                    
-             #if tab == ala_norte.TAB_2: 
-                
-                
-                #if pi == 11 and pj == 11: 
-                    
-                   # arma_soco = True
-                    
-           # if arma == False:
-                #if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_pos.colliderect(A_LUZ3) == True:
-                  #  pygame.draw.rect(tela,VERDE,arma_pos)
             
+            # monstro: 
             
             if tab == tabuleiro.TAB: 
                 
@@ -459,6 +439,15 @@ def main():
                     
                 if MONSTRO3_HALL== True: 
                     monstro3_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                
+                if pi == 11 and pj == 11: 
+                    
+                    arma_soco_hall = True
+                    
+            if arma_soco-hall == False:
+                if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_hall_pos.colliderect(A_LUZ3) == True:
+                    pygame.draw.rect(tela,VERDE,arma_hall_pos)
+                    
             
             if tab == ala_norte.TAB_2: 
                 
@@ -473,6 +462,32 @@ def main():
             
                 if MONSTRO4_NORTE == True:
                     monstro4_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    
+                if pi == 2 and pj == 2: 
+                    
+                   arma1_catana_norte = True
+                    
+                if arma1_catana_norte == False:
+               
+                    if arma1_norte_pos.colliderect(A_LUZ1) == True or arma1_norte_pos.colliderect(A_LUZ2) == True or arma1_norte_pos.colliderect(A_LUZ3) == True:
+                        pygame.draw.rect(tela,VERDE,arma1_norte_pos)
+                  
+                if pi == 27 and pj == 2: 
+                    
+                   arma_soco_norte = True
+                    
+                if arma_soco_norte == False:
+                    if arma2_norte_pos.colliderect(A_LUZ1) == True or arma2_norte_pos.colliderect(A_LUZ2) == True or arma2_norte_pos.colliderect(A_LUZ3) == True:
+                     pygame.draw.rect(tela,VERDE,arma2_norte_pos)
+                  
+                if pi == 24 and pj == 37: 
+                    
+                   arma2_catana_norte = True
+                    
+                if arma2_catana_norte == False:
+                    if arma3_norte_pos.colliderect(A_LUZ1) == True or arma3_norte_pos.colliderect(A_LUZ2) == True or arma3_norte_pos.colliderect(A_LUZ3) == True:
+                        pygame.draw.rect(tela,VERDE,arma3_norte_pos)
+        
             
             count_m += 1
             if count_m == 2:
