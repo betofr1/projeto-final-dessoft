@@ -412,8 +412,10 @@ def main():
             if tab == tab_tutorial.TAB_6:
                 tela.blit(background_tutorial, [0,0])
             
+#========================================================================================
 
-    # se tocar no monstro: 
+                           # CENARIOS:
+    
             
             if tab == tabuleiro.TAB:
                 
@@ -445,18 +447,21 @@ def main():
                     monstro_hall.vida(poder_arma,MONSTRO1_HALL,arma_atual,QUIT)
                     QUIT = monstro_hall.QUIT
                     MONSTRO1_HALL= monstro_hall.MONSTRO
+                    poder_arma = monstro_hall.poder_arma
                         
                 if pi == monstro2_hall.y and pj ==monstro2_hall.x: 
                     
                     monstro2_hall.vida(poder_arma,MONSTRO2_HALL,arma_atual,QUIT)
                     QUIT = monstro2_hall.QUIT
                     MONSTRO2_HALL= monstro2_hall.MONSTRO
+                    poder_arma = monstro2_hall.poder_arma
                 
                 if pi == monstro3_hall.y and pj == monstro3_hall.x:
                     
                     monstro3_hall.vida(poder_arma,MONSTRO3_HALL,arma_atual,QUIT)
                     QUIT = monstro3_hall.QUIT
                     MONSTRO3_HALL= monstro3_hall.MONSTRO
+                    poder_arma = monstro3_hall.poder_arma
                     
                 if MONSTRO1_HALL == True: 
                     monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
@@ -504,12 +509,14 @@ def main():
                     monstro_norte.vida(poder_arma,MONSTRO1_NORTE,arma_atual,QUIT)
                     QUIT = monstro_norte.QUIT
                     MONSTRO1_NORTE= monstro_norte.MONSTRO
+                    poder_arma = monstro_norte.poder_arma
                     
                 if pi == monstro2_norte.y and pj == monstro2_norte.x: 
                     
                     monstro2_norte.vida(poder_arma,MONSTRO2_NORTE,arma_atual,QUIT)
                     QUIT = monstro2_norte.QUIT
                     MONSTRO2_NORTE= monstro2_norte.MONSTRO
+                    poder_arma = monstro2_norte.poder_arma
 
                     
                 if pi == monstro3_norte.y and pj == monstro3_norte.x: 
@@ -517,12 +524,14 @@ def main():
                     monstro3_norte.vida(poder_arma,MONSTRO3_NORTE,arma_atual,QUIT)
                     QUIT = monstro3_norte.QUIT
                     MONSTRO3_NORTE= monstro3_norte.MONSTRO
+                    poder_arma = monstro3_norte.poder_arma
                     
                 if pi == monstro4_norte.y and pj == monstro4_norte.x: 
                     
                     monstro4_norte.vida(poder_arma,MONSTRO4_NORTE,arma_atual,QUIT)
                     QUIT = monstro4_norte.QUIT
                     MONSTRO4_NORTE= monstro4_norte.MONSTRO
+                    poder_arma = monstro4_norte.poder_arma
 
                     
                     
@@ -579,24 +588,28 @@ def main():
                     monstro_sul.vida(poder_arma,MONSTRO1_SUL,arma_atual,QUIT)
                     QUIT = monstro_sul.QUIT
                     MONSTRO1_SUL= monstro_sul.MONSTRO
+                    poder_arma = monstro_sul.poder_arma
                     
                 if pi == monstro2_sul.y and pj == monstro2_sul.x: 
                     
                     monstro2_sul.vida(poder_arma,MONSTRO2_SUL,arma_atual,QUIT)
                     QUIT = monstro2_sul.QUIT
                     MONSTRO2_SUL= monstro2_sul.MONSTRO
+                    poder_arma = monstro2_sul.poder_arma
                     
                 if pi == monstro3_sul.y and pj == monstro3_sul.x: 
                     
                     monstro3_sul.vida(poder_arma,MONSTRO3_SUL,arma_atual,QUIT)
                     QUIT = monstro3_sul.QUIT
                     MONSTRO3_SUL= monstro3_sul.MONSTRO
+                    poder_arma = monstro3_sul.poder_arma
                     
                 if pi == monstro4_sul.y and pj == monstro4_sul.x: 
                     
                     monstro4_sul.vida(poder_arma,MONSTRO4_SUL,arma_atual,QUIT)
                     QUIT = monstro4_sul.QUIT
                     MONSTRO4_SUL= monstro4_sul.MONSTRO
+                    poder_arma = monstro4_sul.poder_arma
                     
                 if MONSTRO1_SUL == True: 
                     monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
@@ -662,24 +675,28 @@ def main():
                     monstro_leste1.vida(poder_arma,MONSTRO1_LESTE1,arma_atual,QUIT)
                     QUIT = monstro_leste1.QUIT
                     MONSTRO1_LESTE1= monstro_leste1.MONSTRO
+                    poder_arma = monstro_leste1.poder_arma
                     
                if pi == monstro2_leste1.y and pj == monstro2_leste1.x: 
                     
                     monstro2_leste1.vida(poder_arma,MONSTRO2_LESTE1,arma_atual,QUIT)
                     QUIT = monstro2_leste1.QUIT
-                    MONSTRO2_LESTE1= monstro2_leste1.MONSTRO    
+                    MONSTRO2_LESTE1= monstro2_leste1.MONSTRO 
+                    poder_arma = monstro2_leste1.poder_arma
                     
                if pi == monstro3_leste1.y and pj == monstro3_leste1.x: 
                     
                     monstro3_leste1.vida(poder_arma,MONSTRO3_LESTE1,arma_atual,QUIT)
                     QUIT = monstro3_leste1.QUIT
                     MONSTRO3_LESTE1= monstro3_leste1.MONSTRO
+                    poder_arma = monstro3_leste1.poder_arma
                     
                if pi == monstro4_leste1.y and pj == monstro4_leste1.x: 
                     
                     monstro4_leste1.vida(poder_arma,MONSTRO4_LESTE1,arma_atual,QUIT)
                     QUIT = monstro4_leste1.QUIT
                     MONSTRO4_LESTE1= monstro4_leste1.MONSTRO
+                    poder_arma = monstro4_leste1.poder_arma
                     
 
                 if pi == 27 and pj == 6: 
@@ -719,42 +736,42 @@ def main():
                     monstro_leste2.vida(poder_arma,MONSTRO1_LESTE2,arma_atual,QUIT)
                     QUIT = monstro_leste2.QUIT
                     MONSTRO1_LESTE2= monstro_leste2.MONSTRO
+                    poder_arma = monstro_leste2.poder_arma
                     
                 if pi == monstro2_leste2.y and pj == monstro2_leste2.x: 
                     
                     monstro2_leste2.vida(poder_arma,MONSTRO2_LESTE2,arma_atual,QUIT)
                     QUIT = monstro2_leste2.QUIT
                     MONSTRO2_LESTE2= monstro2_leste2.MONSTRO
+                    poder_arma = monstro2_leste2.poder_arma
                     
                 if pi == monstro3_leste2.y and pj == monstro3_leste2.x: 
                     
                     monstro3_leste2.vida(poder_arma,MONSTRO3_LESTE2,arma_atual,QUIT)
                     QUIT = monstro3_leste2.QUIT
                     MONSTRO3_LESTE2= monstro3_leste2.MONSTRO
+                    poder_arma = monstro3_leste2.poder_arma
                     
                 if pi == monstro4_leste2.y and pj == monstro4_leste2.x: 
                     
                     monstro4_leste2.vida(poder_arma,MONSTRO4_LESTE2,arma_atual,QUIT)
                     QUIT = monstro4_leste2.QUIT
                     MONSTRO4_LESTE2= monstro4_leste2.MONSTRO
-                    
-                if pi == monstro4_leste2.y and pj == monstro4_leste2.x: 
-                    
-                    monstro4_leste2.vida(poder_arma,MONSTRO4_LESTE2,arma_atual,QUIT)
-                    QUIT = monstro4_leste2.QUIT
-                    MONSTRO4_LESTE2= monstro4_leste2.MONSTRO
+                    poder_arma = monstro4_leste2.poder_arma
                     
                 if pi == monstro5_leste2.y and pj == monstro5_leste2.x: 
                     
                     monstro5_leste2.vida(poder_arma,MONSTRO5_LESTE2,arma_atual,QUIT)
                     QUIT = monstro5_leste2.QUIT
                     MONSTRO5_LESTE2= monstro5_leste2.MONSTRO
+                    poder_arma = monstro5_leste2.poder_arma
                     
                 if pi == monstro6_leste2.y and pj == monstro6_leste2.x: 
                     
                     monstro6_leste2.vida(poder_arma,MONSTRO6_LESTE2,arma_atual,QUIT)
                     QUIT = monstro6_leste2.QUIT
                     MONSTRO6_LESTE2= monstro6_leste2.MONSTRO
+                    poder_arma = monstro6_leste2.poder_arma
                     
                     
                 if pi == 23 and pj == 12: 
@@ -797,6 +814,8 @@ def main():
                
                     if arma3_leste2_pos.colliderect(A_LUZ1) == True or arma3_leste2_pos.colliderect(A_LUZ2) == True or arma3_leste2_pos.colliderect(A_LUZ3) == True:
                         pygame.draw.rect(tela,VERDE,arma3_leste2_pos)
+                        
+#======================================================================================
                 
                 
             relogio.tick(12)
