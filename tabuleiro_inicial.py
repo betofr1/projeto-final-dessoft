@@ -70,24 +70,24 @@ class Monstro:
         self.QUIT = QUIT
         
         if self.arma == True: 
-            if self.vida_m > 0 and self.vida_a > 0:
-                self.vida_m = self.vida_m - self.vida_a
+            if self.vida_m > 0 and self.vida_a['soco_ingles'] > 0:
+                self.vida_m = self.vida_m - self.vida_a['soco_ingles']
 
             if self.vida_m <= 0: 
                 self.MONSTRO = False
             
-            if self.vida_a <= 0 and self.vida_m > 0:
+            if self.vida_a['soco_ingles'] <= 0 and self.vida_m > 0:
                 self.MONSTRO = True 
                 self.QUIT = True
             
-            if self.vida_a <= 0: 
+            if self.vida_a['soco_ingles'] <= 0: 
                 self.arma = False
                 
-            if self.vida_a > 0: 
-                self.vida_a -= 1 
+            if self.vida_a['soco_ingles'] > 0: 
+                self.vida_a['soco_ingles'] -= 1 
                 
-            if self.vida_a <= 0:
-                self.vida = 0 
+            if self.vida_a['soco_ingles'] <= 0:
+                self.vida_a = {}
                 self.arma = False
             
                 
@@ -158,7 +158,7 @@ def main():
     #telag_14.fill(PRETO)
     #telag_15.fill(PRETO)
     #telag_16.fill(PRETO)
-    
+
     # texto 
     fonte = pygame.font.SysFont("Arial", 100)
     fonte_2 = pygame.font.SysFont('Arial', 25)
@@ -282,17 +282,7 @@ def main():
     arma2_soco_leste2 = False
     arma3_catana_leste2 = False
     
-    arma_atual = 0
-    
-    if arma_atual == arma_soco_hall or arma_atual == arma1_soco_norte or arma_atual == arma1_soco_sul\
-    or arma_atual == arma3_soco_sul or arma_atual == arma2_soco_leste1 or arma_atual == arma2_soco_leste2:
-        
-        poder_arma = armas["soco_ingles"]
-    
-    if  arma_atual== arma2_catana_norte or arma_atual == arma3_catana_norte or arma_atual == arma2_catana_sul or arma_atual == arma1_catana_leste1 \
-    or arma_atual == arma1_catana_leste2 or arma_atual == arma3_catana_leste2: 
-       
-        poder_arma = armas["catana"]
+    arma_dic = {}
     
     #definindo lanterna
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
@@ -419,13 +409,24 @@ def main():
                 if pi == 2 and pj == 6:
 
                     lanterna = True
+
+                if pi == 11 and pj == 11:
+                    if len(arma_dic) == 0:
+
+                    # if arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
+                    # and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
+                    # and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
+                    
+                        arma_dic = {'soco_ingles':armas['soco_ingles']}
+                        arma_soco_hall = True
+                        arma_atual = arma_soco_hall
                 
                 if pi == monstro_hall.y and pj == monstro_hall.x:
 
-                    monstro_hall.vida(poder_arma,MONSTRO1_HALL,arma_atual,QUIT)
+                    monstro_hall.vida(arma_dic,MONSTRO1_HALL,arma_atual,QUIT)
                     QUIT = monstro_hall.QUIT
                     MONSTRO1_HALL= monstro_hall.MONSTRO
-                    poder_arma = monstro_hall.poder_arma
+                    arma_dic = monstro_hall.vida_a
                         
                 if pi == monstro2_hall.y and pj ==monstro2_hall.x: 
                     
@@ -450,13 +451,6 @@ def main():
                 if MONSTRO3_HALL== True: 
                     monstro3_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                 
-                if pi == 11 and pj == 11: 
-                    if arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
-                    
-                        arma_soco_hall = True
-                        arma_atual = arma_soco_hall
                     
                 if arma_soco_hall == False:
                     if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_hall_pos.colliderect(A_LUZ3) == True:
