@@ -193,45 +193,36 @@ def main():
     m4j_norte = 21
     
 
-    mi_sul = 
-    mj_sul = 
-    m2i_sul = 
-    m2j_sul = 
-    m3i_sul = 
-    m3j_sul = 
-    m4i_sul = 
-    m4j_sul = 
+    mi_sul = 2
+    mj_sul = 2
+    m2i_sul = 27
+    m2j_sul = 13
+    m3i_sul = 27
+    m3j_sul = 24
+    m4i_sul = 8
+    m4j_sul = 23
     
-    mi_leste1 = 
-    mj_leste1 = 
-    m2i_leste1 = 
-    m2j_leste1 = 
-    m3i_leste1 = 
-    m3j_leste1 = 
-    m4i_leste1 = 
-    m4j_leste1 = 
-    m4i_leste1 = 
-    m4j_leste1 = 
+    mi_leste1 = 27
+    mj_leste1 = 2
+    m2i_leste1 = 2
+    m2j_leste1 = 14
+    m3i_leste1 = 21
+    m3j_leste1 = 23
+    m4i_leste1 = 10
+    m4j_leste1 = 25
     
-    mi_leste2 = 
-    mj_leste2 = 
-    m2i_leste2 = 
-    m2j_leste2 = 
-    m3i_leste2 = 
-    m3j_leste2 = 
-    m4i_leste2 = 
-    m4j_leste2 = 
-    m4i_leste2 = 
-    m4j_leste2 = 
-    m5i_leste2 = 
-    m5i_leste2 = 
-    m5j_leste2 =
-    m6i_leste2 = 
-    m6j_leste2 = 
-    
-    
-    
-    
+    mi_leste2 = 27
+    mj_leste2 = 2
+    m2i_leste2 = 27
+    m2j_leste2 = 29
+    m3i_leste2 = 23
+    m3j_leste2 = 33
+    m4i_leste2 = 22
+    m4j_leste2 = 16
+    m5i_leste2 = 15
+    m5j_leste2 = 37
+    m6i_leste2 = 15
+    m6j_leste2 = 33
     
     vida_monstro_hall = 10
     vida_monstro_norte = 15
@@ -249,31 +240,21 @@ def main():
     monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
     monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
     monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-    monstro_sul = 
-    monstro2_sul = 
-    monstro3_sul= 
-    monstro4_sul = 
-    monstro_leste1 = 
-    monstro2_leste1 = 
-    monstro3_leste1 = 
-    monstro4_leste1 = 
-    monstro_leste2 = 
-    monstro2_leste2 = 
-    monstro3_leste2 = 
-    monstro4_leste2 = 
-    monstro5_leste2 = 
-    monstro6_leste2 = 
+    monstro_sul = Monstro(mj_sul,mi_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
+    monstro2_sul = Monstro(m2j_sul,m2i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
+    monstro3_sul= Monstro(m3j_sul,m3i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
+    monstro4_sul = Monstro(m4j_sul,m4i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
+    monstro_leste1 = Monstro(mj_leste1,mi_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
+    monstro2_leste1 = Monstro(m2j_leste1,m2i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
+    monstro3_leste1 = Monstro(m3j_leste1,m3i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
+    monstro4_leste1 = Monstro(m4j_leste1,m4i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
+    monstro_leste2 = Monstro(mj_leste2,mi_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+    monstro2_leste2 = Monstro(m2j_leste2,m2i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+    monstro3_leste2 = Monstro(m3j_leste2,m3i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+    monstro4_leste2 = Monstro(m4j_leste2,m4i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+    monstro5_leste2 = Monstro(m5j_leste2,m5i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+    monstro6_leste2 = Monstro(m6j_leste2,m6i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
 
-
-    monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,10)
-    monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,10)
-    monstro3_hall = Monstro(m3j_hall,m3i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,10)
-    monstro_norte = Monstro(mj_norte,mi_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
-    monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
-    monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
-    monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
-
-    
 
     arma_hall_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
     arma1_norte_pos = pygame.Rect(2*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
@@ -301,15 +282,15 @@ def main():
     arma2_soco_leste2 = False
     arma3_catana_leste2 = False
     
-    arma_atual = nada
+    arma_atual = 0
     
     if arma_atual == arma_soco_hall or arma_atual == arma1_soco_norte or arma_atual == arma1_soco_sul\
     or arma_atual == arma3_soco_sul or arma_atual == arma2_soco_leste1 or arma_atual == arma2_soco_leste2:
         
         poder_arma = armas["soco_ingles"]
     
-   if  arma_atual== arma2_catana_norte or arma_atual == arma3_catana_norte or arma_atual == arma2_catana_sul \
-   or arma_atual == arma1_catana_leste1 or arma_atual == arma1_catana_leste2 or arma_atual == arma3_catana_leste2: 
+    if  arma_atual== arma2_catana_norte or arma_atual == arma3_catana_norte or arma_atual == arma2_catana_sul or arma_atual == arma1_catana_leste1 \
+    or arma_atual == arma1_catana_leste2 or arma_atual == arma3_catana_leste2: 
        
         poder_arma = armas["catana"]
     
@@ -419,7 +400,7 @@ def main():
             
             if tab == tabuleiro.TAB:
                 
-                 tela.blit(background_hall,[0,0])
+                tela.blit(background_hall,[0,0])
                 tela.blit(telag_5,[14*TILESIZE,0*TILESIZE])
                 tela.blit(telag_6,[9*TILESIZE,9*TILESIZE])
                 tela.blit(telag_7,[3*TILESIZE,26*TILESIZE])
@@ -464,13 +445,13 @@ def main():
                     poder_arma = monstro3_hall.poder_arma
                     
                 if MONSTRO1_HALL == True: 
-                    monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                     
                 if MONSTRO2_HALL == True: 
-                    monstro2_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro2_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                     
                 if MONSTRO3_HALL== True: 
-                    monstro3_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro3_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                 
                 if pi == 11 and pj == 11: 
                     if arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
@@ -478,6 +459,7 @@ def main():
                     and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
                     
                         arma_soco_hall = True
+                        arma_atual = arma_soco_hall
                     
             if arma_soco_hall == False:
                 if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_hall_pos.colliderect(A_LUZ3) == True:
@@ -489,16 +471,16 @@ def main():
             if tab == ala_norte.TAB_2: 
                
                 if MONSTRO1_NORTE == True: 
-                    monstro_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                     
                 if MONSTRO2_NORTE == True: 
-                    monstro2_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro2_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                     
                 if MONSTRO3_NORTE == True: 
-                    monstro3_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro3_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
             
                 if MONSTRO4_NORTE == True:
-                    monstro4_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro4_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                     
                 tela.blit(background_alanorte, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
@@ -564,7 +546,7 @@ def main():
                   
                 if pi == 24 and pj == 37: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and \
+                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False\
                     and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
                     and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
                     
@@ -677,21 +659,21 @@ def main():
                     MONSTRO1_LESTE1= monstro_leste1.MONSTRO
                     poder_arma = monstro_leste1.poder_arma
                     
-               if pi == monstro2_leste1.y and pj == monstro2_leste1.x: 
+                if pi == monstro2_leste1.y and pj == monstro2_leste1.x: 
                     
                     monstro2_leste1.vida(poder_arma,MONSTRO2_LESTE1,arma_atual,QUIT)
                     QUIT = monstro2_leste1.QUIT
                     MONSTRO2_LESTE1= monstro2_leste1.MONSTRO 
                     poder_arma = monstro2_leste1.poder_arma
                     
-               if pi == monstro3_leste1.y and pj == monstro3_leste1.x: 
+                if pi == monstro3_leste1.y and pj == monstro3_leste1.x: 
                     
                     monstro3_leste1.vida(poder_arma,MONSTRO3_LESTE1,arma_atual,QUIT)
                     QUIT = monstro3_leste1.QUIT
                     MONSTRO3_LESTE1= monstro3_leste1.MONSTRO
                     poder_arma = monstro3_leste1.poder_arma
                     
-               if pi == monstro4_leste1.y and pj == monstro4_leste1.x: 
+                if pi == monstro4_leste1.y and pj == monstro4_leste1.x: 
                     
                     monstro4_leste1.vida(poder_arma,MONSTRO4_LESTE1,arma_atual,QUIT)
                     QUIT = monstro4_leste1.QUIT
@@ -702,7 +684,7 @@ def main():
                 if pi == 27 and pj == 6: 
                     
                     if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  \
+                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False \
                     and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
                     
                         arma1_catana_leste1 = True
@@ -794,7 +776,7 @@ def main():
                     and arma2_soco_leste1 == False and arma1_catana_leste2 == False and  arma3_catana_leste2 == False: 
                     
                         arma2_soco_leste2 = True
-                        arma_atual = arma2_soco_leste
+                        arma_atual = arma2_soco_leste2
                     
                 if arma2_soco_leste2 == False:
                
@@ -938,12 +920,13 @@ def main():
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
                 #definindo monstros
 
-                mi_hall = 15
+                
                 mj_hall= 16
                 m2i_hall = 3
                 m2j_hall = 25
                 m3i_hall = 27
                 m3j_hall = 35
+                
                 mi_norte = 19
                 mj_norte = 6
                 m2i_norte = 17
@@ -952,14 +935,69 @@ def main():
                 m3j_norte = 17
                 m4i_norte = 3
                 m4j_norte = 21
-                            
-                monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tab,10)
-                monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tab,10)
-                monstro3_hall = Monstro(m3j_hall,m3i_hall,VERMELHO,TILESIZE,tela,tab,10)
-                monstro_norte = Monstro(mj_norte,mi_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
-                monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
-                monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
-                monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,15)
+                
+            
+                mi_sul = 2
+                mj_sul = 2
+                m2i_sul = 27
+                m2j_sul = 13
+                m3i_sul = 27
+                m3j_sul = 24
+                m4i_sul = 8
+                m4j_sul = 23
+                
+                mi_leste1 = 27
+                mj_leste1 = 2
+                m2i_leste1 = 2
+                m2j_leste1 = 14
+                m3i_leste1 = 21
+                m3j_leste1 = 23
+                m4i_leste1 = 10
+                m4j_leste1 = 25
+                
+                mi_leste2 = 27
+                mj_leste2 = 2
+                m2i_leste2 = 27
+                m2j_leste2 = 29
+                m3i_leste2 = 23
+                m3j_leste2 = 33
+                m4i_leste2 = 22
+                m4j_leste2 = 16
+                m5i_leste2 = 15
+                m5j_leste2 = 37
+                m6i_leste2 = 15
+                m6j_leste2 = 33
+                
+                vida_monstro_hall = 10
+                vida_monstro_norte = 15
+                vida_monstro_sul = 20
+                vida_monstro_leste1 = 25
+                vida_monstro_leste2 = 30
+                
+                armas = {"catana": 10, "soco_ingles": 2.5}         # dicionario 
+                
+                
+                monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
+                monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
+                monstro3_hall = Monstro(m3j_hall,m3i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
+                monstro_norte = Monstro(mj_norte,mi_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
+                monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
+                monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
+                monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
+                monstro_sul = Monstro(mj_sul,mi_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
+                monstro2_sul = Monstro(m2j_sul,m2i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
+                monstro3_sul= Monstro(m3j_sul,m3i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
+                monstro4_sul = Monstro(m4j_sul,m4i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
+                monstro_leste1 = Monstro(mj_leste1,mi_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
+                monstro2_leste1 = Monstro(m2j_leste1,m2i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
+                monstro3_leste1 = Monstro(m3j_leste1,m3i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
+                monstro4_leste1 = Monstro(m4j_leste1,m4i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
+                monstro_leste2 = Monstro(mj_leste2,mi_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+                monstro2_leste2 = Monstro(m2j_leste2,m2i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+                monstro3_leste2 = Monstro(m3j_leste2,m3i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+                monstro4_leste2 = Monstro(m4j_leste2,m4i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+                monstro5_leste2 = Monstro(m5j_leste2,m5i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+                monstro6_leste2 = Monstro(m6j_leste2,m6i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
 
                 sair = False
                 lanterna = False
