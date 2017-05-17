@@ -242,7 +242,7 @@ def main():
     #imagens
     background_hall= pygame.image.load("entrada.png")
     background_alanorte = pygame.image.load("ala-norte.png")
-    background_alasul = pygame.image.load("ala sul.png")
+    background_alasul = pygame.image.load("ala-sul.png")
     background_alaleste1 = pygame.image.load("ala-leste-1.png")
     background_alaleste2 = pygame.image.load("ala-leste-final.png")
     background_tutorial = pygame.image.load("tutorial.png")
