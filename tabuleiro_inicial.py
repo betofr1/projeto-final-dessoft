@@ -84,34 +84,33 @@ class Monstro:
         self.QUIT = QUIT
         self.nome_arma = nome_arma
         
+        if self.arma == False and self.vida_m > 0: 
+            self.QUIT = True
+        
         if self.arma == True: 
-            if self.vida_m > 0 and self.arma_dic[self.nome_arma] > 0:
-                self.vida_m = self.vida_m - self.arma_dic[self.nome_arma]
+            
+            if self.vida_m > 0 and self.arma_dic[self.nome_arma][1] > 0:
+                self.vida_m = self.vida_m - self.arma_dic[self.nome_arma][0]
+                self.arma_dic[self.nome_arma][1] -= 1
+                print(self.vida_m)
                 
 
             if self.vida_m <= 0: 
                 self.MONSTRO = False
             
-            if self.arma_dic[self.nome_arma] <= 0 and self.vida_m > 0:
+            if self.arma_dic[self.nome_arma][1] <= 0 and self.vida_m > 0:
                 self.MONSTRO = True 
                 self.QUIT = True
             
-            if self.arma_dic[self.nome_arma] <= 0: 
+            if self.arma_dic[self.nome_arma][1] <= 0: 
                 self.arma = False
-                
-            if self.arma_dic[self.nome_arma] > 0: 
-                self.arma_dic[self.nome_arma] -= 1 
-                
-            if self.arma_dic[self.nome_arma] <= 0:
                 self.arma_dic = {}
-                self.arma = False
+                print("quebrou")
+                
                 #label6 = fonte_2.render("Sua arma quebrou...fuja", True, VERMELHO)
                 #tela.blit(label6, (19*TILESIZE, 27*TILESIZE))
             
                 
-                
-        if self.arma == False: 
-            self.QUIT = True
             
 def main():
     #definindo dimensoes
@@ -248,7 +247,7 @@ def main():
     vida_monstro_leste1 = 25
     vida_monstro_leste2 = 30
     
-    armas = {"catana": 10, "soco_ingles": 5}         # dicionario 
+    armas = {'catana': [10,3], 'soco_ingles': [5,4]}         # dicionario 
     
     
     monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
@@ -301,6 +300,8 @@ def main():
     arma3_catana_leste2 = False
     
     arma_dic = {}
+    arma_atual = False
+    nome_arma = ''
     
     #definindo lanterna
     lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
@@ -438,26 +439,29 @@ def main():
                         nome_arma = "soco_ingles"
                         
                 
-                if pi == monstro_hall.y and pj == monstro_hall.x:
+                if pi == monstro_hall.y and pj == monstro_hall.x and MONSTRO1_HALL == True:
 
                     monstro_hall.vida(arma_dic,MONSTRO1_HALL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_hall.QUIT
                     MONSTRO1_HALL= monstro_hall.MONSTRO
                     arma_dic = monstro_hall.arma_dic
+                    arma_atual = monstro_hall.arma
                         
-                if pi == monstro2_hall.y and pj ==monstro2_hall.x: 
+                if pi == monstro2_hall.y and pj ==monstro2_hall.x and MONSTRO2_HALL == True: 
                     
                     monstro2_hall.vida(arma_dic,MONSTRO2_HALL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_hall.QUIT
                     MONSTRO2_HALL= monstro2_hall.MONSTRO
                     arma_dic = monstro2_hall.arma_dic
+                    arma_atual = monstro2_hall.arma
                 
-                if pi == monstro3_hall.y and pj == monstro3_hall.x:
+                if pi == monstro3_hall.y and pj == monstro3_hall.x and MONSTRO3_HALL == True:
                     
                     monstro3_hall.vida(arma_dic,MONSTRO3_HALL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_hall.QUIT
                     MONSTRO3_HALL= monstro3_hall.MONSTRO
                     arma_dic = monstro3_hall.arma_dic
+                    arma_atual = monstro3_hall.arma
                     
                 if MONSTRO1_HALL == True: 
                     monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
@@ -491,33 +495,37 @@ def main():
                     
 
 
-                if pi == monstro_norte.y and pj == monstro_norte.x: 
+                if pi == monstro_norte.y and pj == monstro_norte.x and MONSTRO1_NORTE == True: 
                     
                     monstro_norte.vida(arma_dic,MONSTRO1_NORTE,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_norte.QUIT
                     MONSTRO1_NORTE= monstro_norte.MONSTRO
                     arma_dic = monstro_norte.arma_dic
+                    arma_atual = monstro_norte.arma
                     
-                if pi == monstro2_norte.y and pj == monstro2_norte.x: 
+                if pi == monstro2_norte.y and pj == monstro2_norte.x and MONSTRO2_NORTE == True: 
                     
                     monstro2_norte.vida(arma_dic,MONSTRO2_NORTE,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_norte.QUIT
                     MONSTRO2_NORTE= monstro2_norte.MONSTRO
                     arma_dic = monstro2_norte.arma_dic
+                    arma_atual = monstro2_norte.arma
 
-                if pi == monstro3_norte.y and pj == monstro3_norte.x: 
+                if pi == monstro3_norte.y and pj == monstro3_norte.x and MONSTRO3_NORTE == True: 
                     
                     monstro3_norte.vida(arma_dic,MONSTRO3_NORTE,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_norte.QUIT
                     MONSTRO3_NORTE= monstro3_norte.MONSTRO
                     arma_dic = monstro3_norte.arma_dic
+                    arma_atual = monstro3_norte.arma
                     
-                if pi == monstro4_norte.y and pj == monstro4_norte.x: 
+                if pi == monstro4_norte.y and pj == monstro4_norte.x and MONSTRO4_NORTE == True: 
                     
                     monstro4_norte.vida(arma_dic,MONSTRO4_NORTE,arma_atual,QUIT,nome_arma)
                     QUIT = monstro4_norte.QUIT
                     MONSTRO4_NORTE= monstro4_norte.MONSTRO
                     arma_dic = monstro4_norte.arma_dic
+                    arma_atual = monstro4_norte.arma
 
                 if pi == 2 and pj == 2: 
                     
@@ -565,33 +573,37 @@ def main():
                 tela.blit(background_alasul, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 
-                if pi == monstro_sul.y and pj == monstro_sul.x: 
+                if pi == monstro_sul.y and pj == monstro_sul.x and MONSTRO1_SUL == True: 
                     
                     monstro_sul.vida(arma_dic,MONSTRO1_SUL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_sul.QUIT
                     MONSTRO1_SUL= monstro_sul.MONSTRO
                     arma_dic = monstro_sul.arma_dic
+                    arma_atual = monstro_sul.arma
                     
-                if pi == monstro2_sul.y and pj == monstro2_sul.x: 
+                if pi == monstro2_sul.y and pj == monstro2_sul.x and MONSTRO2_SUL == True: 
                     
                     monstro2_sul.vida(arma_dic,MONSTRO2_SUL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_sul.QUIT
                     MONSTRO2_SUL= monstro2_sul.MONSTRO
                     arma_dic = monstro2_sul.arma_dic
+                    arma_atual = monstro2_sul.arma
                     
-                if pi == monstro3_sul.y and pj == monstro3_sul.x: 
+                if pi == monstro3_sul.y and pj == monstro3_sul.x and MONSTRO3_SUL == True: 
                     
                     monstro3_sul.vida(arma_dic,MONSTRO3_SUL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_sul.QUIT
                     MONSTRO3_SUL= monstro3_sul.MONSTRO
                     arma_dic = monstro3_sul.arma_dic
+                    arma_atual = monstro3_sul.arma
                     
-                if pi == monstro4_sul.y and pj == monstro4_sul.x: 
+                if pi == monstro4_sul.y and pj == monstro4_sul.x and MONSTRO4_SUL == True: 
                     
                     monstro4_sul.vida(arma_dic,MONSTRO4_SUL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro4_sul.QUIT
                     MONSTRO4_SUL= monstro4_sul.MONSTRO
                     arma_dic = monstro4_sul.arma_dic
+                    arma_atual = monstro4_sul.arma
                     
                 if MONSTRO1_SUL == True: 
                     monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
@@ -649,33 +661,37 @@ def main():
 #---------------------------------------------------------------------------------------
             if tab == ala_leste_1.TAB_5:
                 
-                if pi == monstro_leste1.y and pj == monstro_leste1.x: 
+                if pi == monstro_leste1.y and pj == monstro_leste1.x and MONSTRO1_LESTE1 == True: 
                     
                     monstro_leste1.vida(arma_dic,MONSTRO1_LESTE1,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_leste1.QUIT
                     MONSTRO1_LESTE1= monstro_leste1.MONSTRO
                     arma_dic = monstro_leste1.arma_dic
+                    arma_atual = monstro_leste1.arma
                     
-                if pi == monstro2_leste1.y and pj == monstro2_leste1.x: 
+                if pi == monstro2_leste1.y and pj == monstro2_leste1.x and MONSTRO2_LESTE1 == True: 
                     
                     monstro2_leste1.vida(arma_dic,MONSTRO2_LESTE1,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_leste1.QUIT
                     MONSTRO2_LESTE1= monstro2_leste1.MONSTRO 
                     arma_dic = monstro2_leste1.arma_dic
+                    arma_atual = monstro2_leste1.arma
                     
-                if pi == monstro3_leste1.y and pj == monstro3_leste1.x: 
+                if pi == monstro3_leste1.y and pj == monstro3_leste1.x and MONSTRO3_LESTE1 == True: 
                     
                     monstro3_leste1.vida(arma_dic,MONSTRO3_LESTE1,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_leste1.QUIT
                     MONSTRO3_LESTE1= monstro3_leste1.MONSTRO
                     arma_dic = monstro3_leste1.arma_dic
+                    arma_atual = monstro3_leste1.arma
                     
-                if pi == monstro4_leste1.y and pj == monstro4_leste1.x: 
+                if pi == monstro4_leste1.y and pj == monstro4_leste1.x and MONSTRO4_LESTE1 == True: 
                     
                     monstro4_leste1.vida(arma_dic,MONSTRO4_LESTE1,arma_atual,QUIT,nome_arma)
                     QUIT = monstro4_leste1.QUIT
                     MONSTRO4_LESTE1= monstro4_leste1.MONSTRO
                     arma_dic = monstro4_leste1.arma_dic
+                    arma_atual = monstro4_leste1.arma
                     
                 if pi == 27 and pj == 6: 
                     
@@ -707,47 +723,53 @@ def main():
 #------------------------------------------------------------------------------------                        
             if tab == ala_leste_final.TAB_4:
                 
-                if pi == monstro_leste2.y and pj == monstro_leste2.x: 
+                if pi == monstro_leste2.y and pj == monstro_leste2.x and MONSTRO1_LESTE2 == True: 
                     
                     monstro_leste2.vida(arma_dic,MONSTRO1_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_leste2.QUIT
                     MONSTRO1_LESTE2= monstro_leste2.MONSTRO
                     arma_dic = monstro_leste2.arma_dic
+                    arma_atual = monstro_leste2.arma
                     
-                if pi == monstro2_leste2.y and pj == monstro2_leste2.x: 
+                if pi == monstro2_leste2.y and pj == monstro2_leste2.x and MONSTRO2_LESTE2 == True: 
                     
                     monstro2_leste2.vida(arma_dic,MONSTRO2_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_leste2.QUIT
                     MONSTRO2_LESTE2= monstro2_leste2.MONSTRO
                     arma_dic = monstro2_leste2.arma_dic
+                    arma_atual = monstro2_leste2.arma
                     
-                if pi == monstro3_leste2.y and pj == monstro3_leste2.x: 
+                if pi == monstro3_leste2.y and pj == monstro3_leste2.x and MONSTRO3_LESTE2 == True: 
                     
                     monstro3_leste2.vida(arma_dic,MONSTRO3_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_leste2.QUIT
                     MONSTRO3_LESTE2= monstro3_leste2.MONSTRO
                     arma_dic = monstro3_leste2.arma_dic
+                    arma_atual = monstro3_leste2.arma
                     
-                if pi == monstro4_leste2.y and pj == monstro4_leste2.x: 
+                if pi == monstro4_leste2.y and pj == monstro4_leste2.x and MONSTRO4_LESTE2 == True: 
                     
                     monstro4_leste2.vida(arma_dic,MONSTRO4_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro4_leste2.QUIT
                     MONSTRO4_LESTE2= monstro4_leste2.MONSTRO
                     arma_dic = monstro4_leste2.arma_dic
+                    arma_atual = monstro4_leste2.arma
                     
-                if pi == monstro5_leste2.y and pj == monstro5_leste2.x: 
+                if pi == monstro5_leste2.y and pj == monstro5_leste2.x and MONSTRO5_LESTE2 == True: 
                     
                     monstro5_leste2.vida(arma_dic,MONSTRO5_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro5_leste2.QUIT
                     MONSTRO5_LESTE2= monstro5_leste2.MONSTRO
                     arma_dic = monstro5_leste2.arma_dic
+                    arma_atual = monstro5_leste2.arma
                     
-                if pi == monstro6_leste2.y and pj == monstro6_leste2.x: 
+                if pi == monstro6_leste2.y and pj == monstro6_leste2.x and MONSTRO6_LESTE2 == True: 
                     
                     monstro6_leste2.vida(arma_dic,MONSTRO6_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro6_leste2.QUIT
                     MONSTRO6_LESTE2= monstro6_leste2.MONSTRO
                     arma_dic = monstro6_leste2.arma_dic
+                    arma_atual = monstro6_leste2.arma
                     
                 if pi == 23 and pj == 12: 
                     
@@ -821,13 +843,15 @@ def main():
             count_m += 1
             if count_m == 3:
                 count_m = 0
-            #ir pro hall
+                
+ # ------------------------ir pro hall------------------------------
             if tab[pi][pj] == 14:
                 tab = tabuleiro.TAB
                 pi = 14
                 pj = 0
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
-            # ir para a ala norte: 
+                
+ #-------------------ir para a ala norte------------------------------------
             if tab[pi][pj] == 11: 
                 tab = ala_norte.TAB_2
                 pj = 20
@@ -838,7 +862,7 @@ def main():
                 label2 = fonte_2.render("Ala norte", True, VERMELHO)
                 tela.blit(label2, (19*TILESIZE, 26*TILESIZE))
 
-                # ir para o hall: 
+# ---------------------ir para o hall----------------------------------------------
             if tab[pi][pj] == 2: 
                 tab = tabuleiro.TAB
                 pj = 20
@@ -853,7 +877,7 @@ def main():
                 label5 = fonte_2.render("Hall", True, VERMELHO)
                 tela.blit(label5, (19*TILESIZE, 27*TILESIZE))
 
-             # ala sul:
+#-----------------------------ala sul-----------------------------------------
             if tab == ala_norte.TAB_2:    
                 if pi == 3 and pj == 37:    
                     chave1 = True
@@ -873,6 +897,9 @@ def main():
                 pj = 20
                 pi = 29
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+#------------------------------ala_leste1---------------------------------------------
+
+#------------------------------ala_leste2----------------------------------------------
             
             if tab == ala_sul.TAB_3 and pj == 20 and pi == 1: 
                 label4 = fonte_2.render("Ala Sul", True, VERMELHO)
@@ -956,7 +983,7 @@ def main():
                 vida_monstro_leste1 = 25
                 vida_monstro_leste2 = 30
                 
-                armas = {"catana": 10, "soco_ingles": 2.5}         # dicionario 
+                armas = {"catana": 10, "soco_ingles": 5}         # dicionario 
                 
                 monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
                 monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
@@ -992,6 +1019,22 @@ def main():
                 MONSTRO2_NORTE = True
                 MONSTRO3_NORTE = True
                 MONSTRO4_NORTE = True
+                arma_soco_hall = False
+                arma1_soco_norte = False
+                arma2_catana_norte = False
+                arma3_catana_norte = False
+                arma1_soco_sul = False
+                arma2_catana_sul = False
+                arma3_soco_sul = False
+                arma1_catana_leste1 = False
+                arma2_soco_leste1 = False
+                arma1_catana_leste2 = False
+                arma2_soco_leste2 = False
+                arma3_catana_leste2 = False
+    
+                arma_dic = {}
+                arma_atual = False
+                nome_arma = ''
                 
                 count = 0  
                 count_m = 0  
