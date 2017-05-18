@@ -87,6 +87,7 @@ class Monstro:
         if self.arma == True: 
             if self.vida_m > 0 and self.arma_dic[self.nome_arma] > 0:
                 self.vida_m = self.vida_m - self.arma_dic[self.nome_arma]
+                
 
             if self.vida_m <= 0: 
                 self.MONSTRO = False
@@ -247,7 +248,7 @@ def main():
     vida_monstro_leste1 = 25
     vida_monstro_leste2 = 30
     
-    armas = {"catana": 10, "soco_ingles": 10}         # dicionario 
+    armas = {"catana": 10, "soco_ingles": 5}         # dicionario 
     
     
     monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
