@@ -310,7 +310,9 @@ def main():
     A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
 
     #BOOL
-    chave1 = False
+    chave_norte = False
+    chave_sul = False
+    chave_final = False
     Fullscreen = False
     sair = False
     lanterna = False
@@ -606,16 +608,16 @@ def main():
                     arma_atual = monstro4_sul.arma
                     
                 if MONSTRO1_SUL == True: 
-                    monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                     
                 if MONSTRO2_SUL == True: 
-                    monstro2_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro2_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                     
                 if MONSTRO3_SUL == True: 
-                    monstro3_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro3_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
             
                 if MONSTRO4_SUL == True:
-                    monstro4_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
+                    monstro4_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
                 
                 if pi == 19 and pj == 2: 
                     
@@ -877,12 +879,12 @@ def main():
                 label5 = fonte_2.render("Hall", True, VERMELHO)
                 tela.blit(label5, (19*TILESIZE, 27*TILESIZE))
 
-#-----------------------------ala sul-----------------------------------------
+#-----------------------------chave da ala norte-----------------------------------------
             if tab == ala_norte.TAB_2:    
                 if pi == 3 and pj == 37:    
-                    chave1 = True
-                
-            if tab[pi][pj] == 6 and chave1 == True: 
+                    chave_norte = True
+#--------------------------------abrindo ala sul---------------------------------------               
+            if tab[pi][pj] == 6 and chave_norte == True: 
                 tab = ala_sul.TAB_3
                 pj = 20
                 pi = 1
@@ -897,10 +899,43 @@ def main():
                 pj = 20
                 pi = 29
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
-#------------------------------ala_leste1---------------------------------------------
+                
+# ---------------------------------chave da ala sul -----------------------------------
+            if tab == ala_sul.TAB_3:    
+                if pi == 15 and pj == 17:    
+                    chave_sul = True
 
-#------------------------------ala_leste2----------------------------------------------
-            
+#------------------------------abrindo ala_leste1---------------------------------------------
+            if tab[pi][pj] == 12 and chave_sul == True: 
+                tab = ala_leste_1.TAB_5
+                pj = 1
+                pi = 13
+                jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+                
+            if tab[pi][pj] == 12 and chave_sul == False: 
+                label7 = fonte_2.render("A porta esta trancada, vá para a ala sul", True, VERMELHO)
+                tela.blit(label7, (37*TILESIZE, 13*TILESIZE))
+
+#------------------------------chave final ala leste1----------------------------------------------
+            if tab == ala_leste_1.TAB_5:    
+                if pi == 22 and pj == 34:    
+                    chave_final = True
+                    
+#----------------------------abrindo ala final -------------------------------------------
+            if tab[pi][pj] == 15 and chave_final == True: 
+                tab = ala_leste_final.TAB_4
+                pj = 1
+                pi = 13
+                jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+
+            if tab[pi][pj] == 15 and chave_final == False: 
+                label8 = fonte_2.render("A porta esta trancada, vá para a ala leste 1", True, VERMELHO)
+                tela.blit(label8, (2*TILESIZE, 12*TILESIZE))
+#-----------------------------------------------------------------------------------------
+
+
+# falta os nomes dos outos tabuleiros, igual codigo abaixo: 
+    
             if tab == ala_sul.TAB_3 and pj == 20 and pi == 1: 
                 label4 = fonte_2.render("Ala Sul", True, VERMELHO)
                 tela.blit(label4, (19*TILESIZE, 2*TILESIZE))
