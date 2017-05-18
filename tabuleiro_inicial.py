@@ -76,7 +76,7 @@ class Monstro:
                 if num == 3:
                     self.ret.move_ip(-1*self.tamanho,0)
                     self.x -= 1
-                    
+    
     def vida(self,arma_dic,MONSTRO,arma,QUIT,nome_arma):
         self.arma_dic = arma_dic
         self.MONSTRO = MONSTRO
@@ -86,12 +86,13 @@ class Monstro:
         
         if self.arma == False and self.vida_m > 0: 
             self.QUIT = True
-        
+        #self.arma_dic[self.nome_arma][1] = int(self.arma_dic[self.nome_arma][1])
         if self.arma == True: 
             
             if self.vida_m > 0 and self.arma_dic[self.nome_arma][1] > 0:
                 self.vida_m = self.vida_m - self.arma_dic[self.nome_arma][0]
-                self.arma_dic[self.nome_arma][1] -= 1
+                # self.arma_dic[self.nome_arma][1] -= 1
+                self.arma_dic[self.nome_arma] = [self.arma_dic[self.nome_arma][0], self.arma_dic[self.nome_arma][1] -1]
                 print(self.vida_m)
                 
 
@@ -209,7 +210,6 @@ def main():
     m4i_norte = 3
     m4j_norte = 21
     
-
     mi_sul = 2
     mj_sul = 2
     m2i_sul = 27
@@ -247,7 +247,7 @@ def main():
     vida_monstro_leste1 = 25
     vida_monstro_leste2 = 30
     
-    armas = {'catana': [10,3], 'soco_ingles': [5,4]}         # dicionario 
+    armas = {'catana': [10,3], 'martelo': [5,4]}         # dicionario 
     
     
     monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
@@ -406,7 +406,7 @@ def main():
 
             if tab == tab_tutorial.TAB_6:
                 tela.blit(background_tutorial, [0,0])
-
+#----------------------------------------------------------
             if tab == tabuleiro.TAB:
                 tela.blit(background_hall,[0,0])
                 tela.blit(telag_5,[14*TILESIZE,0*TILESIZE])
@@ -435,10 +435,10 @@ def main():
                     
                     if len(arma_dic) == 0:
 
-                        arma_dic = {'soco_ingles':armas['soco_ingles']}
+                        arma_dic = {'martelo':armas['martelo']}
                         arma_soco_hall = True
                         arma_atual = arma_soco_hall
-                        nome_arma = "soco_ingles"
+                        nome_arma = 'martelo'
                         
                 
                 if pi == monstro_hall.y and pj == monstro_hall.x and MONSTRO1_HALL == True:
@@ -477,7 +477,7 @@ def main():
                     
                 if arma_soco_hall == False:
                     if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_hall_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma_hall_pos)       
+                        tela.blit(martelo,[11*TILESIZE,11*TILESIZE])     
   #---------------------------------------------------------------------------      
             if tab == ala_norte.TAB_2: 
                 tela.blit(background_alanorte, [0,0])
@@ -537,26 +537,26 @@ def main():
                         
                         arma2_catana_norte = True
                         arma_atual = arma2_catana_norte
-                        nome_arma = "catana"
+                        nome_arma = 'catana'
                     
                 if arma2_catana_norte == False:
                
                     if arma1_norte_pos.colliderect(A_LUZ1) == True or arma1_norte_pos.colliderect(A_LUZ2) == True or arma1_norte_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma1_norte_pos)
+                        tela.blit(martelo,[2*TILESIZE,2*TILESIZE])
                   
                 if pi == 27 and pj == 2: 
                     
                     if len(arma_dic) == 0:
                         
-                        arma_dic = {'soco_ingles':armas['soco_ingles']}
+                        arma_dic = {'martelo':armas['martelo']}
                         arma1_soco_norte = True
                         arma_atual = arma1_soco_norte
-                        nome_arma = "soco_ingles"
+                        nome_arma = 'martelo'
                     
                     
                 if arma1_soco_norte == False:
                     if arma2_norte_pos.colliderect(A_LUZ1) == True or arma2_norte_pos.colliderect(A_LUZ2) == True or arma2_norte_pos.colliderect(A_LUZ3) == True:
-                     pygame.draw.rect(tela,VERDE,arma2_norte_pos)
+                        tela.blit(martelo,[2*TILESIZE,27*TILESIZE])
                   
                 if pi == 24 and pj == 37: 
                     
@@ -565,11 +565,11 @@ def main():
                         arma_dic = {'catana':armas['catana']}
                         arma3_catana_norte = True
                         arma_atual = arma3_catana_norte
-                        nome_arma = "catana"
+                        nome_arma = 'catana'
                     
                 if arma3_catana_norte == False:
                     if arma3_norte_pos.colliderect(A_LUZ1) == True or arma3_norte_pos.colliderect(A_LUZ2) == True or arma3_norte_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma3_norte_pos)
+                        tela.blit(katana,[37*TILESIZE,24*TILESIZE])
 #----------------------------------------------------------------------------------------
             if tab == ala_sul.TAB_3: 
                 tela.blit(background_alasul, [0,0])
@@ -623,15 +623,15 @@ def main():
                     
                     if len(arma_dic) == 0:
                         
-                        arma_dic = {'soco_ingles':armas['soco_ingles']}
+                        arma_dic = {'martelo':armas['martelo']}
                         arma1_soco_sul = True
                         arma_atual = arma1_soco_sul
-                        nome_arma = "soco_ingles"
+                        nome_arma = 'martelo'
                     
                 if arma1_soco_sul == False:
                
                     if arma1_sul_pos.colliderect(A_LUZ1) == True or arma1_sul_pos.colliderect(A_LUZ2) == True or arma1_sul_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma1_sul_pos)
+                        tela.blit(martelo,[2*TILESIZE,19*TILESIZE])
                         
                 if pi == 4 and pj == 33: 
                     
@@ -640,26 +640,26 @@ def main():
                         arma_dic = {'catana':armas['catana']}
                         arma2_catana_sul = True
                         arma_atual = arma2_catana_sul
-                        nome_arma = "catana"
+                        nome_arma = 'catana'
                     
                 if arma2_catana_sul == False:
                
                     if arma2_sul_pos.colliderect(A_LUZ1) == True or arma2_sul_pos.colliderect(A_LUZ2) == True or arma2_sul_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma1_sul_pos)
+                        tela.blit(katana,[33*TILESIZE,4*TILESIZE])
                 
                 if pi == 27 and pj == 30: 
                     
                     if len(arma_dic) == 0:
                         
-                        arma_dic = {'soco_ingles':armas['soco_ingles']}
+                        arma_dic = {'martelo':armas['martelo']}
                         arma3_soco_sul = True
                         arma_atual = arma3_soco_sul
-                        nome_arma = "soco_ingles"
+                        nome_arma = 'martelo'
                     
                 if arma3_soco_sul == False:
                
                     if arma3_sul_pos.colliderect(A_LUZ1) == True or arma3_sul_pos.colliderect(A_LUZ2) == True or arma3_sul_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma3_norte_pos)
+                        tela.blit(martelo,[30*TILESIZE,27*TILESIZE])
 #---------------------------------------------------------------------------------------
             if tab == ala_leste_1.TAB_5:
                 
@@ -706,26 +706,26 @@ def main():
                         arma_dic = {'catana':armas['catana']}
                         arma1_catana_leste1 = True
                         arma_atual = arma1_catana_leste1
-                        nome_arma = "catana"
+                        nome_arma = 'catana'
                     
                 if arma1_catana_leste1 == False:
                
                     if arma1_leste1_pos.colliderect(A_LUZ1) == True or arma1_leste1_pos.colliderect(A_LUZ2) == True or arma1_leste1_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma1_leste1_pos)
+                        tela.blit(katana,[6*TILESIZE,27*TILESIZE])
                         
                 if pi == 6 and pj == 25: 
                     
                     if len(arma_dic) == 0:
                         
-                        arma_dic = {'soco_ingles':armas['soco_ingles']}
+                        arma_dic = {'martelo':armas['martelo']}
                         arma2_soco_leste1 = True
                         arma_atual = arma2_soco_leste1
-                        nome_arma = "soco_ingles"
+                        nome_arma = 'martelo'
                     
                 if arma2_soco_leste1 == False:
                
                     if arma2_leste1_pos.colliderect(A_LUZ1) == True or arma2_leste1_pos.colliderect(A_LUZ2) == True or arma2_leste1_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma2_leste1_pos)
+                        tela.blit(martelo,[25*TILESIZE,6*TILESIZE])
 #------------------------------------------------------------------------------------                        
             if tab == ala_leste_final.TAB_4:
                 
@@ -787,26 +787,26 @@ def main():
                         arma_dic = {'catana':armas['catana']}
                         arma1_catana_leste2 = True
                         arma_atual = arma1_catana_leste2
-                        nome_arma = "catana"
+                        nome_arma = 'catana'
                     
                 if arma1_catana_leste2 == False:
                
                     if arma1_leste2_pos.colliderect(A_LUZ1) == True or arma1_leste2_pos.colliderect(A_LUZ2) == True or arma1_leste2_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma1_leste2_pos)
+                        tela.blit(martelo,[12*TILESIZE,23*TILESIZE])
                         
                 if pi == 6 and pj == 24: 
                     
                     if len(arma_dic) == 0:
                         
-                        arma_dic = {'soco_ingles':armas['soco_ingles']}
+                        arma_dic = {'martelo':armas['martelo']}
                         arma2_soco_leste2 = True
                         arma_atual = arma2_soco_leste2
-                        nome_arma = "soco_ingles"
+                        nome_arma = 'martelo'
                     
                 if arma2_soco_leste2 == False:
                
                     if arma2_leste2_pos.colliderect(A_LUZ1) == True or arma2_leste2_pos.colliderect(A_LUZ2) == True or arma2_leste2_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma2_leste2_pos)
+                        tela.blit(martelo,[24*TILESIZE,6*TILESIZE])
                     
                 if pi == 7 and pj == 32: 
                     
@@ -815,12 +815,12 @@ def main():
                         arma_dic = {'catana':armas['catana']}
                         arma3_catana_leste2 = True
                         arma_atual = arma3_catana_leste2
-                        nome_arma = "catana"
+                        nome_arma = 'catana'
                     
                 if arma3_catana_leste2 == False:
                
                     if arma3_leste2_pos.colliderect(A_LUZ1) == True or arma3_leste2_pos.colliderect(A_LUZ2) == True or arma3_leste2_pos.colliderect(A_LUZ3) == True:
-                        pygame.draw.rect(tela,VERDE,arma3_leste2_pos)  
+                        tela.blit(martelo,[32*TILESIZE,7*TILESIZE]) 
 #======================================================================================
             
             if lanterna == True: 
@@ -1039,7 +1039,7 @@ def main():
                 vida_monstro_leste1 = 25
                 vida_monstro_leste2 = 30
                 
-                armas = {"catana": 10, "soco_ingles": 5}         # dicionario 
+                armas = {"catana": 10, "martelo": 5}         # dicionario 
                 
                 monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
                 monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
