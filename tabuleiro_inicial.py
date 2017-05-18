@@ -7,8 +7,20 @@ import tab_tutorial
 import ala_leste_1
 import ala_leste_final
 
+# definindo parametros usados nas classes e funcoes: 
+#pygame.init()    
+#fonte = pygame.font.SysFont("Arial", 100)
+#fonte_2 = pygame.font.SysFont('Arial', 25)
+#VERMELHO = (255,0,0)
+#tab = tab_tutorial.TAB_6
+#TILESIZE = 20
+#MAPWIDTH = len(tab[0])
+#MAPHEIGHT = len(tab)
+#tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
+
 
 #funcao botao
+
 def botao(texto,x,y,l,a,cor1,tela,font,action):
     mouse = pygame.mouse.get_pos()
     TILESIZE = 20
@@ -21,7 +33,9 @@ def botao(texto,x,y,l,a,cor1,tela,font,action):
                 return 3
             if action == 0:
                 return 2
+            
 #classe monstro
+
 class Monstro:
     def __init__(self,x,y,cor,tamanho,tela,tab,vida_m):
         self.tab = tab
@@ -63,32 +77,35 @@ class Monstro:
                     self.ret.move_ip(-1*self.tamanho,0)
                     self.x -= 1
                     
-    def vida(self,vida_a,MONSTRO,arma,QUIT):
-        self.vida_a = vida_a
+    def vida(self,arma_dic,MONSTRO,arma,QUIT,nome_arma):
+        self.arma_dic = arma_dic
         self.MONSTRO = MONSTRO
         self.arma = arma
         self.QUIT = QUIT
+        self.nome_arma = nome_arma
         
         if self.arma == True: 
-            if self.vida_m > 0 and self.vida_a['soco_ingles'] > 0:
-                self.vida_m = self.vida_m - self.vida_a['soco_ingles']
+            if self.vida_m > 0 and self.arma_dic[self.nome_arma] > 0:
+                self.vida_m = self.vida_m - self.arma_dic[self.nome_arma]
 
             if self.vida_m <= 0: 
                 self.MONSTRO = False
             
-            if self.vida_a['soco_ingles'] <= 0 and self.vida_m > 0:
+            if self.arma_dic[self.nome_arma] <= 0 and self.vida_m > 0:
                 self.MONSTRO = True 
                 self.QUIT = True
             
-            if self.vida_a['soco_ingles'] <= 0: 
+            if self.arma_dic[self.nome_arma] <= 0: 
                 self.arma = False
                 
-            if self.vida_a['soco_ingles'] > 0: 
-                self.vida_a['soco_ingles'] -= 1 
+            if self.arma_dic[self.nome_arma] > 0: 
+                self.arma_dic[self.nome_arma] -= 1 
                 
-            if self.vida_a['soco_ingles'] <= 0:
-                self.vida_a = {}
+            if self.arma_dic[self.nome_arma] <= 0:
+                self.arma_dic = {}
                 self.arma = False
+                #label6 = fonte_2.render("Sua arma quebrou...fuja", True, VERMELHO)
+                #tela.blit(label6, (19*TILESIZE, 27*TILESIZE))
             
                 
                 
@@ -230,7 +247,7 @@ def main():
     vida_monstro_leste1 = 25
     vida_monstro_leste2 = 30
     
-    armas = {"catana": 10, "soco_ingles": 2.5}         # dicionario 
+    armas = {"catana": 10, "soco_ingles": 10}         # dicionario 
     
     
     monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
@@ -411,36 +428,35 @@ def main():
                     lanterna = True
 
                 if pi == 11 and pj == 11:
+                    
                     if len(arma_dic) == 0:
 
-                    # if arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    # and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    # and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
-                    
                         arma_dic = {'soco_ingles':armas['soco_ingles']}
                         arma_soco_hall = True
                         arma_atual = arma_soco_hall
+                        nome_arma = "soco_ingles"
+                        
                 
                 if pi == monstro_hall.y and pj == monstro_hall.x:
 
-                    monstro_hall.vida(arma_dic,MONSTRO1_HALL,arma_atual,QUIT)
+                    monstro_hall.vida(arma_dic,MONSTRO1_HALL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_hall.QUIT
                     MONSTRO1_HALL= monstro_hall.MONSTRO
-                    arma_dic = monstro_hall.vida_a
+                    arma_dic = monstro_hall.arma_dic
                         
                 if pi == monstro2_hall.y and pj ==monstro2_hall.x: 
                     
-                    monstro2_hall.vida(poder_arma,MONSTRO2_HALL,arma_atual,QUIT)
+                    monstro2_hall.vida(arma_dic,MONSTRO2_HALL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_hall.QUIT
                     MONSTRO2_HALL= monstro2_hall.MONSTRO
-                    poder_arma = monstro2_hall.poder_arma
+                    arma_dic = monstro2_hall.arma_dic
                 
                 if pi == monstro3_hall.y and pj == monstro3_hall.x:
                     
-                    monstro3_hall.vida(poder_arma,MONSTRO3_HALL,arma_atual,QUIT)
+                    monstro3_hall.vida(arma_dic,MONSTRO3_HALL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_hall.QUIT
                     MONSTRO3_HALL= monstro3_hall.MONSTRO
-                    poder_arma = monstro3_hall.poder_arma
+                    arma_dic = monstro3_hall.arma_dic
                     
                 if MONSTRO1_HALL == True: 
                     monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
@@ -476,40 +492,41 @@ def main():
 
                 if pi == monstro_norte.y and pj == monstro_norte.x: 
                     
-                    monstro_norte.vida(poder_arma,MONSTRO1_NORTE,arma_atual,QUIT)
+                    monstro_norte.vida(arma_dic,MONSTRO1_NORTE,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_norte.QUIT
                     MONSTRO1_NORTE= monstro_norte.MONSTRO
-                    poder_arma = monstro_norte.poder_arma
+                    arma_dic = monstro_norte.arma_dic
                     
                 if pi == monstro2_norte.y and pj == monstro2_norte.x: 
                     
-                    monstro2_norte.vida(poder_arma,MONSTRO2_NORTE,arma_atual,QUIT)
+                    monstro2_norte.vida(arma_dic,MONSTRO2_NORTE,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_norte.QUIT
                     MONSTRO2_NORTE= monstro2_norte.MONSTRO
-                    poder_arma = monstro2_norte.poder_arma
+                    arma_dic = monstro2_norte.arma_dic
 
                 if pi == monstro3_norte.y and pj == monstro3_norte.x: 
                     
-                    monstro3_norte.vida(poder_arma,MONSTRO3_NORTE,arma_atual,QUIT)
+                    monstro3_norte.vida(arma_dic,MONSTRO3_NORTE,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_norte.QUIT
                     MONSTRO3_NORTE= monstro3_norte.MONSTRO
-                    poder_arma = monstro3_norte.poder_arma
+                    arma_dic = monstro3_norte.arma_dic
                     
                 if pi == monstro4_norte.y and pj == monstro4_norte.x: 
                     
-                    monstro4_norte.vida(poder_arma,MONSTRO4_NORTE,arma_atual,QUIT)
+                    monstro4_norte.vida(arma_dic,MONSTRO4_NORTE,arma_atual,QUIT,nome_arma)
                     QUIT = monstro4_norte.QUIT
                     MONSTRO4_NORTE= monstro4_norte.MONSTRO
-                    poder_arma = monstro4_norte.poder_arma
+                    arma_dic = monstro4_norte.arma_dic
 
                 if pi == 2 and pj == 2: 
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
                     
-                        arma2_catana_norte = True
+                    if len(arma_dic) == 0:
                         
+                        arma_dic = {'catana':armas['catana']}
+                        
+                        arma2_catana_norte = True
                         arma_atual = arma2_catana_norte
+                        nome_arma = "catana"
                     
                 if arma2_catana_norte == False:
                
@@ -517,12 +534,13 @@ def main():
                         pygame.draw.rect(tela,VERDE,arma1_norte_pos)
                   
                 if pi == 27 and pj == 2: 
-                    if arma_soco_hall == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
                     
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'soco_ingles':armas['soco_ingles']}
                         arma1_soco_norte = True
                         arma_atual = arma1_soco_norte
+                        nome_arma = "soco_ingles"
                     
                     
                 if arma1_soco_norte == False:
@@ -531,12 +549,12 @@ def main():
                   
                 if pi == 24 and pj == 37: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
-                    
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'catana':armas['catana']}
                         arma3_catana_norte = True
                         arma_atual = arma3_catana_norte
+                        nome_arma = "catana"
                     
                 if arma3_catana_norte == False:
                     if arma3_norte_pos.colliderect(A_LUZ1) == True or arma3_norte_pos.colliderect(A_LUZ2) == True or arma3_norte_pos.colliderect(A_LUZ3) == True:
@@ -548,31 +566,31 @@ def main():
                 
                 if pi == monstro_sul.y and pj == monstro_sul.x: 
                     
-                    monstro_sul.vida(poder_arma,MONSTRO1_SUL,arma_atual,QUIT)
+                    monstro_sul.vida(arma_dic,MONSTRO1_SUL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_sul.QUIT
                     MONSTRO1_SUL= monstro_sul.MONSTRO
-                    poder_arma = monstro_sul.poder_arma
+                    arma_dic = monstro_sul.arma_dic
                     
                 if pi == monstro2_sul.y and pj == monstro2_sul.x: 
                     
-                    monstro2_sul.vida(poder_arma,MONSTRO2_SUL,arma_atual,QUIT)
+                    monstro2_sul.vida(arma_dic,MONSTRO2_SUL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_sul.QUIT
                     MONSTRO2_SUL= monstro2_sul.MONSTRO
-                    poder_arma = monstro2_sul.poder_arma
+                    arma_dic = monstro2_sul.arma_dic
                     
                 if pi == monstro3_sul.y and pj == monstro3_sul.x: 
                     
-                    monstro3_sul.vida(poder_arma,MONSTRO3_SUL,arma_atual,QUIT)
+                    monstro3_sul.vida(arma_dic,MONSTRO3_SUL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_sul.QUIT
                     MONSTRO3_SUL= monstro3_sul.MONSTRO
-                    poder_arma = monstro3_sul.poder_arma
+                    arma_dic = monstro3_sul.arma_dic
                     
                 if pi == monstro4_sul.y and pj == monstro4_sul.x: 
                     
-                    monstro4_sul.vida(poder_arma,MONSTRO4_SUL,arma_atual,QUIT)
+                    monstro4_sul.vida(arma_dic,MONSTRO4_SUL,arma_atual,QUIT,nome_arma)
                     QUIT = monstro4_sul.QUIT
                     MONSTRO4_SUL= monstro4_sul.MONSTRO
-                    poder_arma = monstro4_sul.poder_arma
+                    arma_dic = monstro4_sul.arma_dic
                     
                 if MONSTRO1_SUL == True: 
                     monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m)
@@ -588,12 +606,12 @@ def main():
                 
                 if pi == 19 and pj == 2: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
-                    
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'soco_ingles':armas['soco_ingles']}
                         arma1_soco_sul = True
                         arma_atual = arma1_soco_sul
+                        nome_arma = "soco_ingles"
                     
                 if arma1_soco_sul == False:
                
@@ -602,12 +620,12 @@ def main():
                         
                 if pi == 4 and pj == 33: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
-                    
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'catana':armas['catana']}
                         arma2_catana_sul = True
                         arma_atual = arma2_catana_sul
+                        nome_arma = "catana"
                     
                 if arma2_catana_sul == False:
                
@@ -616,12 +634,12 @@ def main():
                 
                 if pi == 27 and pj == 30: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
-                    
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'soco_ingles':armas['soco_ingles']}
                         arma3_soco_sul = True
                         arma_atual = arma3_soco_sul
+                        nome_arma = "soco_ingles"
                     
                 if arma3_soco_sul == False:
                
@@ -632,40 +650,40 @@ def main():
                 
                 if pi == monstro_leste1.y and pj == monstro_leste1.x: 
                     
-                    monstro_leste1.vida(poder_arma,MONSTRO1_LESTE1,arma_atual,QUIT)
+                    monstro_leste1.vida(arma_dic,MONSTRO1_LESTE1,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_leste1.QUIT
                     MONSTRO1_LESTE1= monstro_leste1.MONSTRO
-                    poder_arma = monstro_leste1.poder_arma
+                    arma_dic = monstro_leste1.arma_dic
                     
                 if pi == monstro2_leste1.y and pj == monstro2_leste1.x: 
                     
-                    monstro2_leste1.vida(poder_arma,MONSTRO2_LESTE1,arma_atual,QUIT)
+                    monstro2_leste1.vida(arma_dic,MONSTRO2_LESTE1,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_leste1.QUIT
                     MONSTRO2_LESTE1= monstro2_leste1.MONSTRO 
-                    poder_arma = monstro2_leste1.poder_arma
+                    arma_dic = monstro2_leste1.arma_dic
                     
                 if pi == monstro3_leste1.y and pj == monstro3_leste1.x: 
                     
-                    monstro3_leste1.vida(poder_arma,MONSTRO3_LESTE1,arma_atual,QUIT)
+                    monstro3_leste1.vida(arma_dic,MONSTRO3_LESTE1,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_leste1.QUIT
                     MONSTRO3_LESTE1= monstro3_leste1.MONSTRO
-                    poder_arma = monstro3_leste1.poder_arma
+                    arma_dic = monstro3_leste1.arma_dic
                     
                 if pi == monstro4_leste1.y and pj == monstro4_leste1.x: 
                     
-                    monstro4_leste1.vida(poder_arma,MONSTRO4_LESTE1,arma_atual,QUIT)
+                    monstro4_leste1.vida(arma_dic,MONSTRO4_LESTE1,arma_atual,QUIT,nome_arma)
                     QUIT = monstro4_leste1.QUIT
                     MONSTRO4_LESTE1= monstro4_leste1.MONSTRO
-                    poder_arma = monstro4_leste1.poder_arma
+                    arma_dic = monstro4_leste1.arma_dic
                     
                 if pi == 27 and pj == 6: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False \
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
-                    
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'catana':armas['catana']}
                         arma1_catana_leste1 = True
                         arma_atual = arma1_catana_leste1
+                        nome_arma = "catana"
                     
                 if arma1_catana_leste1 == False:
                
@@ -674,12 +692,12 @@ def main():
                         
                 if pi == 6 and pj == 25: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma1_catana_leste2 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
-                    
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'soco_ingles':armas['soco_ingles']}
                         arma2_soco_leste1 = True
                         arma_atual = arma2_soco_leste1
+                        nome_arma = "soco_ingles"
                     
                 if arma2_soco_leste1 == False:
                
@@ -690,53 +708,54 @@ def main():
                 
                 if pi == monstro_leste2.y and pj == monstro_leste2.x: 
                     
-                    monstro_leste2.vida(poder_arma,MONSTRO1_LESTE2,arma_atual,QUIT)
+                    monstro_leste2.vida(arma_dic,MONSTRO1_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro_leste2.QUIT
                     MONSTRO1_LESTE2= monstro_leste2.MONSTRO
-                    poder_arma = monstro_leste2.poder_arma
+                    arma_dic = monstro_leste2.arma_dic
                     
                 if pi == monstro2_leste2.y and pj == monstro2_leste2.x: 
                     
-                    monstro2_leste2.vida(poder_arma,MONSTRO2_LESTE2,arma_atual,QUIT)
+                    monstro2_leste2.vida(arma_dic,MONSTRO2_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro2_leste2.QUIT
                     MONSTRO2_LESTE2= monstro2_leste2.MONSTRO
-                    poder_arma = monstro2_leste2.poder_arma
+                    arma_dic = monstro2_leste2.arma_dic
                     
                 if pi == monstro3_leste2.y and pj == monstro3_leste2.x: 
                     
-                    monstro3_leste2.vida(poder_arma,MONSTRO3_LESTE2,arma_atual,QUIT)
+                    monstro3_leste2.vida(arma_dic,MONSTRO3_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro3_leste2.QUIT
                     MONSTRO3_LESTE2= monstro3_leste2.MONSTRO
-                    poder_arma = monstro3_leste2.poder_arma
+                    arma_dic = monstro3_leste2.arma_dic
                     
                 if pi == monstro4_leste2.y and pj == monstro4_leste2.x: 
                     
-                    monstro4_leste2.vida(poder_arma,MONSTRO4_LESTE2,arma_atual,QUIT)
+                    monstro4_leste2.vida(arma_dic,MONSTRO4_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro4_leste2.QUIT
                     MONSTRO4_LESTE2= monstro4_leste2.MONSTRO
-                    poder_arma = monstro4_leste2.poder_arma
+                    arma_dic = monstro4_leste2.arma_dic
                     
                 if pi == monstro5_leste2.y and pj == monstro5_leste2.x: 
                     
-                    monstro5_leste2.vida(poder_arma,MONSTRO5_LESTE2,arma_atual,QUIT)
+                    monstro5_leste2.vida(arma_dic,MONSTRO5_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro5_leste2.QUIT
                     MONSTRO5_LESTE2= monstro5_leste2.MONSTRO
-                    poder_arma = monstro5_leste2.poder_arma
+                    arma_dic = monstro5_leste2.arma_dic
                     
                 if pi == monstro6_leste2.y and pj == monstro6_leste2.x: 
                     
-                    monstro6_leste2.vida(poder_arma,MONSTRO6_LESTE2,arma_atual,QUIT)
+                    monstro6_leste2.vida(arma_dic,MONSTRO6_LESTE2,arma_atual,QUIT,nome_arma)
                     QUIT = monstro6_leste2.QUIT
                     MONSTRO6_LESTE2= monstro6_leste2.MONSTRO
-                    poder_arma = monstro6_leste2.poder_arma
+                    arma_dic = monstro6_leste2.arma_dic
                     
                 if pi == 23 and pj == 12: 
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma2_soco_leste2 == False and  arma3_catana_leste2 == False: 
                     
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'catana':armas['catana']}
                         arma1_catana_leste2 = True
                         arma_atual = arma1_catana_leste2
+                        nome_arma = "catana"
                     
                 if arma1_catana_leste2 == False:
                
@@ -745,12 +764,12 @@ def main():
                         
                 if pi == 6 and pj == 24: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and  arma3_catana_leste2 == False: 
-                    
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'soco_ingles':armas['soco_ingles']}
                         arma2_soco_leste2 = True
                         arma_atual = arma2_soco_leste2
+                        nome_arma = "soco_ingles"
                     
                 if arma2_soco_leste2 == False:
                
@@ -759,12 +778,12 @@ def main():
                     
                 if pi == 7 and pj == 32: 
                     
-                    if arma_soco_hall == False and arma1_soco_norte == False and arma2_catana_norte == False and arma3_catana_norte == False\
-                    and arma1_soco_sul == False and arma2_catana_sul == False and arma3_soco_sul == False and  arma1_catana_leste1 == False\
-                    and arma2_soco_leste1 == False and arma1_catana_leste2 == False and arma2_soco_leste2 == False: 
-                    
+                    if len(arma_dic) == 0:
+                        
+                        arma_dic = {'catana':armas['catana']}
                         arma3_catana_leste2 = True
                         arma_atual = arma3_catana_leste2
+                        nome_arma = "catana"
                     
                 if arma3_catana_leste2 == False:
                
