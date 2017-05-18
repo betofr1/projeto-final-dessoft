@@ -152,7 +152,7 @@ def main():
     #telag_15 = pygame.Surface((TILESIZE*2,TILESIZE*5))
     #telag_16 = pygame.Surface((TILESIZE*2,TILESIZE*5))
     tela2.fill(PRETO)
-    telag_2.set_alpha(250)
+    telag_2.set_alpha(200)
     telag_2.fill(PRETO)
     telag_3.set_alpha(200)
     telag_3.fill(PRETO)
@@ -663,6 +663,10 @@ def main():
 #---------------------------------------------------------------------------------------
             if tab == ala_leste_1.TAB_5:
                 
+                tela.blit(background_alaleste1, [0,0])
+                tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
+                
+                
                 if pi == monstro_leste1.y and pj == monstro_leste1.x and MONSTRO1_LESTE1 == True: 
                     
                     monstro_leste1.vida(arma_dic,MONSTRO1_LESTE1,arma_atual,QUIT,nome_arma)
@@ -724,6 +728,9 @@ def main():
                         pygame.draw.rect(tela,VERDE,arma2_leste1_pos)
 #------------------------------------------------------------------------------------                        
             if tab == ala_leste_final.TAB_4:
+                
+                tela.blit(background_alaleste2, [0,0])
+                tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 
                 if pi == monstro_leste2.y and pj == monstro_leste2.x and MONSTRO1_LESTE2 == True: 
                     
@@ -860,24 +867,12 @@ def main():
                 pi = 28 
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
             
-            if tab == ala_norte.TAB_2 and pj == 20 and pi == 28: 
-                label2 = fonte_2.render("Ala norte", True, VERMELHO)
-                tela.blit(label2, (19*TILESIZE, 26*TILESIZE))
-
 # ---------------------ir para o hall----------------------------------------------
             if tab[pi][pj] == 2: 
                 tab = tabuleiro.TAB
                 pj = 20
                 pi = 1
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
-            
-            if tab == tabuleiro.TAB and pj == 20 and pi == 1: 
-                label3 = fonte_2.render("Hall", True, VERMELHO)
-                tela.blit(label3, (19*TILESIZE, 2*TILESIZE))
-                
-            if tab == tabuleiro.TAB and pj == 20 and pi == 28:                
-                label5 = fonte_2.render("Hall", True, VERMELHO)
-                tela.blit(label5, (19*TILESIZE, 27*TILESIZE))
 
 #-----------------------------chave da ala norte-----------------------------------------
             if tab == ala_norte.TAB_2:    
@@ -890,7 +885,7 @@ def main():
                 pi = 1
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
                 
-            if tab[pi][pj] == 6 and chave1 == False: 
+            if tab[pi][pj] == 6 and chave_norte == False: 
                 label1 = fonte_2.render("A porta esta trancada, vá para a ala norte", True, VERMELHO)
                 tela.blit(label1, (19*TILESIZE, 27*TILESIZE))
             
@@ -931,14 +926,37 @@ def main():
             if tab[pi][pj] == 15 and chave_final == False: 
                 label8 = fonte_2.render("A porta esta trancada, vá para a ala leste 1", True, VERMELHO)
                 tela.blit(label8, (2*TILESIZE, 12*TILESIZE))
-#-----------------------------------------------------------------------------------------
+                
+#--------------------------------------escritas---------------------------------------------------
 
 
 # falta os nomes dos outos tabuleiros, igual codigo abaixo: 
     
+            if tab == ala_norte.TAB_2 and pj == 20 and pi == 28: 
+                label2 = fonte_2.render("Ala norte", True, VERMELHO)
+                tela.blit(label2, (19*TILESIZE, 26*TILESIZE))
+
             if tab == ala_sul.TAB_3 and pj == 20 and pi == 1: 
                 label4 = fonte_2.render("Ala Sul", True, VERMELHO)
                 tela.blit(label4, (19*TILESIZE, 2*TILESIZE))
+                
+            if tab == tabuleiro.TAB and pj == 20 and pi == 1: 
+                label3 = fonte_2.render("Hall", True, VERMELHO)
+                tela.blit(label3, (19*TILESIZE, 2*TILESIZE))
+                
+            if tab == tabuleiro.TAB and pj == 20 and pi == 28:                
+                label5 = fonte_2.render("Hall", True, VERMELHO)
+                tela.blit(label5, (19*TILESIZE, 27*TILESIZE))
+                
+            if tab == tabuleiro.TAB and pj == 20 and pi == 28:                
+                label9 = fonte_2.render("Hall", True, VERMELHO)
+                tela.blit(label9, (38*TILESIZE, 13*TILESIZE))
+            
+            if tab == ala_leste_1 and pj == 1 and pi == 13:                
+                label9 = fonte_2.render("ala leste", True, VERMELHO)
+                tela.blit(label9, (19*TILESIZE, 27*TILESIZE))
+                
+#------------------------------------------------------------------------------------------
             
             if QUIT == True: 
                 nome_tela = 'quit'
@@ -964,7 +982,10 @@ def main():
                 nome_tela = 'jogo'
 
                 tab = tab_tutorial.TAB_6
-                chave1 = False
+                chave_norte = False
+                chave_norte = False
+                chave_sul = False
+                chave_final = False
                 #definindo jogador
                 pi = 14
                 pj = 0
@@ -1042,9 +1063,9 @@ def main():
                 monstro5_leste2 = Monstro(m5j_leste2,m5i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
                 monstro6_leste2 = Monstro(m6j_leste2,m6i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
 
+
                 sair = False
                 lanterna = False
-                arma = False
                 luz = True
                 QUIT = False
                 MONSTRO1_HALL = True
