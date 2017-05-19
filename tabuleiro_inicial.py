@@ -376,8 +376,14 @@ def main():
     img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
     
     #Definindo musicas
-    musica_intro = pygame.mixer.music.load("música intro.mp3")
-  
+    musica_intro = pygame.mixer.music.load("Jesus Lastra - Abandoned - intro.mp3")
+    
+    def music(musica):
+    
+        if musica == True: 
+            
+            
+            pygame.mixer.music.play()
 
 # definindo loop
 
@@ -385,6 +391,7 @@ def main():
         
         if tela_inicial == "inicio": 
             musica = True
+            music(musica)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -410,7 +417,7 @@ def main():
         
         
         if nome_tela == 'jogo':
-            musica = False
+    
           
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
