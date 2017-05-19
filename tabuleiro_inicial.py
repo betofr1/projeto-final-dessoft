@@ -359,11 +359,11 @@ def main():
     background_alaleste1 = pygame.image.load("ala-leste-1.png").convert_alpha()
     background_alaleste2 = pygame.image.load("ala-leste-final.png").convert_alpha()
     background_tutorial = pygame.image.load("tutorial.png").convert_alpha()
-    katana = pygame.image.load("katana.png").convert_alpha()
-    martelo = pygame.image.load("smallhammer.png").convert_alpha()
-    adaga = pygame.image.load("adaga.png").convert_alpha()
-    img_lanterna = pygame.image.load("lanterna.png").convert_alpha()
-    img_chave = pygame.image.load("chave.png").convert_alpha()
+    katana = pygame.image.load("Itens/katana.png").convert_alpha()
+    martelo = pygame.image.load("Itens/smallhammer.png").convert_alpha()
+    adaga = pygame.image.load("Itens/adaga.png").convert_alpha()
+    img_lanterna = pygame.image.load("Itens/lanterna.png").convert_alpha()
+    img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
     personagem_up = pygame.image.load("personagem_costas.png").convert_alpha()
     personagem_down = pygame.image.load("personagem_frente.png").convert_alpha()
     personagem_right = pygame.image.load("personagem_direita.png").convert_alpha()
@@ -463,14 +463,10 @@ def main():
                 tela.blit(telag_7,[3*TILESIZE,26*TILESIZE])
    
                 if lanterna == False:  
-<<<<<<< HEAD
-                    pygame.draw.rect(tela,AZUL,lanterna_pos)
-                    
-    
-=======
+
                     tela.blit(img_lanterna, [6*TILESIZE,2*TILESIZE])
 
->>>>>>> 92e365314a1ec7a942bde97e172c7e0f1b2aa239
+
                 count += 1
                 
                 if count == 5:
