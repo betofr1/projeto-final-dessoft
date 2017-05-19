@@ -99,8 +99,7 @@ class Monstro:
             
             if self.vida_m > 0 and self.arma_dic[self.nome_arma][1] > 0:
                 self.vida_m -= self.arma_dic[self.nome_arma][0]
-                # self.arma_dic[self.nome_arma][1] -= 1
-                self.arma_dic[self.nome_arma] = [self.arma_dic[self.nome_arma][0], self.arma_dic[self.nome_arma][1] -1]
+                self.arma_dic[self.nome_arma][1] -= 1
                 print(self.vida_m)
                 
 
@@ -1112,7 +1111,7 @@ def main():
                 
             if tab[pi][pj] == 12 and chave_sul == False: 
                 label7 = fonte_2.render("A porta esta trancada, vá para a ala sul", True, VERMELHO)
-                tela.blit(label7, (37*TILESIZE, 13*TILESIZE))
+                tela.blit(label7, (20*TILESIZE, 13*TILESIZE))
 
 #------------------------------chave final ala leste1----------------------------------------------
             if tab == ala_leste_1.TAB_5:    
