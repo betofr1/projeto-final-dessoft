@@ -351,7 +351,7 @@ def main():
     count = 0  
     count_m = 0  
     count_a = 0 
-    #imagens
+    #backgorunds
     intro = pygame.image.load("intro.png").convert_alpha()
     background_hall= pygame.image.load("entrada.png").convert_alpha()
     background_alanorte = pygame.image.load("ala-norte.png").convert_alpha()
@@ -359,11 +359,8 @@ def main():
     background_alaleste1 = pygame.image.load("ala-leste-1.png").convert_alpha()
     background_alaleste2 = pygame.image.load("ala-leste-final.png").convert_alpha()
     background_tutorial = pygame.image.load("tutorial.png").convert_alpha()
-    katana = pygame.image.load("Itens/katana.png").convert_alpha()
-    martelo = pygame.image.load("Itens/smallhammer.png").convert_alpha()
-    adaga = pygame.image.load("Itens/adaga.png").convert_alpha()
-    img_lanterna = pygame.image.load("Itens/lanterna.png").convert_alpha()
-    img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
+    
+    #imagens personagens
     personagem_up = pygame.image.load("personagem_costas.png").convert_alpha()
     personagem_down = pygame.image.load("personagem_frente.png").convert_alpha()
     personagem_right = pygame.image.load("personagem_direita.png").convert_alpha()
@@ -371,21 +368,30 @@ def main():
     zombie = pygame.image.load("zombie_frente.png").convert_alpha()
     #mask_BG = pygame.image.load("mask-BG.png").convert_alpha()
     #aurea_objeto = pygame.image.load("aurea-objeto.png").convert_alpha()
+    #imagens itens
+    katana = pygame.image.load("Itens/katana.png").convert_alpha()
+    martelo = pygame.image.load("Itens/smallhammer.png").convert_alpha()
+    adaga = pygame.image.load("Itens/adaga.png").convert_alpha()
+    img_lanterna = pygame.image.load("Itens/lanterna.png").convert_alpha()
+    img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
     
-
-   
+    #Definindo musicas
+    musica_intro = pygame.mixer.music.load("música intro.mp3")
+  
 
 # definindo loop
 
     while sair != True:
         
         if tela_inicial == "inicio": 
-            
+            musica = True
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sair = True
             
             tela.blit(intro, [0,0])
+            
             
             label2 = fonte_titulo.render("M4D BETO", True, BRANCO)
             tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
@@ -404,6 +410,7 @@ def main():
         
         
         if nome_tela == 'jogo':
+            musica = False
           
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
