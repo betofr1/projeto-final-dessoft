@@ -50,14 +50,15 @@ class Monstro:
         self.MAPHEIGHT = len(tab)
         self.vida_m = vida_m
        
-    def anda(self,l1,l2,l3,count,lanterna):
+    def anda(self,l1,l2,l3,count,lanterna,zombie):
         self.count = count
         self.l1 = l1
         self.l2 = l2
         self.l3 = l3
         if lanterna == True:
             if self.ret.colliderect(self.l1) == True or self.ret.colliderect(self.l2) == True or self.ret.colliderect(self.l3) == True:    
-                pygame.draw.rect(self.tela, self.cor, self.ret)
+                #pygame.draw.rect(self.tela, self.cor, self.ret)
+                self.tela.blit(zombie,[self.x*self.tamanho,self.y*self.tamanho])
         
         if self.count == 0:
             num = random.randint(0,4)    
@@ -264,6 +265,9 @@ def main():
     monstro5_leste2 = Monstro(m5j_leste2,m5i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
     monstro6_leste2 = Monstro(m6j_leste2,m6i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
 
+    chave_norte_pos = pygame.Rect(37*TILESIZE,3*TILESIZE,TILESIZE,TILESIZE)
+    chave_sul_pos = pygame.Rect(17*TILESIZE,15*TILESIZE,TILESIZE,TILESIZE)
+    chave_final_pos = pygame.Rect(34*TILESIZE,22*TILESIZE,TILESIZE,TILESIZE)
 
     arma_hall_pos = pygame.Rect(11*TILESIZE,11*TILESIZE,TILESIZE,TILESIZE)
     arma1_norte_pos = pygame.Rect(2*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
@@ -357,6 +361,12 @@ def main():
     katana = pygame.image.load("katana.png").convert_alpha()
     martelo = pygame.image.load("smallhammer.png").convert_alpha()
     adaga = pygame.image.load("adaga.png").convert_alpha()
+    img_chave = pygame.image.load("chave.png").convert_alpha()
+    personagem_up = pygame.image.load("personagem_costas.png").convert_alpha()
+    personagem_down = pygame.image.load("personagem_frente.png").convert_alpha()
+    personagem_right = pygame.image.load("personagem_direita.png").convert_alpha()
+    personagem_left = pygame.image.load("personagem_esquerda.png").convert_alpha()
+    zombie = pygame.image.load("zombie_frente.png").convert_alpha()
     #mask_BG = pygame.image.load("mask-BG.png").convert_alpha()
     #aurea_objeto = pygame.image.load("aurea-objeto.png").convert_alpha()
     
@@ -417,18 +427,22 @@ def main():
                 if pj < (MAPWIDTH - 1) and (tab[pi][pj+1] != 1):
                     jogador.move_ip(TILESIZE,0)
                     pj += 1
+            #tela.blit(personagem_right,[pj*TILESIZE,pi*TILESIZE])
             if key_pressed[pygame.K_UP]:
                 if pi > 0 and (tab[pi-1][pj] != 1):
                     jogador.move_ip(0,-TILESIZE)
                     pi -= 1
+            tela.blit(personagem_up,[pj*TILESIZE,pi*TILESIZE])
             if key_pressed[pygame.K_LEFT]:
                 if pj > 0 and (tab[pi][pj-1] != 1):
                     jogador.move_ip(-TILESIZE,0)
                     pj -= 1
+            #tela.blit(personagem_left,[pj*TILESIZE,pi*TILESIZE])
             if key_pressed[pygame.K_DOWN]:
                 if (pi < (MAPHEIGHT - 1)) and (tab[pi+1][pj] != 1):
                     jogador.move_ip(0,TILESIZE)
                     pi += 1
+            #tela.blit(personagem_down,[pj*TILESIZE,pi*TILESIZE])
 #========================================================================================
              # CENARIOS:
 
@@ -514,13 +528,13 @@ def main():
                         quebrou = 0 
                         
                 if MONSTRO1_HALL == True: 
-                    monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO2_HALL == True: 
-                    monstro2_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro2_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO3_HALL== True: 
-                    monstro3_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro3_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                 
                     
                 if arma_soco_hall == False:
@@ -534,16 +548,16 @@ def main():
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                
                 if MONSTRO1_NORTE == True: 
-                    monstro_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO2_NORTE == True: 
-                    monstro2_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro2_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO3_NORTE == True: 
-                    monstro3_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro3_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
             
                 if MONSTRO4_NORTE == True:
-                    monstro4_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro4_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
 
 
@@ -700,16 +714,16 @@ def main():
                         quebrou = 0 
                     
                 if MONSTRO1_SUL == True: 
-                    monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO2_SUL == True: 
-                    monstro2_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro2_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO3_SUL == True: 
-                    monstro3_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro3_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
             
                 if MONSTRO4_SUL == True:
-                    monstro4_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro4_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                 
                 if pi == 19 and pj == 2: 
                     
@@ -759,16 +773,16 @@ def main():
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 
                 if MONSTRO1_LESTE1 == True: 
-                    monstro_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                 
                 if MONSTRO2_LESTE1 == True: 
-                    monstro2_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro2_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO3_LESTE1 == True: 
-                    monstro3_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro3_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                 
                 if MONSTRO4_LESTE1 == True: 
-                    monstro4_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro4_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                 
                 if pi == monstro_leste1.y and pj == monstro_leste1.x and MONSTRO1_LESTE1 == True: 
                     
@@ -856,22 +870,22 @@ def main():
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 
                 if MONSTRO1_LESTE2 == True: 
-                    monstro_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO2_LESTE2 == True: 
-                    monstro2_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro2_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO3_LESTE2 == True: 
-                    monstro3_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro3_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO4_LESTE2 == True: 
-                    monstro4_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro4_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                 
                 if MONSTRO5_LESTE2 == True: 
-                    monstro5_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro5_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if MONSTRO6_LESTE2 == True: 
-                    monstro6_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna)
+                    monstro6_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
                     
                 if pi == monstro_leste2.y and pj == monstro_leste2.x and MONSTRO1_LESTE2 == True: 
                     
@@ -1024,7 +1038,9 @@ def main():
                 
             
                 
-            pygame.draw.rect(tela,ROSA,jogador)
+            #pygame.draw.rect(tela,ROSA,jogador)
+
+            tela.blit(personagem_right,[pj*TILESIZE,pi*TILESIZE])
             
             
             
@@ -1054,9 +1070,13 @@ def main():
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
 
 #-----------------------------chave da ala norte-----------------------------------------
-            if tab == ala_norte.TAB_2:    
+            if tab == ala_norte.TAB_2:
+                if chave_norte == False:
+                    if chave_norte_pos.colliderect(A_LUZ1) == True or chave_norte_pos.colliderect(A_LUZ2) == True or chave_norte_pos.colliderect(A_LUZ3) == True:
+                        tela.blit(img_chave,[37*TILESIZE,3*TILESIZE])  
                 if pi == 3 and pj == 37:    
                     chave_norte = True
+
 #--------------------------------abrindo ala sul---------------------------------------               
             if tab[pi][pj] == 6 and chave_norte == True: 
                 tab = ala_sul.TAB_3
@@ -1075,7 +1095,10 @@ def main():
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
                 
 # ---------------------------------chave da ala sul -----------------------------------
-            if tab == ala_sul.TAB_3:    
+            if tab == ala_sul.TAB_3:
+                if chave_sul == False:
+                    if chave_sul_pos.colliderect(A_LUZ1) == True or chave_sul_pos.colliderect(A_LUZ2) == True or chave_sul_pos.colliderect(A_LUZ3) == True:
+                        tela.blit(img_chave,[17*TILESIZE,15*TILESIZE])    
                 if pi == 15 and pj == 17:    
                     chave_sul = True
 
@@ -1092,6 +1115,9 @@ def main():
 
 #------------------------------chave final ala leste1----------------------------------------------
             if tab == ala_leste_1.TAB_5:    
+                if chave_final == False:
+                    if chave_final_pos.colliderect(A_LUZ1) == True or chave_final_pos.colliderect(A_LUZ2) == True or chave_final_pos.colliderect(A_LUZ3) == True:
+                        tela.blit(img_chave,[34*TILESIZE,22*TILESIZE])
                 if pi == 22 and pj == 34:    
                     chave_final = True
                     
