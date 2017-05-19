@@ -352,6 +352,7 @@ def main():
     count_m = 0  
     
     #imagens
+    intro = pygame.image.load("intro.png").convert_alpha()
     background_hall= pygame.image.load("entrada.png").convert_alpha()
     background_alanorte = pygame.image.load("ala-norte.png").convert_alpha()
     background_alasul = pygame.image.load("ala-sul.png").convert_alpha()
@@ -361,6 +362,7 @@ def main():
     katana = pygame.image.load("katana.png").convert_alpha()
     martelo = pygame.image.load("smallhammer.png").convert_alpha()
     adaga = pygame.image.load("adaga.png").convert_alpha()
+    img_lanterna = pygame.image.load("lanterna.png").convert_alpha()
     img_chave = pygame.image.load("chave.png").convert_alpha()
     personagem_up = pygame.image.load("personagem_costas.png").convert_alpha()
     personagem_down = pygame.image.load("personagem_frente.png").convert_alpha()
@@ -383,7 +385,7 @@ def main():
                 if event.type == pygame.QUIT:
                     sair = True
             
-            tela.fill(PRETO)
+            tela.blit(intro, [0,0])
             
             label2 = fonte_titulo.render("M4D BETO", True, BRANCO)
             tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
@@ -461,7 +463,7 @@ def main():
                 tela.blit(telag_7,[3*TILESIZE,26*TILESIZE])
    
                 if lanterna == False:  
-                    pygame.draw.rect(tela,AZUL,lanterna_pos)
+                    tela.blit(img_lanterna, [6*TILESIZE,2*TILESIZE])
 
                 count += 1
                 if count == 5:
