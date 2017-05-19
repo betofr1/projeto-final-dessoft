@@ -170,6 +170,7 @@ def main():
     # texto 
     fonte = pygame.font.SysFont("Arial", 100)
     fonte_2 = pygame.font.SysFont('Arial', 25)
+    fonte_titulo = pygame.font.Font('True Lies.ttf', 100)
     label10 = fonte_2.render("A arma quebrou...corra", True, VERMELHO)
 
     #pygame functions
@@ -385,7 +386,7 @@ def main():
             
             tela.fill(PRETO)
             
-            label2 = fonte.render("Bem vindo", True, VERMELHO)
+            label2 = fonte_titulo.render("M4D BETO", True, BRANCO)
             tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
             
             play1 = 1
