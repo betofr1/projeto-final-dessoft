@@ -168,7 +168,7 @@ def main():
 
     # texto 
     fonte = pygame.font.SysFont("Arial", 100)
-    fonte_2 = pygame.font.SysFont('Arial', 25)
+    fonte_2 = pygame.font.Font('naughty_scratch_free.ttf', 25)
     fonte_titulo = pygame.font.Font('True Lies.ttf', 100)
     label10 = fonte_2.render("A arma quebrou...corra", True, VERMELHO)
 
@@ -1027,7 +1027,7 @@ def main():
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
                 
             if tab[pi][pj] == 6 and chave_norte == False: 
-                label1 = fonte_2.render("A porta esta trancada, vá para a ala norte", True, VERMELHO)
+                label1 = fonte_2.render("A porta esta trancada, va para a ala norte", True, BRANCO)
                 tela.blit(label1, (19*TILESIZE, 27*TILESIZE))
             
             if tab[pi][pj] == 4:
@@ -1044,7 +1044,7 @@ def main():
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
                 
             if tab[pi][pj] == 12 and chave_sul == False: 
-                label7 = fonte_2.render("A porta esta trancada, vá para a ala sul", True, VERMELHO)
+                label7 = fonte_2.render("A porta esta trancada, va para a ala sul", True, BRANCO)
                 tela.blit(label7, (20*TILESIZE, 13*TILESIZE))
 
 #----------------------------abrindo ala final -------------------------------------------
@@ -1055,7 +1055,7 @@ def main():
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
 
             if tab[pi][pj] == 15 and chave_final == False: 
-                label8 = fonte_2.render("A porta esta trancada, vá para a ala leste 1", True, VERMELHO)
+                label8 = fonte_2.render("A porta esta trancada, va para a ala leste 1", True, BRANCO)
                 tela.blit(label8, (2*TILESIZE, 12*TILESIZE))
                 
 #--------------------------------------escritas---------------------------------------------------
@@ -1063,27 +1063,27 @@ def main():
 # falta os nomes dos outos tabuleiros, igual codigo abaixo: 
     
             if tab == ala_norte.TAB_2 and pj == 20 and pi == 28: 
-                label2 = fonte_2.render("Ala norte", True, VERMELHO)
+                label2 = fonte_2.render("Ala norte", True, BRANCO)
                 tela.blit(label2, (19*TILESIZE, 26*TILESIZE))
 
             if tab == ala_sul.TAB_3 and pj == 20 and pi == 1: 
-                label4 = fonte_2.render("Ala Sul", True, VERMELHO)
+                label4 = fonte_2.render("Ala Sul", True, BRANCO)
                 tela.blit(label4, (19*TILESIZE, 2*TILESIZE))
                 
             if tab == tabuleiro.TAB and pj == 20 and pi == 1: 
-                label3 = fonte_2.render("Hall", True, VERMELHO)
+                label3 = fonte_2.render("Hall", True, BRANCO)
                 tela.blit(label3, (19*TILESIZE, 2*TILESIZE))
                 
             if tab == tabuleiro.TAB and pj == 20 and pi == 28:                
-                label5 = fonte_2.render("Hall", True, VERMELHO)
+                label5 = fonte_2.render("Hall", True, BRANCO)
                 tela.blit(label5, (19*TILESIZE, 27*TILESIZE))
                 
             if tab == tabuleiro.TAB and pj == 38 and pi == 13:                
-                label9 = fonte_2.render("Hall", True, VERMELHO)
+                label9 = fonte_2.render("Hall", True, BRANCO)
                 tela.blit(label9, (38*TILESIZE, 12*TILESIZE))
             
             if tab == ala_leste_1 and pj == 1 and pi == 13:                
-                label9 = fonte_2.render("ala leste", True, VERMELHO)
+                label9 = fonte_2.render("ala leste", True, BRANCO)
                 tela.blit(label9, (19*TILESIZE, 27*TILESIZE))
                 
 #------------------------------------------------------------------------------------------
@@ -1100,7 +1100,7 @@ def main():
             
             tela.fill(PRETO)
             
-            label2 = fonte.render("VOCÊ PERDEU...", True, VERMELHO)
+            label2 = fonte.render("VOCÊ PERDEU...", True, BRANCO)
             tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
             
             play = 1
