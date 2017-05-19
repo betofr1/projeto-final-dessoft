@@ -99,8 +99,7 @@ class Monstro:
             
             if self.vida_m > 0 and self.arma_dic[self.nome_arma][1] > 0:
                 self.vida_m -= self.arma_dic[self.nome_arma][0]
-                # self.arma_dic[self.nome_arma][1] -= 1
-                self.arma_dic[self.nome_arma] = [self.arma_dic[self.nome_arma][0], self.arma_dic[self.nome_arma][1] -1]
+                self.arma_dic[self.nome_arma][1] -= 1
                 print(self.vida_m)
                 
 
@@ -656,6 +655,12 @@ def main():
                 if arma3_catana_norte == False:
                     if arma3_norte_pos.colliderect(A_LUZ1) == True or arma3_norte_pos.colliderect(A_LUZ2) == True or arma3_norte_pos.colliderect(A_LUZ3) == True:
                         tela.blit(katana,[37*TILESIZE,24*TILESIZE])
+
+                if chave_norte == False:
+                    if chave_norte_pos.colliderect(A_LUZ1) == True or chave_norte_pos.colliderect(A_LUZ2) == True or chave_norte_pos.colliderect(A_LUZ3) == True:
+                        tela.blit(img_chave,[37*TILESIZE,3*TILESIZE])  
+                if pi == 3 and pj == 37:    
+                    chave_norte = True
 #----------------------------------------------------------------------------------------
             if tab == ala_sul.TAB_3: 
                 tela.blit(background_alasul, [0,0])
@@ -767,6 +772,12 @@ def main():
                
                     if arma3_sul_pos.colliderect(A_LUZ1) == True or arma3_sul_pos.colliderect(A_LUZ2) == True or arma3_sul_pos.colliderect(A_LUZ3) == True:
                         tela.blit(martelo,[30*TILESIZE,27*TILESIZE])
+
+                if chave_sul == False:
+                    if chave_sul_pos.colliderect(A_LUZ1) == True or chave_sul_pos.colliderect(A_LUZ2) == True or chave_sul_pos.colliderect(A_LUZ3) == True:
+                        tela.blit(img_chave,[17*TILESIZE,15*TILESIZE])    
+                if pi == 15 and pj == 17:    
+                    chave_sul = True
 #---------------------------------------------------------------------------------------
             if tab == ala_leste_1.TAB_5:
                 
@@ -864,6 +875,12 @@ def main():
                
                     if arma2_leste1_pos.colliderect(A_LUZ1) == True or arma2_leste1_pos.colliderect(A_LUZ2) == True or arma2_leste1_pos.colliderect(A_LUZ3) == True:
                         tela.blit(martelo,[25*TILESIZE,6*TILESIZE])
+
+                if chave_final == False:
+                    if chave_final_pos.colliderect(A_LUZ1) == True or chave_final_pos.colliderect(A_LUZ2) == True or chave_final_pos.colliderect(A_LUZ3) == True:
+                        tela.blit(img_chave,[34*TILESIZE,22*TILESIZE])
+                if pi == 22 and pj == 34:    
+                    chave_final = True
 #------------------------------------------------------------------------------------                        
             if tab == ala_leste_final.TAB_4:
                 
@@ -1071,12 +1088,7 @@ def main():
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
 
 #-----------------------------chave da ala norte-----------------------------------------
-            if tab == ala_norte.TAB_2:
-                if chave_norte == False:
-                    if chave_norte_pos.colliderect(A_LUZ1) == True or chave_norte_pos.colliderect(A_LUZ2) == True or chave_norte_pos.colliderect(A_LUZ3) == True:
-                        tela.blit(img_chave,[37*TILESIZE,3*TILESIZE])  
-                if pi == 3 and pj == 37:    
-                    chave_norte = True
+            
 
 #--------------------------------abrindo ala sul---------------------------------------               
             if tab[pi][pj] == 6 and chave_norte == True: 
@@ -1095,13 +1107,7 @@ def main():
                 pi = 28
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
                 
-# ---------------------------------chave da ala sul -----------------------------------
-            if tab == ala_sul.TAB_3:
-                if chave_sul == False:
-                    if chave_sul_pos.colliderect(A_LUZ1) == True or chave_sul_pos.colliderect(A_LUZ2) == True or chave_sul_pos.colliderect(A_LUZ3) == True:
-                        tela.blit(img_chave,[17*TILESIZE,15*TILESIZE])    
-                if pi == 15 and pj == 17:    
-                    chave_sul = True
+
 
 #------------------------------abrindo ala_leste1---------------------------------------------
             if tab[pi][pj] == 12 and chave_sul == True: 
@@ -1112,16 +1118,9 @@ def main():
                 
             if tab[pi][pj] == 12 and chave_sul == False: 
                 label7 = fonte_2.render("A porta esta trancada, vá para a ala sul", True, VERMELHO)
-                tela.blit(label7, (37*TILESIZE, 13*TILESIZE))
+                tela.blit(label7, (20*TILESIZE, 13*TILESIZE))
 
-#------------------------------chave final ala leste1----------------------------------------------
-            if tab == ala_leste_1.TAB_5:    
-                if chave_final == False:
-                    if chave_final_pos.colliderect(A_LUZ1) == True or chave_final_pos.colliderect(A_LUZ2) == True or chave_final_pos.colliderect(A_LUZ3) == True:
-                        tela.blit(img_chave,[34*TILESIZE,22*TILESIZE])
-                if pi == 22 and pj == 34:    
-                    chave_final = True
-                    
+
 #----------------------------abrindo ala final -------------------------------------------
             if tab[pi][pj] == 15 and chave_final == True: 
                 tab = ala_leste_final.TAB_4
