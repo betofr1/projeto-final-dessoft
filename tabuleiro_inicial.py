@@ -1087,9 +1087,6 @@ def main():
                 pi = 1
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
 
-#-----------------------------chave da ala norte-----------------------------------------
-            
-
 #--------------------------------abrindo ala sul---------------------------------------               
             if tab[pi][pj] == 6 and chave_norte == True: 
                 tab = ala_sul.TAB_3
@@ -1107,8 +1104,6 @@ def main():
                 pi = 28
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
                 
-
-
 #------------------------------abrindo ala_leste1---------------------------------------------
             if tab[pi][pj] == 12 and chave_sul == True: 
                 tab = ala_leste_1.TAB_5
@@ -1119,7 +1114,6 @@ def main():
             if tab[pi][pj] == 12 and chave_sul == False: 
                 label7 = fonte_2.render("A porta esta trancada, vá para a ala sul", True, VERMELHO)
                 tela.blit(label7, (20*TILESIZE, 13*TILESIZE))
-
 
 #----------------------------abrindo ala final -------------------------------------------
             if tab[pi][pj] == 15 and chave_final == True: 
@@ -1133,7 +1127,6 @@ def main():
                 tela.blit(label8, (2*TILESIZE, 12*TILESIZE))
                 
 #--------------------------------------escritas---------------------------------------------------
-
 
 # falta os nomes dos outos tabuleiros, igual codigo abaixo: 
     
@@ -1187,16 +1180,12 @@ def main():
                 nome_tela = 'jogo'
 
                 tab = tab_tutorial.TAB_6
-                chave_norte = False
-                chave_norte = False
-                chave_sul = False
-                chave_final = False
                 #definindo jogador
                 pi = 14
                 pj = 0
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
-
                 #definindo monstros
+                mi_hall = 15
                 mj_hall= 16
                 m2i_hall = 3
                 m2j_hall = 25
@@ -1244,42 +1233,8 @@ def main():
                 vida_monstro_leste1 = 25
                 vida_monstro_leste2 = 30
                 
-                armas = {"catana": 10, "martelo": 5}         # dicionario 
+                armas = {'catana': [10,3], 'martelo': [5,4]}         # dicionario 
                 
-                monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
-                monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
-                monstro3_hall = Monstro(m3j_hall,m3i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
-                monstro_norte = Monstro(mj_norte,mi_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-                monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-                monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-                monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-                monstro_sul = Monstro(mj_sul,mi_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
-                monstro2_sul = Monstro(m2j_sul,m2i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
-                monstro3_sul= Monstro(m3j_sul,m3i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
-                monstro4_sul = Monstro(m4j_sul,m4i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
-                monstro_leste1 = Monstro(mj_leste1,mi_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
-                monstro2_leste1 = Monstro(m2j_leste1,m2i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
-                monstro3_leste1 = Monstro(m3j_leste1,m3i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
-                monstro4_leste1 = Monstro(m4j_leste1,m4i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
-                monstro_leste2 = Monstro(mj_leste2,mi_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-                monstro2_leste2 = Monstro(m2j_leste2,m2i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-                monstro3_leste2 = Monstro(m3j_leste2,m3i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-                monstro4_leste2 = Monstro(m4j_leste2,m4i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-                monstro5_leste2 = Monstro(m5j_leste2,m5i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-                monstro6_leste2 = Monstro(m6j_leste2,m6i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-
-
-                sair = False
-                lanterna = False
-                luz = True
-                QUIT = False
-                MONSTRO1_HALL = True
-                MONSTRO2_HALL = True
-                MONSTRO3_HALL = True
-                MONSTRO1_NORTE = True
-                MONSTRO2_NORTE = True
-                MONSTRO3_NORTE = True
-                MONSTRO4_NORTE = True
                 arma_soco_hall = False
                 arma1_soco_norte = False
                 arma2_catana_norte = False
@@ -1292,14 +1247,56 @@ def main():
                 arma1_catana_leste2 = False
                 arma2_soco_leste2 = False
                 arma3_catana_leste2 = False
-    
+                
                 arma_dic = {}
                 arma_atual = False
                 nome_arma = ''
+                quebrou = 0 
+                
+
+                #BOOL
+                chave_norte = False
+                chave_sul = False
+                chave_final = False
+                Fullscreen = False
+                sair = False
+                lanterna = False
+
+                key_pressed = pygame.key.get_pressed() 
+                
+                luz = True
+                
+                QUIT = False
+                
+                MONSTRO1_HALL = True
+                MONSTRO2_HALL = True
+                MONSTRO3_HALL = True
+                
+                MONSTRO1_NORTE = True
+                MONSTRO2_NORTE = True
+                MONSTRO3_NORTE = True
+                MONSTRO4_NORTE = True
+                
+                MONSTRO1_SUL = True
+                MONSTRO2_SUL = True
+                MONSTRO3_SUL = True
+                MONSTRO4_SUL = True
+                
+                MONSTRO1_LESTE1 = True
+                MONSTRO2_LESTE1 = True
+                MONSTRO3_LESTE1 = True
+                MONSTRO4_LESTE1 = True
+                
+                MONSTRO1_LESTE2 = True
+                MONSTRO2_LESTE2 = True
+                MONSTRO3_LESTE2 = True
+                MONSTRO4_LESTE2 = True
+                MONSTRO5_LESTE2 = True
+                MONSTRO6_LESTE2 = True
                 
                 count = 0  
                 count_m = 0  
-      
+
             elif b2 == 2:
                 sair = True
 
