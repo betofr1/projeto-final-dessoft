@@ -1236,4 +1236,3 @@ def main():
         pygame.display.update()
     pygame.quit()
 main()
-
