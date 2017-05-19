@@ -6,6 +6,7 @@ import ala_sul
 import tab_tutorial
 import ala_leste_1
 import ala_leste_final
+import time
 
 # definindo parametros usados nas classes e funcoes: 
 #pygame.init()    
@@ -92,8 +93,11 @@ class Monstro:
         #self.arma_dic[self.nome_arma][1] = int(self.arma_dic[self.nome_arma][1])
         if self.arma == True: 
             
+            print("monstro",self.vida_m)
+            print(self.arma_dic[self.nome_arma][1])
+            
             if self.vida_m > 0 and self.arma_dic[self.nome_arma][1] > 0:
-                self.vida_m = self.vida_m - self.arma_dic[self.nome_arma][0]
+                self.vida_m -= self.arma_dic[self.nome_arma][0]
                 # self.arma_dic[self.nome_arma][1] -= 1
                 self.arma_dic[self.nome_arma] = [self.arma_dic[self.nome_arma][0], self.arma_dic[self.nome_arma][1] -1]
                 print(self.vida_m)
@@ -171,7 +175,8 @@ def main():
     key_pressed = pygame.key.get_pressed()
     pygame.display.set_caption("LABIRINTO DOS INFERNO")
     relogio = pygame.time.Clock()
-    nome_tela = 'jogo'
+    nome_tela = ''
+    tela_inicial = "inicio"
     
 
     #definindo jogador
@@ -341,6 +346,7 @@ def main():
     
     count = 0  
     count_m = 0  
+    
     #imagens
     background_hall= pygame.image.load("entrada.png").convert_alpha()
     background_alanorte = pygame.image.load("ala-norte.png").convert_alpha()
@@ -351,8 +357,8 @@ def main():
     katana = pygame.image.load("katana.png").convert_alpha()
     martelo = pygame.image.load("smallhammer.png").convert_alpha()
     adaga = pygame.image.load("adaga.png").convert_alpha()
-    mask_BG = pygame.image.load("mask-BG.png").convert_alpha()
-    aurea_objeto = pygame.image.load("aurea-objeto.png").convert_alpha()
+    #mask_BG = pygame.image.load("mask-BG.png").convert_alpha()
+    #aurea_objeto = pygame.image.load("aurea-objeto.png").convert_alpha()
     
 
    
@@ -360,6 +366,31 @@ def main():
 # definindo loop
 
     while sair != True:
+        
+        if tela_inicial == "inicio": 
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sair = True
+            
+            tela.fill(PRETO)
+            
+            label2 = fonte.render("Bem vindo", True, VERMELHO)
+            tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
+            
+            play1 = 1
+            exit1 = 0
+            b3 = botao("Play ",7,22,5,3,VERMELHO,tela,fonte_2,play1)                        
+            b4 = botao("Sair",25,22,5,3,VERMELHO,tela,fonte_2,exit1)
+         
+            if b3 == 3:
+                nome_tela = 'jogo'
+                
+            elif b4 == 2:
+                sair = True
+            
+        
+        
         if nome_tela == 'jogo':
           
             for event in pygame.event.get():
@@ -453,7 +484,7 @@ def main():
                     quebrou = monstro_hall.quebrou
                     
                     if quebrou == 1: 
-                        tela.blit(label10, (monstro_hall.x, ((monstro_hall.y) - 1)))
+                        tela.blit(label10, (monstro_hall.x, (monstro_hall.y - 1)))
                         quebrou = 0
                         
                 if pi == monstro2_hall.y and pj ==monstro2_hall.x and MONSTRO2_HALL == True: 
