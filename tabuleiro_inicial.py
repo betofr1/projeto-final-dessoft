@@ -113,8 +113,8 @@ class Monstro:
             if self.arma_dic[self.nome_arma][1] <= 0: 
                 self.arma = False
                 self.arma_dic = {}
-                quebrou = 1
-                print(quebrou)
+                self.quebrou = 1
+                print("quebrou")
                 
                 #label6 = fonte_2.render("Sua arma quebrou...fuja", True, VERMELHO)
                 #tela.blit(label6, (19*TILESIZE, 27*TILESIZE))
@@ -350,7 +350,7 @@ def main():
     
     count = 0  
     count_m = 0  
-    
+    count_a = 0 
     #imagens
     background_hall= pygame.image.load("entrada.png").convert_alpha()
     background_alanorte = pygame.image.load("ala-norte.png").convert_alpha()
@@ -462,8 +462,10 @@ def main():
    
                 if lanterna == False:  
                     pygame.draw.rect(tela,AZUL,lanterna_pos)
-
+                    
+    
                 count += 1
+                
                 if count == 5:
                     count = 0
                     luz = not luz
@@ -497,9 +499,6 @@ def main():
                     arma_atual = monstro_hall.arma
                     quebrou = monstro_hall.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro_hall.x, (monstro_hall.y - 1)))
-                        quebrou = 0
                         
                 if pi == monstro2_hall.y and pj ==monstro2_hall.x and MONSTRO2_HALL == True: 
                     
@@ -510,9 +509,6 @@ def main():
                     arma_atual = monstro2_hall.arma
                     quebrou = monstro2_hall.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro2_hall.x, (monstro2_hall.y - 1)))
-                        quebrou = 0 
                 
                 if pi == monstro3_hall.y and pj == monstro3_hall.x and MONSTRO3_HALL == True:
                     
@@ -523,9 +519,6 @@ def main():
                     arma_atual = monstro3_hall.arma
                     quebrou = monstro3_hall.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro3_hall.x, (monstro3_hall.y - 1)))
-                        quebrou = 0 
                         
                 if MONSTRO1_HALL == True: 
                     monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
@@ -570,10 +563,6 @@ def main():
                     arma_atual = monstro_norte.arma
                     quebrou = monstro_norte.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro_norte.x, (monstro_norte.y - 1)))
-                        quebrou = 0 
-                    
                 if pi == monstro2_norte.y and pj == monstro2_norte.x and MONSTRO2_NORTE == True: 
                     
                     monstro2_norte.vida(arma_dic,MONSTRO2_NORTE,arma_atual,QUIT,nome_arma,quebrou)
@@ -581,11 +570,7 @@ def main():
                     MONSTRO2_NORTE= monstro2_norte.MONSTRO
                     arma_dic = monstro2_norte.arma_dic
                     arma_atual = monstro2_norte.arma
-                    quebrou = monstro2_norte.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro2_norte.x, (monstro2_norte.y - 1)))
-                        quebrou = 0 
+                    quebrou = monstro2_norte.quebrou 
                     
                 if pi == monstro3_norte.y and pj == monstro3_norte.x and MONSTRO3_NORTE == True: 
                     
@@ -596,11 +581,6 @@ def main():
                     arma_atual = monstro3_norte.arma
                     quebrou = monstro3_norte.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro3_norte.x, (monstro3_norte.y - 1)))
-                        quebrou = 0 
-                    
-                    
                 if pi == monstro4_norte.y and pj == monstro4_norte.x and MONSTRO4_NORTE == True: 
                     
                     monstro4_norte.vida(arma_dic,MONSTRO4_NORTE,arma_atual,QUIT,nome_arma,quebrou)
@@ -609,10 +589,6 @@ def main():
                     arma_dic = monstro4_norte.arma_dic
                     arma_atual = monstro4_norte.arma
                     quebrou = monstro4_norte.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro4_norte.x, (monstro4_norte.y - 1)))
-                        quebrou = 0 
                     
                 if pi == 2 and pj == 2: 
                     
@@ -675,11 +651,6 @@ def main():
                     arma_atual = monstro_sul.arma
                     quebrou = monstro_sul.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro_sul.x, (monstro_sul.y - 1)))
-                        quebrou = 0 
-                    
-                    
                 if pi == monstro2_sul.y and pj == monstro2_sul.x and MONSTRO2_SUL == True: 
                     
                     monstro2_sul.vida(arma_dic,MONSTRO2_SUL,arma_atual,QUIT,nome_arma,quebrou)
@@ -688,11 +659,7 @@ def main():
                     arma_dic = monstro2_sul.arma_dic
                     arma_atual = monstro2_sul.arma
                     quebrou = monstro2_sul.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro2_sul.x, (monstro2_sul.y - 1)))
-                        quebrou = 0 
-                    
+                   
                 if pi == monstro3_sul.y and pj == monstro3_sul.x and MONSTRO3_SUL == True: 
                     
                     monstro3_sul.vida(arma_dic,MONSTRO3_SUL,arma_atual,QUIT,nome_arma,quebrou)
@@ -702,10 +669,6 @@ def main():
                     arma_atual = monstro3_sul.arma
                     quebrou = monstro3_sul.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro3_sul.x, (monstro3_sul.y - 1)))
-                        quebrou = 0 
-                    
                 if pi == monstro4_sul.y and pj == monstro4_sul.x and MONSTRO4_SUL == True: 
                     
                     monstro4_sul.vida(arma_dic,MONSTRO4_SUL,arma_atual,QUIT,nome_arma,quebrou)
@@ -714,10 +677,6 @@ def main():
                     arma_dic = monstro4_sul.arma_dic
                     arma_atual = monstro4_sul.arma
                     quebrou = monstro4_sul.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro4_sul.x, (monstro4_sul.y - 1)))
-                        quebrou = 0 
                     
                 if MONSTRO1_SUL == True: 
                     monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
@@ -804,11 +763,7 @@ def main():
                     arma_dic = monstro_leste1.arma_dic
                     arma_atual = monstro_leste1.arma
                     quebrou = monstro_leste1.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro_leste1.x, (monstro_leste1.y - 1)))
-                        quebrou = 0 
-                    
+                   
                 if pi == monstro2_leste1.y and pj == monstro2_leste1.x and MONSTRO2_LESTE1 == True: 
                     
                     monstro2_leste1.vida(arma_dic,MONSTRO2_LESTE1,arma_atual,QUIT,nome_arma,quebrou)
@@ -818,10 +773,6 @@ def main():
                     arma_atual = monstro2_leste1.arma
                     quebrou = monstro2_leste1.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro2_leste1.x, (monstro2_leste1.y - 1)))
-                        quebrou = 0 
-                    
                 if pi == monstro3_leste1.y and pj == monstro3_leste1.x and MONSTRO3_LESTE1 == True: 
                     
                     monstro3_leste1.vida(arma_dic,MONSTRO3_LESTE1,arma_atual,QUIT,nome_arma,quebrou)
@@ -830,11 +781,7 @@ def main():
                     arma_dic = monstro3_leste1.arma_dic
                     arma_atual = monstro3_leste1.arma
                     quebrou = monstro3_leste2.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro3_leste2.x, (monstro3_leste1.y - 1)))
-                        quebrou = 0 
-                        
+                       
                 if pi == monstro4_leste1.y and pj == monstro4_leste1.x and MONSTRO4_LESTE1 == True: 
                     
                     monstro4_leste1.vida(arma_dic,MONSTRO4_LESTE1,arma_atual,QUIT,nome_arma,quebrou)
@@ -843,10 +790,6 @@ def main():
                     arma_dic = monstro4_leste1.arma_dic
                     arma_atual = monstro4_leste1.arma
                     quebrou = monstro4_leste1.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro4_leste1.x, (monstro4_leste1.y - 1)))
-                        quebrou = 0 
                     
                 if pi == 27 and pj == 6: 
                     
@@ -926,11 +869,7 @@ def main():
                     arma_dic = monstro2_leste2.arma_dic
                     arma_atual = monstro2_leste2.arma
                     quebrou = monstro2_leste2.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro2_leste2.x, (monstro2_leste2.y - 1)))
-                        quebrou = 0 
-                        
+                       
                 if pi == monstro3_leste2.y and pj == monstro3_leste2.x and MONSTRO3_LESTE2 == True: 
                     
                     monstro3_leste2.vida(arma_dic,MONSTRO3_LESTE2,arma_atual,QUIT,nome_arma,quebrou)
@@ -939,11 +878,7 @@ def main():
                     arma_dic = monstro3_leste2.arma_dic
                     arma_atual = monstro3_leste2.arma
                     quebrou = monstro3_leste2.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro3_leste2.x, (monstro3_leste2.y - 1)))
-                        quebrou = 0 
-                        
+                      
                 if pi == monstro4_leste2.y and pj == monstro4_leste2.x and MONSTRO4_LESTE2 == True: 
                     
                     monstro4_leste2.vida(arma_dic,MONSTRO4_LESTE2,arma_atual,QUIT,nome_arma,quebrou)
@@ -953,11 +888,6 @@ def main():
                     arma_atual = monstro4_leste2.arma
                     quebrou = monstro4_leste2.quebrou
                     
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro4_leste2.x, (monstro4_leste2.y - 1)))
-                        quebrou = 0 
-                        
-                    
                 if pi == monstro5_leste2.y and pj == monstro5_leste2.x and MONSTRO5_LESTE2 == True: 
                     
                     monstro5_leste2.vida(arma_dic,MONSTRO5_LESTE2,arma_atual,QUIT,nome_arma,quebrou)
@@ -966,11 +896,7 @@ def main():
                     arma_dic = monstro5_leste2.arma_dic
                     arma_atual = monstro5_leste2.arma
                     quebrou = monstro5_leste2.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro5_leste2.x, (monstro5_leste2.y - 1)))
-                        quebrou = 0 
-                        
+                      
                 if pi == monstro6_leste2.y and pj == monstro6_leste2.x and MONSTRO6_LESTE2 == True: 
                     
                     monstro6_leste2.vida(arma_dic,MONSTRO6_LESTE2,arma_atual,QUIT,nome_arma,quebrou)
@@ -979,11 +905,7 @@ def main():
                     arma_dic = monstro6_leste2.arma_dic
                     arma_atual = monstro6_leste2.arma
                     quebrou = monstro6_leste2.quebrou
-                    
-                    if quebrou == 1: 
-                        tela.blit(label10, (monstro6_leste2.x, (monstro6_leste2.y - 1)))
-                        quebrou = 0 
-                        
+                       
                 if pi == 23 and pj == 12: 
                     
                     if len(arma_dic) == 0:
@@ -1024,7 +946,14 @@ def main():
                 if arma3_catana_leste2 == False:
                
                     if arma3_leste2_pos.colliderect(A_LUZ1) == True or arma3_leste2_pos.colliderect(A_LUZ2) == True or arma3_leste2_pos.colliderect(A_LUZ3) == True:
-                        tela.blit(martelo,[32*TILESIZE,7*TILESIZE]) 
+                        tela.blit(martelo,[32*TILESIZE,7*TILESIZE])
+                        
+            if quebrou == 1: 
+                count_a +=1
+                tela.blit(label10, (15*TILESIZE,10*TILESIZE))
+                if count_a == 30:
+                    quebrou = 0
+                    count_a = 0
 #======================================================================================
             
             if lanterna == True: 
