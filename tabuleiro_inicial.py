@@ -1167,7 +1167,31 @@ def main():
                 
                     label_inventario11 = fonte_inventario.render("- Lanterna", True, BRANCO)
                     tela.blit(label_inventario11, ([MAPWIDTH*TILESIZE + 10 ,3*TILESIZE]))
+               
+                if chave_norte == True:
                         
+                    label_inventario7 = fonte_inventario.render("____________________", True, BRANCO)
+                    tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 10 ,12*TILESIZE]))
+                        
+                    label_inventario12 = fonte_inventario.render("- Chaves :", True, BRANCO)
+                    tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 10 ,13*TILESIZE]))
+                
+                        
+                    label_inventario12 = fonte_inventario.render("    Chave da ala sul", True, BRANCO)
+                    tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 10 ,15*TILESIZE]))
+                    
+                if chave_sul == True:
+                        
+                    label_inventario13 = fonte_inventario.render("    Chave da ala leste", True, BRANCO)
+                    tela.blit(label_inventario13, ([MAPWIDTH*TILESIZE + 10 ,17*TILESIZE]))
+                        
+                if chave_final == True:
+                        
+                    label_inventario14 = fonte_inventario.render("    Chave da saida", True, BRANCO)
+                    tela.blit(label_inventario14, ([MAPWIDTH*TILESIZE + 10 ,19*TILESIZE]))
+                        
+                
+                    
             if len(arma_dic) == 1:
                 
                     tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
