@@ -22,13 +22,13 @@ import ala_leste_final
 
 #funcao botao
 
-def botao(texto,x,y,l,a,cor1,tela,font,action):
+def botao(texto,x,y,l,a,cor1,cor2,tela,font,action):
     mouse = pygame.mouse.get_pos()
     TILESIZE = 20
     click = pygame.mouse.get_pressed()
-    pygame.draw.rect(tela, cor1, (x*TILESIZE,y*TILESIZE, l*TILESIZE, a*TILESIZE))
-    tela.blit(font.render(texto, True, (0,0,0)), (x*TILESIZE, y*TILESIZE))
+    tela.blit(font.render(texto, False, (cor1)), ((x+1)*TILESIZE, (y+1)*TILESIZE))
     if (x*TILESIZE+l*TILESIZE) > mouse[0] > (x*TILESIZE) and (y*TILESIZE+a*TILESIZE) > mouse[1] > (y*TILESIZE):
+        tela.blit(font.render(texto, False, (cor2)), ((x+1)*TILESIZE, (y+1)*TILESIZE))
         if click[0] == 1:
             if action == 1:
                 return 3
@@ -183,6 +183,7 @@ def main():
     AZUL = (0,0,255)
     PRETO = (0,0,0)
     VERMELHO = (255,0,0)
+    VERMELHO_DARK = (150,0,0)
     VERDE = (0,255,0)
     ROSA = (214,34,191)
     white = (255,255,255,255)
@@ -471,8 +472,8 @@ def main():
             
             play1 = 1
             exit1 = 0
-            b3 = botao("Play ",10,22,5,3,VERMELHO,tela,fonte_2,play1)                        
-            b4 = botao("Sair",35,22,5,3,VERMELHO,tela,fonte_2,exit1)
+            b3 = botao("Play ",10,22,5,3,VERMELHO,VERMELHO_DARK,tela,fonte_2,play1)                        
+            b4 = botao("Sair",35,22,5,3,VERMELHO,VERMELHO_DARK,tela,fonte_2,exit1)
          
             if b3 == 3:
                 nome_tela = 'jogo'
@@ -1304,8 +1305,8 @@ def main():
             play = 1
             exit = 0
     
-            b1 = botao("play again",10,22,9,3,VERMELHO,tela,fonte_2,play)                        
-            b2 = botao("sair",35,22,5,3,VERMELHO,tela,fonte_2,exit)
+            b1 = botao("play again",10,22,9,3,VERMELHO,VERMELHO_DARK,tela,fonte_2,play)                        
+            b2 = botao("sair",35,22,5,3,VERMELHO,VERMELHO_DARK,tela,fonte_2,exit)
          
             if b1 == 3:
                 nome_tela = 'jogo'
