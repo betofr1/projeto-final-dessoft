@@ -183,7 +183,7 @@ def main():
 
     #pygame functions
     key_pressed = pygame.key.get_pressed()
-    pygame.display.set_caption("LABIRINTO DOS INFERNO")
+    pygame.display.set_caption("M4D BETO")
     relogio = pygame.time.Clock()
     nome_tela = ''
     tela_inicial = "inicio"
@@ -410,12 +410,12 @@ def main():
             #tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
             
             label2 = fonte_titulo.render("M4D BETO", True, BRANCO)
-            tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
+            tela.blit(label2, (12*TILESIZE, 3*TILESIZE))
             
             play1 = 1
             exit1 = 0
-            b3 = botao("Play ",7,22,5,3,VERMELHO,tela,fonte_2,play1)                        
-            b4 = botao("Sair",25,22,5,3,VERMELHO,tela,fonte_2,exit1)
+            b3 = botao("Play ",10,22,5,3,VERMELHO,tela,fonte_2,play1)                        
+            b4 = botao("Sair",35,22,5,3,VERMELHO,tela,fonte_2,exit1)
          
             if b3 == 3:
                 nome_tela = 'jogo'
