@@ -122,6 +122,21 @@ class Monstro:
                 #label6 = fonte_2.render("Sua arma quebrou...fuja", True, VERMELHO)
                 #tela.blit(label6, (19*TILESIZE, 27*TILESIZE))
             
+class music: 
+    def __init__(self,musica,musica1,nome_tela):
+        self.musica = musica
+        self.musica_rodando = musica1
+        self.nome_tela = nome_tela
+        
+    def toca_musica(self):
+        if not self.nome_tela == 'jogo':
+        
+            if self.musica == True: 
+                if self.musica_rodando == False: 
+                    musica_intro = pygame.mixer.music.load("Jesus Lastra - Abandoned - intro.mp3")
+                    pygame.mixer.music.play()
+        
+    
                 
             
 def main():
@@ -322,7 +337,8 @@ def main():
     Fullscreen = False
     sair = False
     lanterna = False
-
+    musica1 = False
+    musica = True
     
     key_pressed = pygame.key.get_pressed() 
     
@@ -387,20 +403,31 @@ def main():
     
     #Definindo musicas
     
-    def music(musica):
     
-        if musica == True: 
-            
-            musica_intro = pygame.mixer.music.load("Jesus Lastra - Abandoned - intro.mp3")
-            pygame.mixer.music.play()
+# para musica: 
+    
+        
+
+
 
 # definindo loop
 
     while sair != True:
         
+        
+        
         if tela_inicial == "inicio": 
+            
             musica = True
+            musica_atual = music(musica,musica1,nome_tela)
+            musica_atual.toca_musica()
+            musica1 = True
+            
+            
+            
+            
             #music(musica)
+
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -427,6 +454,9 @@ def main():
         
         if nome_tela == 'jogo':
             
+            pygame.mixer.music.stop()
+            
+
             #tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
             #tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
           
