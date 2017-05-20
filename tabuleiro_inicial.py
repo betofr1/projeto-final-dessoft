@@ -38,7 +38,7 @@ def botao(texto,x,y,l,a,cor1,tela,font,action):
 #classe monstro
 
 class Monstro:
-    def __init__(self,x,y,cor,tamanho,tela,tab,vida_m):
+    def __init__(self,x,y,cor,tamanho,tela,tab,vida_m,tela_monstro,fonte):
         self.tab = tab
         self.tela = tela
         self.tamanho = tamanho
@@ -49,6 +49,9 @@ class Monstro:
         self.MAPWIDTH = len(tab[0])
         self.MAPHEIGHT = len(tab)
         self.vida_m = vida_m
+        self.tela_monstro = tela_monstro
+        self.fonte = fonte
+        self.a  = self.vida_m
        
     def anda(self,l1,l2,l3,count,lanterna,zombie):
         self.count = count
@@ -81,13 +84,25 @@ class Monstro:
 
                     
     def vida(self,arma_dic,MONSTRO,arma,QUIT,nome_arma,quebrou):
-
+        
         self.arma_dic = arma_dic
         self.MONSTRO = MONSTRO
         self.arma = arma
         self.QUIT = QUIT
         self.nome_arma = nome_arma
         self.quebrou = quebrou 
+        #a  = self.vida_m
+        
+        #self.tela.blit(self.tela_monstro,[self.MAPWIDTH*self.tamanho,20*self.tamanho])
+        
+        #label_inventario8 = self.fonte.render("MONSTRO:", True, self.cor)
+        #self.tela.blit(label_inventario8, ([self.MAPWIDTH*self.tamanho + 10 ,21*self.tamanho]))
+        
+        #label_inventario9 = self.fonte.render(("vida = {0}".format(str(self.vida_m))), True, self.cor)
+        #self.tela.blit(label_inventario9, ([self.MAPWIDTH*self.tamanho + 10 ,25*self.tamanho]))
+        
+        #label_inventario10 = self.fonte.render(("vida máxima = {0}".format(str(self.a))), True, self.cor)
+        #self.tela.blit(label_inventario10, ([self.MAPWIDTH*self.tamanho + 10 ,23*self.tamanho]))
         
         if self.arma == False and self.vida_m > 0: 
             self.QUIT = True
@@ -115,8 +130,24 @@ class Monstro:
                 self.arma = False
                 self.arma_dic = {}
                 self.quebrou = 1
-                print("quebrou")
-                
+        
+        if self.vida_m >= 0 : 
+            
+            self.tela.blit(self.tela_monstro,[self.MAPWIDTH*self.tamanho,20*self.tamanho])
+            
+            label_inventario8 = self.fonte.render("MONSTRO :", True, self.cor)
+            self.tela.blit(label_inventario8, ([self.MAPWIDTH*self.tamanho + 10 ,23*self.tamanho]))
+            
+            label_inventario9 = self.fonte.render((" - vida atual = {0}".format(str(self.vida_m))), True, self.cor)
+            self.tela.blit(label_inventario9, ([self.MAPWIDTH*self.tamanho + 10 ,27*self.tamanho]))
+            
+            label_inventario10 = self.fonte.render((" - vida máxima = {0}".format(str(self.a))), True, self.cor)
+            self.tela.blit(label_inventario10, ([self.MAPWIDTH*self.tamanho + 10 ,25*self.tamanho]))
+            
+        #if self.vida_m <= 0 : 
+            
+            #self.tela.blit(self.tela_monstro,[self.MAPWIDTH*self.tamanho,20*self.tamanho])
+            
             #print("vida arma",self.arma_dic[self.nome_arma][1])
                 
                 #label6 = fonte_2.render("Sua arma quebrou...fuja", True, VERMELHO)
@@ -168,7 +199,9 @@ def main():
     telag_6 = pygame.Surface((TILESIZE*5,TILESIZE*12))
     telag_7 = pygame.Surface((TILESIZE*11,TILESIZE*4))
     telag_8 = pygame.Surface((TILESIZE*40,TILESIZE*30))
-    tela_inventario = pygame.Surface(([200,MAPHEIGHT*TILESIZE]))
+    tela_inventario = pygame.Surface(([200,22*TILESIZE]))
+    tela_monstro = pygame.Surface(([200,18*TILESIZE]))
+    
 
     tela2.fill(PRETO)
     telag_2.set_alpha(200)
@@ -187,6 +220,7 @@ def main():
     telag_8.fill(PRETO)
     #tela_inventario.set_alpha(200)
     tela_inventario.fill(CINZA)
+    tela_monstro.fill(VERMELHO)
 
     # texto 
     #fonte = pygame.font.SysFont("Arial", 100)
@@ -267,27 +301,27 @@ def main():
     armas = {'catana': [10,3], 'martelo': [5,4]}         # dicionario 
     
     
-    monstro_hall = Monstro(mj_hall,mi_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
-    monstro2_hall = Monstro(m2j_hall,m2i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
-    monstro3_hall = Monstro(m3j_hall,m3i_hall,VERMELHO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall)
-    monstro_norte = Monstro(mj_norte,mi_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-    monstro2_norte = Monstro(m2j_norte,m2i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-    monstro3_norte = Monstro(m3j_norte,m3i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-    monstro4_norte = Monstro(m4j_norte,m4i_norte,VERMELHO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte)
-    monstro_sul = Monstro(mj_sul,mi_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
-    monstro2_sul = Monstro(m2j_sul,m2i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
-    monstro3_sul= Monstro(m3j_sul,m3i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
-    monstro4_sul = Monstro(m4j_sul,m4i_sul,VERMELHO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul)
-    monstro_leste1 = Monstro(mj_leste1,mi_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
-    monstro2_leste1 = Monstro(m2j_leste1,m2i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
-    monstro3_leste1 = Monstro(m3j_leste1,m3i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
-    monstro4_leste1 = Monstro(m4j_leste1,m4i_leste1,VERMELHO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1)
-    monstro_leste2 = Monstro(mj_leste2,mi_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-    monstro2_leste2 = Monstro(m2j_leste2,m2i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-    monstro3_leste2 = Monstro(m3j_leste2,m3i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-    monstro4_leste2 = Monstro(m4j_leste2,m4i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-    monstro5_leste2 = Monstro(m5j_leste2,m5i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
-    monstro6_leste2 = Monstro(m6j_leste2,m6i_leste2,VERMELHO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2)
+    monstro_hall = Monstro(mj_hall,mi_hall,BRANCO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall,tela_monstro,fonte_inventario)
+    monstro2_hall = Monstro(m2j_hall,m2i_hall,BRANCO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall,tela_monstro,fonte_inventario)
+    monstro3_hall = Monstro(m3j_hall,m3i_hall,BRANCO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall,tela_monstro,fonte_inventario)
+    monstro_norte = Monstro(mj_norte,mi_norte,BRANCO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte,tela_monstro,fonte_inventario)
+    monstro2_norte = Monstro(m2j_norte,m2i_norte,BRANCO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte,tela_monstro,fonte_inventario)
+    monstro3_norte = Monstro(m3j_norte,m3i_norte,BRANCO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte,tela_monstro,fonte_inventario)
+    monstro4_norte = Monstro(m4j_norte,m4i_norte,BRANCO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte,tela_monstro,fonte_inventario)
+    monstro_sul = Monstro(mj_sul,mi_sul,BRANCO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul,tela_monstro,fonte_inventario)
+    monstro2_sul = Monstro(m2j_sul,m2i_sul,BRANCO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul,tela_monstro,fonte_inventario)
+    monstro3_sul= Monstro(m3j_sul,m3i_sul,BRANCO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul,tela_monstro,fonte_inventario)
+    monstro4_sul = Monstro(m4j_sul,m4i_sul,BRANCO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul,tela_monstro,fonte_inventario)
+    monstro_leste1 = Monstro(mj_leste1,mi_leste1,BRANCO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1,tela_monstro,fonte_inventario)
+    monstro2_leste1 = Monstro(m2j_leste1,m2i_leste1,BRANCO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1,tela_monstro,fonte_inventario)
+    monstro3_leste1 = Monstro(m3j_leste1,m3i_leste1,BRANCO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1,tela_monstro,fonte_inventario)
+    monstro4_leste1 = Monstro(m4j_leste1,m4i_leste1,BRANCO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1,tela_monstro,fonte_inventario)
+    monstro_leste2 = Monstro(mj_leste2,mi_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+    monstro2_leste2 = Monstro(m2j_leste2,m2i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+    monstro3_leste2 = Monstro(m3j_leste2,m3i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+    monstro4_leste2 = Monstro(m4j_leste2,m4i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+    monstro5_leste2 = Monstro(m5j_leste2,m5i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+    monstro6_leste2 = Monstro(m6j_leste2,m6i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
 
     chave_norte_pos = pygame.Rect(37*TILESIZE,3*TILESIZE,TILESIZE,TILESIZE)
     chave_sul_pos = pygame.Rect(17*TILESIZE,15*TILESIZE,TILESIZE,TILESIZE)
@@ -422,12 +456,6 @@ def main():
             musica_atual = music(musica,musica1,nome_tela)
             musica_atual.toca_musica()
             musica1 = True
-            
-            
-            
-            
-            #music(musica)
-
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -1157,11 +1185,20 @@ def main():
                 tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
                 
                 label_inventario1 = fonte_inventario1.render("Inventário:", True, BRANCO)
-                tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 10 ,2*TILESIZE]))
+                tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 25 ,1*TILESIZE]))
                 
-                label_inventario6 = fonte_inventario.render("Vazio", True, BRANCO)
-                tela.blit(label_inventario6, ([MAPWIDTH*TILESIZE + 10 ,5*TILESIZE]))
+                if lanterna == False: 
                 
+                    label_inventario6 = fonte_inventario.render("- Vazio", True, BRANCO)
+                    tela.blit(label_inventario6, ([MAPWIDTH*TILESIZE + 10 ,3*TILESIZE]))
+                    
+                if lanterna == True: 
+                
+                    label_inventario11 = fonte_inventario.render("- Lanterna", True, BRANCO)
+                    tela.blit(label_inventario11, ([MAPWIDTH*TILESIZE + 10 ,3*TILESIZE]))
+                        
+                #label_inventario7 = fonte_inventario.render("____________________", True, BRANCO)
+                #tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 10 ,6*TILESIZE]))
                 
                 
             if len(arma_dic) == 1:
@@ -1169,20 +1206,57 @@ def main():
                     tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
                     
                     label_inventario1 = fonte_inventario1.render("Inventário", True, BRANCO)
-                    tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 10 ,2*TILESIZE]))
-                    
-                    label_inventario2 = fonte_inventario.render("Arma atual :", True, BRANCO)
+                    tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 25 ,1*TILESIZE]))
+                
+                    label_inventario2 = fonte_inventario.render("- Arma atual :", True, BRANCO)
                     tela.blit(label_inventario2, ([MAPWIDTH*TILESIZE + 10 ,5*TILESIZE]))
-                
-                    label_inventario3 = fonte_inventario.render(("nome : {0}".format(nome_arma)), True, BRANCO)
+                    
+                    label_inventario3 = fonte_inventario.render(("    nome : {0}".format(nome_arma)), True, BRANCO)
                     tela.blit(label_inventario3, ([MAPWIDTH*TILESIZE + 10 ,7*TILESIZE]))
-                
-                    label_inventario4 = fonte_inventario.render(("poder da arma : {0}".format(arma_dic[nome_arma][0])), True, BRANCO)
+                    
+                    label_inventario4 = fonte_inventario.render(("    poder da arma : {0}".format(arma_dic[nome_arma][0])), True, BRANCO)
                     tela.blit(label_inventario4, ([MAPWIDTH*TILESIZE + 10 ,9*TILESIZE]))
-                    
-                    label_inventario5 = fonte_inventario.render(("vida da arma : {0}".format(arma_dic[nome_arma][1])), True, BRANCO)
+                        
+                    label_inventario5 = fonte_inventario.render(("    vida da arma : {0}".format(arma_dic[nome_arma][1])), True, BRANCO)
                     tela.blit(label_inventario5, ([MAPWIDTH*TILESIZE + 10 ,11*TILESIZE]))
+                        
+                        
+                    if lanterna == True: 
+                
+                        label_inventario11 = fonte_inventario.render("- Lanterna", True, BRANCO)
+                        tela.blit(label_inventario11, ([MAPWIDTH*TILESIZE + 10 ,3*TILESIZE]))
+                        
+                        label_inventario7 = fonte_inventario.render("____________________", True, BRANCO)
+                        tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 10 ,4*TILESIZE]))
+                
+                        
+                    if chave_norte == True:
+                        
+                        label_inventario7 = fonte_inventario.render("____________________", True, BRANCO)
+                        tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 10 ,12*TILESIZE]))
+                        
+                        label_inventario12 = fonte_inventario.render("- Chaves :", True, BRANCO)
+                        tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 10 ,13*TILESIZE]))
+                
+                        
+                        label_inventario12 = fonte_inventario.render("    Chave da ala sul", True, BRANCO)
+                        tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 10 ,15*TILESIZE]))
                     
+                    if chave_sul == True:
+                        
+                        label_inventario13 = fonte_inventario.render("    Chave da ala leste", True, BRANCO)
+                        tela.blit(label_inventario13, ([MAPWIDTH*TILESIZE + 10 ,17*TILESIZE]))
+                        
+                    if chave_final == True:
+                        
+                        label_inventario14 = fonte_inventario.render("    Chave da saida", True, BRANCO)
+                        tela.blit(label_inventario14, ([MAPWIDTH*TILESIZE + 10 ,19*TILESIZE]))
+                        
+                   # chave_norte = False
+                    ##chave_sul = False
+                    #chave_final = False
+                        
+                        
                     
 #------------------------------------------------------------------------------------------
             
