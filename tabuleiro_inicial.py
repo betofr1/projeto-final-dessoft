@@ -435,6 +435,8 @@ def main():
     img_lanterna = pygame.image.load("Itens/lanterna.png").convert_alpha()
     img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
     
+    personagem = "right"
+    
     #Definindo musicas
     
     
@@ -506,29 +508,6 @@ def main():
             
             #if mask_BG.get_at((799,599)) == white:
                 
-            
-            #movimento jogador
-            key_pressed = pygame.key.get_pressed()
-            if key_pressed[pygame.K_RIGHT]:
-                if pj < (MAPWIDTH - 1) and (tab[pi][pj+1] != 1):
-                    jogador.move_ip(TILESIZE,0)
-                    pj += 1
-            #tela.blit(personagem_right,[pj*TILESIZE,pi*TILESIZE])
-            if key_pressed[pygame.K_UP]:
-                if pi > 0 and (tab[pi-1][pj] != 1):
-                    jogador.move_ip(0,-TILESIZE)
-                    pi -= 1
-            tela.blit(personagem_up,[pj*TILESIZE,pi*TILESIZE])
-            if key_pressed[pygame.K_LEFT]:
-                if pj > 0 and (tab[pi][pj-1] != 1):
-                    jogador.move_ip(-TILESIZE,0)
-                    pj -= 1
-            #tela.blit(personagem_left,[pj*TILESIZE,pi*TILESIZE])
-            if key_pressed[pygame.K_DOWN]:
-                if (pi < (MAPHEIGHT - 1)) and (tab[pi+1][pj] != 1):
-                    jogador.move_ip(0,TILESIZE)
-                    pi += 1
-            #tela.blit(personagem_down,[pj*TILESIZE,pi*TILESIZE])
 #========================================================================================
              # CENARIOS:
 
@@ -1074,7 +1053,7 @@ def main():
                 
             #pygame.draw.rect(tela,ROSA,jogador)
 
-            tela.blit(personagem_right,[pj*TILESIZE,pi*TILESIZE])
+            #tela.blit(personagem_right,[pj*TILESIZE,pi*TILESIZE])
             
             
             
@@ -1239,6 +1218,47 @@ def main():
                         
                         label_inventario14 = fonte_inventario.render("    Chave da saida", True, BRANCO)
                         tela.blit(label_inventario14, ([MAPWIDTH*TILESIZE + 10 ,19*TILESIZE]))
+                        
+            
+            #movimento jogador
+            key_pressed = pygame.key.get_pressed()
+            if key_pressed[pygame.K_RIGHT]:
+                if pj < (MAPWIDTH - 1) and (tab[pi][pj+1] != 1):
+                    jogador.move_ip(TILESIZE,0)
+                    pj += 1
+                    personagem = "right"
+            if key_pressed[pygame.K_UP]:
+                if pi > 0 and (tab[pi-1][pj] != 1):
+                    jogador.move_ip(0,-TILESIZE)
+                    pi -= 1
+                    personagem = "up"
+            if key_pressed[pygame.K_LEFT]:
+                if pj > 0 and (tab[pi][pj-1] != 1):
+                    jogador.move_ip(-TILESIZE,0)
+                    pj -= 1
+                    personagem = "left"
+            if key_pressed[pygame.K_DOWN]:
+                if (pi < (MAPHEIGHT - 1)) and (tab[pi+1][pj] != 1):
+                    jogador.move_ip(0,TILESIZE)
+                    pi += 1
+                    personagem = "down"
+                    
+            if personagem == "right":
+                
+                tela.blit(personagem_right,[pj*TILESIZE,pi*TILESIZE])
+                
+            if personagem == "up":
+                
+                tela.blit(personagem_up,[pj*TILESIZE,pi*TILESIZE])
+                
+            if personagem == "left":
+            
+                tela.blit(personagem_left,[pj*TILESIZE,pi*TILESIZE])
+                
+            if personagem == "down": 
+                
+                tela.blit(personagem_down,[pj*TILESIZE,pi*TILESIZE])
+#================================================================================
                     
 #------------------------------------------------------------------------------------------
             
@@ -1255,12 +1275,13 @@ def main():
             tela.fill(PRETO)
             
             label2 = fonte_titulo.render("VOCE PERDEU...", True, BRANCO)
-            tela.blit(label2, (3*TILESIZE, 3*TILESIZE))
+            tela.blit(label2, (6*TILESIZE, 3*TILESIZE))
             
             play = 1
             exit = 0
-            b1 = botao("play again",7,22,9,3,VERMELHO,tela,fonte_2,play)                        
-            b2 = botao("sair",25,22,5,3,VERMELHO,tela,fonte_2,exit)
+    
+            b1 = botao("play again",10,22,9,3,VERMELHO,tela,fonte_2,play)                        
+            b2 = botao("sair",35,22,5,3,VERMELHO,tela,fonte_2,exit)
          
             if b1 == 3:
                 nome_tela = 'jogo'
