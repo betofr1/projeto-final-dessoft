@@ -6,7 +6,7 @@ import ala_sul
 import tab_tutorial
 import ala_leste_1
 import ala_leste_final
-import time
+
 
 # definindo parametros usados nas classes e funcoes: 
 #pygame.init()    
@@ -94,8 +94,7 @@ class Monstro:
         #self.arma_dic[self.nome_arma][1] = int(self.arma_dic[self.nome_arma][1])
         if self.arma == True: 
             
-            print("monstro",self.vida_m)
-            print(self.arma_dic[self.nome_arma][1])
+            #print("vida arma",self.arma_dic[self.nome_arma][1])
             
             if self.vida_m > 0 and self.arma_dic[self.nome_arma][1] > 0:
                 self.vida_m -= self.arma_dic[self.nome_arma][0]
@@ -109,12 +108,16 @@ class Monstro:
             if self.arma_dic[self.nome_arma][1] <= 0 and self.vida_m > 0:
                 self.MONSTRO = True 
                 self.QUIT = True
+                
+            print("vida arma",self.arma_dic[self.nome_arma][1])
             
             if self.arma_dic[self.nome_arma][1] <= 0: 
                 self.arma = False
                 self.arma_dic = {}
                 self.quebrou = 1
                 print("quebrou")
+                
+            #print("vida arma",self.arma_dic[self.nome_arma][1])
                 
                 #label6 = fonte_2.render("Sua arma quebrou...fuja", True, VERMELHO)
                 #tela.blit(label6, (19*TILESIZE, 27*TILESIZE))
@@ -138,9 +141,10 @@ def main():
     ROSA = (214,34,191)
     white = (255,255,255,255)
     blue = (0,39,255,255)
+    CINZA = (114,114,144)
 
     # definindo telas: 
-    tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
+    tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
     tela2 = pygame.Surface((TILESIZE*5,TILESIZE*30))
     telag_2= pygame.Surface((TILESIZE*14,TILESIZE*9))
     telag_3 = pygame.Surface((TILESIZE*9,TILESIZE*12))
@@ -149,6 +153,7 @@ def main():
     telag_6 = pygame.Surface((TILESIZE*5,TILESIZE*12))
     telag_7 = pygame.Surface((TILESIZE*11,TILESIZE*4))
     telag_8 = pygame.Surface((TILESIZE*40,TILESIZE*30))
+    tela_inventario = pygame.Surface(([200,MAPHEIGHT*TILESIZE]))
 
     tela2.fill(PRETO)
     telag_2.set_alpha(200)
@@ -165,12 +170,16 @@ def main():
     telag_7.fill(PRETO)
     telag_8.set_alpha(200)
     telag_8.fill(PRETO)
+    #tela_inventario.set_alpha(200)
+    tela_inventario.fill(CINZA)
 
     # texto 
     #fonte = pygame.font.SysFont("Arial", 100)
     fonte_2 = pygame.font.Font('naughty_scratch_free.ttf', 25)
     fonte_titulo = pygame.font.Font('True Lies.ttf', 90)
     label10 = fonte_2.render("A arma quebrou...corra", True, VERMELHO)
+    fonte_inventario = pygame.font.Font('TravelingTypewriter.otf', 15)
+    fonte_inventario1 = pygame.font.Font('TravelingTypewriter.otf', 20)
 
     #pygame functions
     key_pressed = pygame.key.get_pressed()
@@ -348,6 +357,7 @@ def main():
     MONSTRO5_LESTE2 = True
     MONSTRO6_LESTE2 = True
     
+    
     count = 0  
     count_m = 0  
     count_a = 0 
@@ -376,13 +386,12 @@ def main():
     img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
     
     #Definindo musicas
-    musica_intro = pygame.mixer.music.load("Jesus Lastra - Abandoned - intro.mp3")
     
     def music(musica):
     
         if musica == True: 
             
-            
+            musica_intro = pygame.mixer.music.load("Jesus Lastra - Abandoned - intro.mp3")
             pygame.mixer.music.play()
 
 # definindo loop
@@ -391,14 +400,14 @@ def main():
         
         if tela_inicial == "inicio": 
             musica = True
-            music(musica)
+            #music(musica)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sair = True
             
             tela.blit(intro, [0,0])
-            
+            #tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
             
             label2 = fonte_titulo.render("M4D BETO", True, BRANCO)
             tela.blit(label2, (5*TILESIZE, 3*TILESIZE))
@@ -417,7 +426,9 @@ def main():
         
         
         if nome_tela == 'jogo':
-    
+            
+            #tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
+            #tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
           
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -426,11 +437,20 @@ def main():
                     if event.key == pygame.K_f:
                         Fullscreen = not Fullscreen
                         if Fullscreen:
-                            tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE], pygame.FULLSCREEN, 32)
+                            tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE], pygame.FULLSCREEN, 32)
+
                         else:
-                            screen = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
+                            screen = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
             
             
+            
+            
+                
+                        #nome_arma
+                        
+                        #arma_dic[nome_arma][1]
+                        
+                        
             #print("mask",mask_BG.get_at((799,599)))
             #print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
             
@@ -1100,6 +1120,40 @@ def main():
                 label9 = fonte_2.render("ala leste", True, BRANCO)
                 tela.blit(label9, (15*TILESIZE, 27*TILESIZE))
                 
+#-------------------------------------------------------------------------------------
+
+            if len(arma_dic) == 0:
+                
+                tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
+                
+                label_inventario1 = fonte_inventario1.render("Inventário:", True, BRANCO)
+                tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 10 ,2*TILESIZE]))
+                
+                label_inventario6 = fonte_inventario.render("Vazio", True, BRANCO)
+                tela.blit(label_inventario6, ([MAPWIDTH*TILESIZE + 10 ,5*TILESIZE]))
+                
+                
+                
+            if len(arma_dic) == 1:
+                
+                    tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
+                    
+                    label_inventario1 = fonte_inventario1.render("Inventário", True, BRANCO)
+                    tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 10 ,2*TILESIZE]))
+                    
+                    label_inventario2 = fonte_inventario.render("Arma atual :", True, BRANCO)
+                    tela.blit(label_inventario2, ([MAPWIDTH*TILESIZE + 10 ,5*TILESIZE]))
+                
+                    label_inventario3 = fonte_inventario.render(("nome : {0}".format(nome_arma)), True, BRANCO)
+                    tela.blit(label_inventario3, ([MAPWIDTH*TILESIZE + 10 ,7*TILESIZE]))
+                
+                    label_inventario4 = fonte_inventario.render(("poder da arma : {0}".format(arma_dic[nome_arma][0])), True, BRANCO)
+                    tela.blit(label_inventario4, ([MAPWIDTH*TILESIZE + 10 ,9*TILESIZE]))
+                    
+                    label_inventario5 = fonte_inventario.render(("vida da arma : {0}".format(arma_dic[nome_arma][1])), True, BRANCO)
+                    tela.blit(label_inventario5, ([MAPWIDTH*TILESIZE + 10 ,11*TILESIZE]))
+                    
+                    
 #------------------------------------------------------------------------------------------
             
             if QUIT == True: 
