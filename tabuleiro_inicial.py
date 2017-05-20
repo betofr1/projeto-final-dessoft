@@ -499,14 +499,6 @@ def main():
 
                         else:
                             screen = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
-            
-            
-            
-            
-                
-                        #nome_arma
-                        
-                        #arma_dic[nome_arma][1]
                         
                         
             #print("mask",mask_BG.get_at((799,599)))
@@ -1197,10 +1189,6 @@ def main():
                     label_inventario11 = fonte_inventario.render("- Lanterna", True, BRANCO)
                     tela.blit(label_inventario11, ([MAPWIDTH*TILESIZE + 10 ,3*TILESIZE]))
                         
-                #label_inventario7 = fonte_inventario.render("____________________", True, BRANCO)
-                #tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 10 ,6*TILESIZE]))
-                
-                
             if len(arma_dic) == 1:
                 
                     tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
@@ -1251,12 +1239,6 @@ def main():
                         
                         label_inventario14 = fonte_inventario.render("    Chave da saida", True, BRANCO)
                         tela.blit(label_inventario14, ([MAPWIDTH*TILESIZE + 10 ,19*TILESIZE]))
-                        
-                   # chave_norte = False
-                    ##chave_sul = False
-                    #chave_final = False
-                        
-                        
                     
 #------------------------------------------------------------------------------------------
             
