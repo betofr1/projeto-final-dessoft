@@ -847,7 +847,7 @@ def main():
                     MONSTRO3_LESTE1= monstro3_leste1.MONSTRO
                     arma_dic = monstro3_leste1.arma_dic
                     arma_atual = monstro3_leste1.arma
-                    quebrou = monstro3_leste2.quebrou
+                    quebrou = monstro3_leste1.quebrou
                        
                 if pi == monstro4_leste1.y and pj == monstro4_leste1.x and MONSTRO4_LESTE1 == True: 
                     
@@ -1182,7 +1182,7 @@ def main():
                     tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 10 ,15*TILESIZE]))
                     
                 if chave_sul == True:
-                        
+                    
                     label_inventario13 = fonte_inventario.render("    Chave da ala leste", True, BRANCO)
                     tela.blit(label_inventario13, ([MAPWIDTH*TILESIZE + 10 ,17*TILESIZE]))
                         
