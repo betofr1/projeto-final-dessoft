@@ -1335,14 +1335,14 @@ def main():
             
             tela.fill(PRETO)
             
-            label2 = fonte_titulo.render("VOCE PERDEU...", True, BRANCO)
+            label2 = fonte_titulo.render("Voce Perdeu...", True, BRANCO)
             tela.blit(label2, (6*TILESIZE, 3*TILESIZE))
             
             play = 1
             exit = 0
     
-            b1 = botao("play again",10,22,9,3,VERMELHO,VERMELHO_DARK,tela,fonte_botao,play)                        
-            b2 = botao("sair",35,22,5,3,VERMELHO,VERMELHO_DARK,tela,fonte_botao,exit)
+            b1 = botao("play again",10,22,18,4,VERMELHO,VERMELHO_DARK,tela,fonte_botao,play)                        
+            b2 = botao("sair",35,22,8,4,VERMELHO,VERMELHO_DARK,tela,fonte_botao,exit)
          
             if b1 == 3:
                 nome_tela = 'jogo'
