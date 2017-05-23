@@ -159,13 +159,33 @@ class music:
         self.musica_rodando = musica1
         self.nome_tela = nome_tela
         
-    def toca_musica(self):
+    def toca_musica1(self):
         if not self.nome_tela == 'jogo':
         
             if self.musica == True: 
                 if self.musica_rodando == False: 
                     musica_intro = pygame.mixer.music.load("Jesus Lastra - Abandoned - intro.mp3")
                     pygame.mixer.music.play()
+                    pygame.mixer.music.set_volume(1.0)
+
+    def toca_musica2(self):
+        if self.nome_tela == 'jogo':
+        
+            if self.musica == True: 
+                if self.musica_rodando == False: 
+                    musica_tutorial = pygame.mixer.music.load("Abuse In The Orphanage - tutorial (online-audio-converter.com).mp3")
+                    pygame.mixer.music.play()
+                    pygame.mixer.music.set_volume(0.5)
+                    
+    def toca_musica3(self):
+        if self.nome_tela == 'jogo':
+        
+            if self.musica == True: 
+                if self.musica_rodando == False: 
+                    musica_tabs = pygame.mixer.music.load("Desolate Part II.mp3")
+                    pygame.mixer.music.play(-1)
+                    pygame.mixer.music.set_volume(0.5)
+                    
         
     
                 
@@ -372,8 +392,10 @@ def main():
     Fullscreen = False
     sair = False
     lanterna = False
-    musica1 = False
+    musica1 = False # se a musica esta rodando
     musica = True
+    musica2 = False # se a musica esta rodando
+    musica3 = False
     
     key_pressed = pygame.key.get_pressed() 
     
@@ -455,9 +477,8 @@ def main():
         
         if tela_inicial == "inicio": 
             
-            musica = True
             musica_atual = music(musica,musica1,nome_tela)
-            musica_atual.toca_musica()
+            musica_atual.toca_musica1()
             musica1 = True
 
             for event in pygame.event.get():
@@ -485,7 +506,7 @@ def main():
         
         if nome_tela == 'jogo':
             
-            pygame.mixer.music.stop()
+            #musica_atual.toca_musica1()
             
 
             #tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
@@ -514,10 +535,22 @@ def main():
 
             if tab == tab_tutorial.TAB_6:
                 tela.blit(background_tutorial, [0,0])
+                
+                
+                musica_atual = music(musica,musica2,nome_tela)
+                musica_atual.toca_musica2()
+                musica2 = True
 
 #-------------------------------------------------------------------------------------
-
+            if tab != tab_tutorial.TAB_6:
+                
+                musica_atual = music(musica,musica3,nome_tela)
+                musica_atual.toca_musica3()
+                musica3 = True
+                
             if tab == tabuleiro.TAB:
+                
+            
                 #print("mask",mask_BG.get_at((799,599)))
                 #tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 #print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
