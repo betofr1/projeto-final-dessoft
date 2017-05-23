@@ -1110,7 +1110,7 @@ def main():
                 pi = 28 
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
             
-# ---------------------ir para o hall----------------------------------------------
+# ---------------------voltando para o hall----------------------------------------------
             if tab[pi][pj] == 2: 
                 tab = tabuleiro.TAB
                 pj = 20
@@ -1127,7 +1127,9 @@ def main():
             if tab[pi][pj] == 6 and chave_norte == False: 
                 label1 = fonte_2.render("A porta esta trancada, va para a ala norte", True, BRANCO)
                 tela.blit(label1, (2*TILESIZE, 27*TILESIZE))
-            
+ 
+#----------------------------voltando para o hall----------------------------------------
+           
             if tab[pi][pj] == 4:
                 tab = tabuleiro.TAB
                 pj = 20
@@ -1155,6 +1157,23 @@ def main():
             if tab[pi][pj] == 15 and chave_final == False: 
                 label8 = fonte_2.render("A porta esta trancada, va para a ala leste 1", True, BRANCO)
                 tela.blit(label8, (2*TILESIZE, 12*TILESIZE))
+                
+#------------------------------------voltando para leste1------------------------------------------------                
+            if tab[pi][pj] == 20: 
+                tab = tabuleiro.TAB
+                pj = 38
+                pi = 14
+                jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)     
+
+ 
+#-------------------------------------voltando para o hall-----------------------------
+            if tab[pi][pj] == 8: 
+                tab = ala_leste_1.TAB_5
+                pj = 38
+                pi = 14
+                jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)    
+    
+
                 
 #--------------------------------------escritas---------------------------------------------------
 
