@@ -5,7 +5,7 @@ Created on Tue May 23 18:43:03 2017
 @author: Roberto Franco
 """
 
- import pygame
+import pygame
 import tabuleiro
 import random 
 import ala_norte
