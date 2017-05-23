@@ -246,7 +246,8 @@ def main():
     # texto 
     #fonte = pygame.font.SysFont("Arial", 100)
     fonte_2 = pygame.font.Font('naughty_scratch_free.ttf', 25)
-    fonte_titulo = pygame.font.Font('True Lies.ttf', 90)
+    fonte_botao = pygame.font.Font('naughty_scratch_free.ttf', 50)
+    fonte_titulo = pygame.font.Font('True Lies.ttf', 120)
     label10 = fonte_2.render("A arma quebrou...corra", True, VERMELHO)
     fonte_inventario = pygame.font.Font('TravelingTypewriter.otf', 15)
     fonte_inventario1 = pygame.font.Font('TravelingTypewriter.otf', 20)
@@ -488,13 +489,13 @@ def main():
             tela.blit(intro, [0,0])
             #tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
             
-            label2 = fonte_titulo.render("M4D BETO", True, BRANCO)
+            label2 = fonte_titulo.render("Lights Out", True, BRANCO)
             tela.blit(label2, (12*TILESIZE, 3*TILESIZE))
             
             play1 = 1
             exit1 = 0
-            b3 = botao("Play ",10,22,5,3,VERMELHO,VERMELHO_DARK,tela,fonte_2,play1)                        
-            b4 = botao("Sair",35,22,5,3,VERMELHO,VERMELHO_DARK,tela,fonte_2,exit1)
+            b3 = botao("Play ",10,22,8,5,VERMELHO,VERMELHO_DARK,tela,fonte_botao,play1)                        
+            b4 = botao("Sair",35,22,8,5,VERMELHO,VERMELHO_DARK,tela,fonte_botao,exit1)
          
             if b3 == 3:
                 nome_tela = 'jogo'
@@ -1340,8 +1341,8 @@ def main():
             play = 1
             exit = 0
     
-            b1 = botao("play again",10,22,9,3,VERMELHO,VERMELHO_DARK,tela,fonte_2,play)                        
-            b2 = botao("sair",35,22,5,3,VERMELHO,VERMELHO_DARK,tela,fonte_2,exit)
+            b1 = botao("play again",10,22,9,3,VERMELHO,VERMELHO_DARK,tela,fonte_botao,play)                        
+            b2 = botao("sair",35,22,5,3,VERMELHO,VERMELHO_DARK,tela,fonte_botao,exit)
          
             if b1 == 3:
                 nome_tela = 'jogo'
