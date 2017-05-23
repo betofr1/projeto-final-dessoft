@@ -240,7 +240,7 @@ def main():
     telag_8.set_alpha(200)
     telag_8.fill(PRETO)
     #tela_inventario.set_alpha(200)
-    tela_inventario.fill(CINZA)
+    tela_inventario.fill(PRETO)
     tela_monstro.fill(VERMELHO)
 
     # texto 
@@ -457,7 +457,7 @@ def main():
     adaga = pygame.image.load("Itens/adaga.png").convert_alpha()
     img_lanterna = pygame.image.load("Itens/lanterna.png").convert_alpha()
     img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
-    
+    img_inventario = pygame.image.load("inventario.png").convert_alpha()
     personagem = "right"
     
     #Definindo musicas
@@ -1188,6 +1188,7 @@ def main():
             if len(arma_dic) == 0:
                 
                 tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
+                tela.blit(img_inventario,[MAPWIDTH*TILESIZE,0])
                 
                 label_inventario1 = fonte_inventario1.render("Inventário:", True, BRANCO)
                 tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 25 ,1*TILESIZE]))
@@ -1229,6 +1230,7 @@ def main():
             if len(arma_dic) == 1:
                 
                     tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
+                    tela.blit(img_inventario,[MAPWIDTH*TILESIZE,0])
                     
                     label_inventario1 = fonte_inventario1.render("Inventário", True, BRANCO)
                     tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 25 ,1*TILESIZE]))
