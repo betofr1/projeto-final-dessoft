@@ -185,10 +185,7 @@ class music:
                     musica_tabs = pygame.mixer.music.load("Desolate Part II.mp3")
                     pygame.mixer.music.play(-1)
                     pygame.mixer.music.set_volume(0.5)
-                    
-        
-    
-                
+                                    
             
 def main():
     #definindo dimensoes
