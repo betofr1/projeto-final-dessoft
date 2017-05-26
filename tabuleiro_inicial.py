@@ -11,18 +11,6 @@ import ala_leste_1
 import ala_leste_final
 
 
-# definindo parametros usados nas classes e funcoes: 
-#pygame.init()    
-#fonte = pygame.font.SysFont("Arial", 100)
-#fonte_2 = pygame.font.SysFont('Arial', 25)
-#VERMELHO = (255,0,0)
-#tab = tab_tutorial.TAB_6
-#TILESIZE = 20
-#MAPWIDTH = len(tab[0])
-#MAPHEIGHT = len(tab)
-#tela = pygame.display.set_mode([MAPWIDTH*TILESIZE,MAPHEIGHT*TILESIZE])
-
-
 #funcao botao
 
 def botao(texto,x,y,l,a,cor1,cor2,tela,font,action):
@@ -94,31 +82,16 @@ class Monstro:
         self.QUIT = QUIT
         self.nome_arma = nome_arma
         self.quebrou = quebrou 
-        #a  = self.vida_m
-        
-        #self.tela.blit(self.tela_monstro,[self.MAPWIDTH*self.tamanho,20*self.tamanho])
-        
-        #label_inventario8 = self.fonte.render("MONSTRO:", True, self.cor)
-        #self.tela.blit(label_inventario8, ([self.MAPWIDTH*self.tamanho + 10 ,21*self.tamanho]))
-        
-        #label_inventario9 = self.fonte.render(("vida = {0}".format(str(self.vida_m))), True, self.cor)
-        #self.tela.blit(label_inventario9, ([self.MAPWIDTH*self.tamanho + 10 ,25*self.tamanho]))
-        
-        #label_inventario10 = self.fonte.render(("vida máxima = {0}".format(str(self.a))), True, self.cor)
-        #self.tela.blit(label_inventario10, ([self.MAPWIDTH*self.tamanho + 10 ,23*self.tamanho]))
-        
+
         if self.arma == False and self.vida_m > 0: 
             self.QUIT = True
-        #self.arma_dic[self.nome_arma][1] = int(self.arma_dic[self.nome_arma][1])
+
         if self.arma == True: 
-            
-            #print("vida arma",self.arma_dic[self.nome_arma][1])
             
             if self.vida_m > 0 and self.arma_dic[self.nome_arma][1] > 0:
                 self.vida_m -= self.arma_dic[self.nome_arma][0]
                 self.arma_dic[self.nome_arma][1] -= 1
-                print(self.vida_m)
-                
+
 
             if self.vida_m <= 0: 
                 self.MONSTRO = False
@@ -127,7 +100,6 @@ class Monstro:
                 self.MONSTRO = True 
                 self.QUIT = True
                 
-            print("vida arma",self.arma_dic[self.nome_arma][1])
             
             if self.arma_dic[self.nome_arma][1] <= 0: 
                 self.arma = False
@@ -216,24 +188,16 @@ def main():
     tela_monstro_tutorial = pygame.Surface(([200,18*TILESIZE]))
 
     tela2.fill(PRETO)
-    telag_2.set_alpha(200)
     telag_2.fill(PRETO)
-    telag_3.set_alpha(200)
     telag_3.fill(PRETO)
-    telag_4.set_alpha(200)
     telag_4.fill(PRETO)
-    telag_5.set_alpha(200)
     telag_5.fill(PRETO)
-    telag_6.set_alpha(200)
     telag_6.fill(PRETO)
-    telag_7.set_alpha(200)
     telag_7.fill(PRETO)
-    telag_8.set_alpha(200)
     telag_8.fill(PRETO)
     #tela_inventario.set_alpha(200)
     tela_inventario.fill(PRETO)
     tela_monstro_tutorial.fill(PRETO)
-
 
     # texto 
     #fonte = pygame.font.SysFont("Arial", 100)
@@ -462,8 +426,17 @@ def main():
 # definindo loop
 
     while sair != True:
-        
-        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sair = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_f:
+                    Fullscreen = not Fullscreen
+                    if Fullscreen == True:
+                        tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE], pygame.FULLSCREEN, 32)
+
+                    else:
+                        tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
         
         if tela_inicial == "inicio": 
             
@@ -496,29 +469,8 @@ def main():
         
         if nome_tela == 'jogo':
             
-            #musica_atual.toca_musica1()
-            
-
-            #tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
-            #tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
           
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sair = True
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_f:
-                        Fullscreen = not Fullscreen
-                        if Fullscreen:
-                            tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE], pygame.FULLSCREEN, 32)
 
-                        else:
-                            screen = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
-                        
-                        
-            #print("mask",mask_BG.get_at((799,599)))
-            #print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
-            
-            #if mask_BG.get_at((799,599)) == white:
                 
 #========================================================================================
              # CENARIOS:
@@ -539,11 +491,7 @@ def main():
                 musica3 = True
                 
             if tab == tabuleiro.TAB:
-                
-            
-                #print("mask",mask_BG.get_at((799,599)))
-                #tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
-                #print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
+
                 tela.blit(background_hall,[0,0])
                 tela.blit(telag_5,[14*TILESIZE,0*TILESIZE])
                 tela.blit(telag_6,[9*TILESIZE,9*TILESIZE])
@@ -575,7 +523,6 @@ def main():
                         background_hall_mask = background_hall.convert()
                         background_hall_mask.fill(PRETO)
                         
-                    
                         background_hall_mask.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
                         background_hall_mask.set_colorkey(blue)
                         
@@ -642,8 +589,6 @@ def main():
                         tela.blit(martelo,[11*TILESIZE,11*TILESIZE])     
   #---------------------------------------------------------------------------      
             if tab == ala_norte.TAB_2: 
-                #print("mask",mask_BG.get_at((799,599)))
-                #print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
                 tela.blit(background_alanorte, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
@@ -1134,10 +1079,7 @@ def main():
             
             if lanterna == True: 
                 
-            
-                    
                 A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
-            
             
             count_m += 1
             if count_m == 3:
