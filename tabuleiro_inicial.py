@@ -1183,7 +1183,7 @@ def main():
             if tab[pi][pj] == 7:
                 clip = VideoFileClip('outro.mp4')
                 clip.preview()
-                nome_tela = ""
+                sair = True
                 
 #--------------------------------------escritas---------------------------------------------------
 
