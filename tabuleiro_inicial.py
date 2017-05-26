@@ -1,4 +1,7 @@
 import pygame
+from moviepy.editor import *
+import imageio
+imageio.plugins.ffmpeg.download()
 import tabuleiro
 import random 
 import ala_norte
@@ -176,10 +179,7 @@ class music:
                     musica_tabs = pygame.mixer.music.load("Desolate Part II.mp3")
                     pygame.mixer.music.play(-1)
                     pygame.mixer.music.set_volume(0.5)
-                    
-        
-    
-                
+
             
 def main():
     #definindo dimensoes
@@ -213,7 +213,7 @@ def main():
     telag_8 = pygame.Surface((TILESIZE*40,TILESIZE*30))
     tela_inventario = pygame.Surface(([200,22*TILESIZE]))
     tela_monstro = pygame.Surface(([200,18*TILESIZE]))
-    
+    tela_monstro_tutorial = pygame.Surface(([200,18*TILESIZE]))
 
     tela2.fill(PRETO)
     telag_2.set_alpha(200)
@@ -232,7 +232,8 @@ def main():
     telag_8.fill(PRETO)
     #tela_inventario.set_alpha(200)
     tela_inventario.fill(PRETO)
-    tela_monstro.fill(VERMELHO)
+    tela_monstro_tutorial.fill(PRETO)
+
 
     # texto 
     #fonte = pygame.font.SysFont("Arial", 100)
@@ -245,7 +246,7 @@ def main():
 
     #pygame functions
     key_pressed = pygame.key.get_pressed()
-    pygame.display.set_caption("M4D BETO")
+    pygame.display.set_caption("Lighs Out")
     relogio = pygame.time.Clock()
     nome_tela = ''
     tela_inicial = "inicio"
@@ -524,7 +525,7 @@ def main():
 
             if tab == tab_tutorial.TAB_6:
                 tela.blit(background_tutorial, [0,0])
-                
+                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
                 
                 musica_atual = music(musica,musica2,nome_tela)
                 musica_atual.toca_musica2()
@@ -547,6 +548,7 @@ def main():
                 tela.blit(telag_5,[14*TILESIZE,0*TILESIZE])
                 tela.blit(telag_6,[9*TILESIZE,9*TILESIZE])
                 tela.blit(telag_7,[3*TILESIZE,26*TILESIZE])
+                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
    
                 if lanterna == False:  
 
@@ -644,6 +646,8 @@ def main():
                 #print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
                 tela.blit(background_alanorte, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
+                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
+
                 
                 if lanterna == True: 
                     tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
@@ -762,6 +766,7 @@ def main():
             if tab == ala_sul.TAB_3: 
                 tela.blit(background_alasul, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
+                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
                 
                 if lanterna == True: 
                     tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
@@ -879,6 +884,7 @@ def main():
                 
                 tela.blit(background_alaleste1, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
+                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
                 
                 if lanterna == True: 
                     tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
@@ -982,6 +988,7 @@ def main():
                 
                 tela.blit(background_alaleste2, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
+                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
                 
                 if lanterna == True: 
                     tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
@@ -1213,7 +1220,11 @@ def main():
                 pi = 14
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)    
     
-
+#------------------------------------encerrando----------------------------------------
+            if tab[pi][pj] == 7:
+                clip = VideoFileClip('outro.mp4')
+                clip.preview()
+                nome_tela = ""
                 
 #--------------------------------------escritas---------------------------------------------------
 
