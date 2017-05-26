@@ -214,7 +214,7 @@ def main():
     VERDE = (0,255,0)
     ROSA = (214,34,191)
     white = (255,255,255,255)
-    blue = (0,39,255,255)
+    blue = (0, 39, 225, 255)
     CINZA = (114,114,144)
 
     # definindo telas: 
@@ -395,6 +395,7 @@ def main():
     #A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
     #A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
     A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
+    
 
     #BOOL
     chave_norte = False
@@ -536,8 +537,8 @@ def main():
                             screen = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
                         
                         
-            print("mask",mask_BG.get_at((799,599)))
-            print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
+            #print("mask",mask_BG.get_at((799,599)))
+            #print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
             
             #if mask_BG.get_at((799,599)) == white
                 
@@ -588,22 +589,23 @@ def main():
                     tela.blit(telag_4,[0*TILESIZE,21*TILESIZE])
                 
                 if lanterna == True: 
+                    tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
                 
-                    tela.blit(aurea_objeto,[((pj*TILESIZE)-2*TILESIZE),((pi*TILESIZE)-2*TILESIZE)])
-                    print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
                     if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
                         
                         background_hall_mask = background_hall.convert()
                         background_hall_mask.fill(PRETO)
                         
-                        
-                        background_hall_mask.blit(aurea_objeto,[((pj*TILESIZE)-2*TILESIZE),((pi*TILESIZE)-2*TILESIZE)])
-                       
+                    
+                        background_hall_mask.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
                         background_hall_mask.set_colorkey(blue)
                         
                         tela.blit(background_hall,[0,0])
                         tela.blit(background_hall_mask,[0,0])
-               
+                        A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
+                        
+                        
+#               
                 if pi == 2 and pj == 6:
 
                     lanterna = True
@@ -1082,26 +1084,23 @@ def main():
                     quebrou = 0
                     count_a = 0
 #======================================================================================
-#            if tab == tabuleiro.TAB: 
-#                if lanterna == True: 
+            #if tab == tabuleiro.TAB: 
+#            if lanterna == True: 
+#                tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+#                
+#                if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
+#                        
+#                    background_hall_mask = background_hall.convert()
+#                    background_hall_mask.fill(PRETO)
+#                        
 #                    
-#                    tela.blit(aurea_objeto,[((pj*TILESIZE)-2*TILESIZE),((pi*TILESIZE)-2*TILESIZE)])
-#                    print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
-#                    if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
+#                    background_hall_mask.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+#                    background_hall_mask.set_colorkey(blue)
 #                        
-#                        background_hall_mask = background_hall.convert()
-#                        background_hall_mask.fill(PRETO)
-#                        
-#                        
-#                        background_hall_mask.blit(aurea_objeto,[((pj*TILESIZE)-2*TILESIZE),((pi*TILESIZE)-2*TILESIZE)])
-#                       
-#                        background_hall_mask.set_colorkey(blue)
-#                        
-#                        tela.blit(background_hall,[0,0])
-#                        tela.blit(background_hall_mask,[0,0])
-#                        
-#                    A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
-#                    #pygame.draw.rect(tela,BRANCO,A_LUZ)
+#                    tela.blit(background_hall,[0,0])
+#                    tela.blit(background_hall_mask,[0,0])
+                        
+                    #pygame.draw.rect(tela,BRANCO,A_LUZ)
 #                
 #                if arma_soco_hall == False:
 #                    if arma_hall_pos.colliderect(A_LUZ) == True:

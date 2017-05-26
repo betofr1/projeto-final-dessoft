@@ -39,7 +39,7 @@ def botao(texto,x,y,l,a,cor1,cor2,tela,font,action):
                 return 2
             
 #classe monstro
-
+     
 class Monstro:
     def __init__(self,x,y,cor,tamanho,tela,tab,vida_m,tela_monstro,fonte):
         self.tab = tab
@@ -56,13 +56,13 @@ class Monstro:
         self.fonte = fonte
         self.a  = self.vida_m
        
-    def anda(self,l1,l2,l3,count,lanterna,zombie):
+    def anda(self,l,count,lanterna,zombie):
         self.count = count
-        self.l1 = l1
-        self.l2 = l2
-        self.l3 = l3
-        if lanterna == True:
-            if self.ret.colliderect(self.l1) == True or self.ret.colliderect(self.l2) == True or self.ret.colliderect(self.l3) == True:    
+        self.l = l
+        self.lanterna = lanterna
+        
+        if self.lanterna == True:
+            if self.ret.colliderect(self.l) == True:
                 #pygame.draw.rect(self.tela, self.cor, self.ret)
                 self.tela.blit(zombie,[self.x*self.tamanho,self.y*self.tamanho])
         
@@ -147,15 +147,6 @@ class Monstro:
             label_inventario10 = self.fonte.render((" - vida máxima = {0}".format(str(self.a))), True, self.cor)
             self.tela.blit(label_inventario10, ([self.MAPWIDTH*self.tamanho + 10 ,25*self.tamanho]))
             
-        #if self.vida_m <= 0 : 
-            
-            #self.tela.blit(self.tela_monstro,[self.MAPWIDTH*self.tamanho,20*self.tamanho])
-            
-            #print("vida arma",self.arma_dic[self.nome_arma][1])
-                
-                #label6 = fonte_2.render("Sua arma quebrou...fuja", True, VERMELHO)
-                #tela.blit(label6, (19*TILESIZE, 27*TILESIZE))
-            
 class music: 
     def __init__(self,musica,musica1,nome_tela):
         self.musica = musica
@@ -207,7 +198,7 @@ def main():
     VERDE = (0,255,0)
     ROSA = (214,34,191)
     white = (255,255,255,255)
-    blue = (0,39,255,255)
+    blue = (0,39,225,255)
     CINZA = (114,114,144)
 
     # definindo telas: 
@@ -382,10 +373,7 @@ def main():
     quebrou = 0 
     
     #definindo lanterna
-    #lanterna_pos = pygame.Rect(6*TILESIZE,2*TILESIZE,TILESIZE,TILESIZE)
-    A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
-    A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
-    A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
+    A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
 
     #BOOL
     chave_norte = False
@@ -451,8 +439,8 @@ def main():
     personagem_right = pygame.image.load("personagem_direita.png").convert_alpha()
     personagem_left = pygame.image.load("personagem_esquerda.png").convert_alpha()
     zombie = pygame.image.load("zombie_frente.png").convert_alpha()
-    #mask_BG = pygame.image.load("mask-BG.png").convert_alpha()
-    #aurea_objeto = pygame.image.load("aurea-objeto.png").convert_alpha()
+    mask_BG = pygame.image.load("mask-BG.png").convert_alpha()
+    aurea_objeto = pygame.image.load("aurea-objeto.png").convert_alpha()
     #imagens itens
     katana = pygame.image.load("Itens/katana.png").convert_alpha()
     martelo = pygame.image.load("Itens/smallhammer.png").convert_alpha()
@@ -579,6 +567,22 @@ def main():
                     tela.blit(telag_3,[0*TILESIZE,9*TILESIZE])
                     tela.blit(telag_4,[0*TILESIZE,21*TILESIZE])
                     
+                if lanterna == True: 
+                    tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                
+                    if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
+                        
+                        background_hall_mask = background_hall.convert()
+                        background_hall_mask.fill(PRETO)
+                        
+                    
+                        background_hall_mask.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                        background_hall_mask.set_colorkey(blue)
+                        
+                        tela.blit(background_hall,[0,0])
+                        tela.blit(background_hall_mask,[0,0])
+                        A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
+                    
                 if pi == 2 and pj == 6:
 
                     lanterna = True
@@ -624,17 +628,17 @@ def main():
                     
                         
                 if MONSTRO1_HALL == True: 
-                    monstro_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro_hall.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO2_HALL == True: 
-                    monstro2_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro2_hall.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO3_HALL== True: 
-                    monstro3_hall.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro3_hall.anda(A_LUZ,count_m,lanterna,zombie)
                 
                     
                 if arma_soco_hall == False:
-                    if arma_hall_pos.colliderect(A_LUZ1) == True or arma_hall_pos.colliderect(A_LUZ2) == True or arma_hall_pos.colliderect(A_LUZ3) == True:
+                    if arma_hall_pos.colliderect(A_LUZ) == True: 
                         tela.blit(martelo,[11*TILESIZE,11*TILESIZE])     
   #---------------------------------------------------------------------------      
             if tab == ala_norte.TAB_2: 
@@ -643,18 +647,35 @@ def main():
                 tela.blit(background_alanorte, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
+
+                
+                if lanterna == True: 
+                    tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                
+                    if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
+                        
+                        background_alanorte_mask = background_alanorte.convert()
+                        background_alanorte_mask.fill(PRETO)
+                        
+                    
+                        background_alanorte_mask.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                        background_alanorte_mask.set_colorkey(blue)
+                        
+                        tela.blit(background_alanorte,[0,0])
+                        tela.blit(background_alanorte_mask,[0,0])
+                        A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
                
                 if MONSTRO1_NORTE == True: 
-                    monstro_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro_norte.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO2_NORTE == True: 
-                    monstro2_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro2_norte.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO3_NORTE == True: 
-                    monstro3_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro3_norte.anda(A_LUZ,count_m,lanterna,zombie)
             
                 if MONSTRO4_NORTE == True:
-                    monstro4_norte.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro4_norte.anda(A_LUZ,count_m,lanterna,zombie)
                     
 
 
@@ -706,7 +727,7 @@ def main():
                     
                 if arma2_catana_norte == False:
                
-                    if arma1_norte_pos.colliderect(A_LUZ1) == True or arma1_norte_pos.colliderect(A_LUZ2) == True or arma1_norte_pos.colliderect(A_LUZ3) == True:
+                    if arma1_norte_pos.colliderect(A_LUZ) == True:
                         tela.blit(martelo,[2*TILESIZE,2*TILESIZE])
                   
                 if pi == 27 and pj == 2: 
@@ -720,7 +741,7 @@ def main():
                     
                     
                 if arma1_soco_norte == False:
-                    if arma2_norte_pos.colliderect(A_LUZ1) == True or arma2_norte_pos.colliderect(A_LUZ2) == True or arma2_norte_pos.colliderect(A_LUZ3) == True:
+                    if arma2_norte_pos.colliderect(A_LUZ) == True: 
                         tela.blit(martelo,[2*TILESIZE,27*TILESIZE])
                   
                 if pi == 24 and pj == 37: 
@@ -733,11 +754,11 @@ def main():
                         nome_arma = 'catana'
                     
                 if arma3_catana_norte == False:
-                    if arma3_norte_pos.colliderect(A_LUZ1) == True or arma3_norte_pos.colliderect(A_LUZ2) == True or arma3_norte_pos.colliderect(A_LUZ3) == True:
+                    if arma3_norte_pos.colliderect(A_LUZ) == True:
                         tela.blit(katana,[37*TILESIZE,24*TILESIZE])
 
                 if chave_norte == False:
-                    if chave_norte_pos.colliderect(A_LUZ1) == True or chave_norte_pos.colliderect(A_LUZ2) == True or chave_norte_pos.colliderect(A_LUZ3) == True:
+                    if chave_norte_pos.colliderect(A_LUZ) == True:
                         tela.blit(img_chave,[37*TILESIZE,3*TILESIZE])  
                 if pi == 3 and pj == 37:    
                     chave_norte = True
@@ -746,6 +767,22 @@ def main():
                 tela.blit(background_alasul, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
+                
+                if lanterna == True: 
+                    tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                
+                    if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
+                        
+                        background_alasul_mask = background_alasul.convert()
+                        background_alasul_mask.fill(PRETO)
+                        
+                    
+                        background_alasul_mask.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                        background_alasul_mask.set_colorkey(blue)
+                        
+                        tela.blit(background_alasul,[0,0])
+                        tela.blit(background_alasul_mask,[0,0])
+                        A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
                 
                 if pi == monstro_sul.y and pj == monstro_sul.x and MONSTRO1_SUL == True: 
                     
@@ -784,16 +821,16 @@ def main():
                     quebrou = monstro4_sul.quebrou
                     
                 if MONSTRO1_SUL == True: 
-                    monstro_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro_sul.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO2_SUL == True: 
-                    monstro2_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro2_sul.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO3_SUL == True: 
-                    monstro3_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro3_sul.anda(A_LUZ,count_m,lanterna,zombie)
             
                 if MONSTRO4_SUL == True:
-                    monstro4_sul.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro4_sul.anda(A_LUZ,count_m,lanterna,zombie)
                 
                 if pi == 19 and pj == 2: 
                     
@@ -806,7 +843,7 @@ def main():
                     
                 if arma1_soco_sul == False:
                
-                    if arma1_sul_pos.colliderect(A_LUZ1) == True or arma1_sul_pos.colliderect(A_LUZ2) == True or arma1_sul_pos.colliderect(A_LUZ3) == True:
+                    if arma1_sul_pos.colliderect(A_LUZ) == True:
                         tela.blit(martelo,[2*TILESIZE,19*TILESIZE])
                         
                 if pi == 4 and pj == 33: 
@@ -820,7 +857,7 @@ def main():
                     
                 if arma2_catana_sul == False:
                
-                    if arma2_sul_pos.colliderect(A_LUZ1) == True or arma2_sul_pos.colliderect(A_LUZ2) == True or arma2_sul_pos.colliderect(A_LUZ3) == True:
+                    if arma2_sul_pos.colliderect(A_LUZ) == True:
                         tela.blit(katana,[33*TILESIZE,4*TILESIZE])
                 
                 if pi == 27 and pj == 30: 
@@ -834,11 +871,11 @@ def main():
                     
                 if arma3_soco_sul == False:
                
-                    if arma3_sul_pos.colliderect(A_LUZ1) == True or arma3_sul_pos.colliderect(A_LUZ2) == True or arma3_sul_pos.colliderect(A_LUZ3) == True:
+                    if arma3_sul_pos.colliderect(A_LUZ) == True:
                         tela.blit(martelo,[30*TILESIZE,27*TILESIZE])
 
                 if chave_sul == False:
-                    if chave_sul_pos.colliderect(A_LUZ1) == True or chave_sul_pos.colliderect(A_LUZ2) == True or chave_sul_pos.colliderect(A_LUZ3) == True:
+                    if chave_sul_pos.colliderect(A_LUZ) == True:
                         tela.blit(img_chave,[17*TILESIZE,15*TILESIZE])    
                 if pi == 15 and pj == 17:    
                     chave_sul = True
@@ -849,17 +886,33 @@ def main():
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
                 
+                if lanterna == True: 
+                    tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                
+                    if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
+                        
+                        background_alaleste1_mask = background_alaleste1.convert()
+                        background_alaleste1_mask.fill(PRETO)
+                        
+                    
+                        background_alaleste1_mask.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                        background_alaleste1_mask.set_colorkey(blue)
+                        
+                        tela.blit(background_alaleste1,[0,0])
+                        tela.blit(background_alaleste1_mask,[0,0])
+                        A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
+                
                 if MONSTRO1_LESTE1 == True: 
-                    monstro_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro_leste1.anda(A_LUZ,count_m,lanterna,zombie)
                 
                 if MONSTRO2_LESTE1 == True: 
-                    monstro2_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro2_leste1.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO3_LESTE1 == True: 
-                    monstro3_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro3_leste1.anda(A_LUZ,count_m,lanterna,zombie)
                 
                 if MONSTRO4_LESTE1 == True: 
-                    monstro4_leste1.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro4_leste1.anda(A_LUZ,count_m,lanterna,zombie)
                 
                 if pi == monstro_leste1.y and pj == monstro_leste1.x and MONSTRO1_LESTE1 == True: 
                     
@@ -908,7 +961,7 @@ def main():
                     
                 if arma1_catana_leste1 == False:
                
-                    if arma1_leste1_pos.colliderect(A_LUZ1) == True or arma1_leste1_pos.colliderect(A_LUZ2) == True or arma1_leste1_pos.colliderect(A_LUZ3) == True:
+                    if arma1_leste1_pos.colliderect(A_LUZ) == True:
                         tela.blit(katana,[6*TILESIZE,27*TILESIZE])
                         
                 if pi == 6 and pj == 25: 
@@ -922,11 +975,11 @@ def main():
                     
                 if arma2_soco_leste1 == False:
                
-                    if arma2_leste1_pos.colliderect(A_LUZ1) == True or arma2_leste1_pos.colliderect(A_LUZ2) == True or arma2_leste1_pos.colliderect(A_LUZ3) == True:
+                    if arma2_leste1_pos.colliderect(A_LUZ) == True: 
                         tela.blit(martelo,[25*TILESIZE,6*TILESIZE])
 
                 if chave_final == False:
-                    if chave_final_pos.colliderect(A_LUZ1) == True or chave_final_pos.colliderect(A_LUZ2) == True or chave_final_pos.colliderect(A_LUZ3) == True:
+                    if chave_final_pos.colliderect(A_LUZ) == True:
                         tela.blit(img_chave,[34*TILESIZE,22*TILESIZE])
                 if pi == 22 and pj == 34:    
                     chave_final = True
@@ -937,23 +990,39 @@ def main():
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
                 tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
                 
+                if lanterna == True: 
+                    tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                
+                    if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
+                        
+                        background_alaleste2_mask = background_alaleste2.convert()
+                        background_alaleste2_mask.fill(PRETO)
+                        
+                    
+                        background_alaleste2_mask.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
+                        background_alaleste2_mask.set_colorkey(blue)
+                        
+                        tela.blit(background_alaleste2,[0,0])
+                        tela.blit(background_hall_alaleste2,[0,0])
+                        A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
+                
                 if MONSTRO1_LESTE2 == True: 
-                    monstro_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro_leste2.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO2_LESTE2 == True: 
-                    monstro2_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro2_leste2.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO3_LESTE2 == True: 
-                    monstro3_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro3_leste2.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO4_LESTE2 == True: 
-                    monstro4_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro4_leste2.anda(A_LUZ,count_m,lanterna,zombie)
                 
                 if MONSTRO5_LESTE2 == True: 
-                    monstro5_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro5_leste2.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if MONSTRO6_LESTE2 == True: 
-                    monstro6_leste2.anda(A_LUZ1,A_LUZ2,A_LUZ3,count_m,lanterna,zombie)
+                    monstro6_leste2.anda(A_LUZ,count_m,lanterna,zombie)
                     
                 if pi == monstro_leste2.y and pj == monstro_leste2.x and MONSTRO1_LESTE2 == True: 
                     
@@ -1024,7 +1093,7 @@ def main():
                     
                 if arma1_catana_leste2 == False:
                
-                    if arma1_leste2_pos.colliderect(A_LUZ1) == True or arma1_leste2_pos.colliderect(A_LUZ2) == True or arma1_leste2_pos.colliderect(A_LUZ3) == True:
+                    if arma1_leste2_pos.colliderect(A_LUZ) == True:
                         tela.blit(martelo,[12*TILESIZE,23*TILESIZE])
                         
                 if pi == 6 and pj == 24: 
@@ -1038,7 +1107,7 @@ def main():
                     
                 if arma2_soco_leste2 == False:
                
-                    if arma2_leste2_pos.colliderect(A_LUZ1) == True or arma2_leste2_pos.colliderect(A_LUZ2) == True or arma2_leste2_pos.colliderect(A_LUZ3) == True:
+                    if arma2_leste2_pos.colliderect(A_LUZ) == True:
                         tela.blit(martelo,[24*TILESIZE,6*TILESIZE])
                     
                 if pi == 7 and pj == 32: 
@@ -1052,7 +1121,7 @@ def main():
                     
                 if arma3_catana_leste2 == False:
                
-                    if arma3_leste2_pos.colliderect(A_LUZ1) == True or arma3_leste2_pos.colliderect(A_LUZ2) == True or arma3_leste2_pos.colliderect(A_LUZ3) == True:
+                    if arma3_leste2_pos.colliderect(A_LUZ) == True:
                         tela.blit(martelo,[32*TILESIZE,7*TILESIZE])
                         
             if quebrou == 1: 
@@ -1065,37 +1134,9 @@ def main():
             
             if lanterna == True: 
                 
-                #tela.blit(aurea_objeto,[((pj*TILESIZE)-2*TILESIZE),((pi*TILESIZE)-2*TILESIZE)])
-                #print("jogador",aurea_objeto.get_at(((pj+59),(pi + 59))))
-                #if aurea_objeto.get_at(((pj+59),(pi + 59))) == blue:
-                    #tela.blit(background_hall,[0,0])
-                    
-                    
-                A_LUZ1 = pygame.Rect((pj-1)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*3,TILESIZE*7)
-                A_LUZ2 = pygame.Rect((pj-3)*TILESIZE,(pi-1)*TILESIZE,TILESIZE*7,TILESIZE*3)
-                A_LUZ3 = pygame.Rect((pj-2)*TILESIZE,(pi-2)*TILESIZE,TILESIZE*5,TILESIZE*5)
-                #pygame.draw.rect(tela,BRANCO,A_LUZ1)
-                #pygame.draw.rect(tela,BRANCO,A_LUZ2)
-                #pygame.draw.rect(tela,BRANCO,A_LUZ3)
-                s2 = pygame.Surface((TILESIZE*7,TILESIZE*3))  
-                s2.set_alpha(50)                
-                s2.fill((255,255,255))           
-                tela.blit(s2, ((pj-3)*TILESIZE,(pi-1)*TILESIZE))
-                s3 = pygame.Surface((TILESIZE*5,TILESIZE*5))  
-                s3.set_alpha(50)                
-                s3.fill((255,255,255))           
-                tela.blit(s3, ((pj-2)*TILESIZE,(pi-2)*TILESIZE))
-                s1 = pygame.Surface((TILESIZE*3,TILESIZE*7))  
-                s1.set_alpha(50)                
-                s1.fill((255,255,255))           
-                tela.blit(s1, ((pj-1)*TILESIZE,(pi-3)*TILESIZE))
-                
             
-                
-            #pygame.draw.rect(tela,ROSA,jogador)
-
-            #tela.blit(personagem_right,[pj*TILESIZE,pi*TILESIZE])
-            
+                    
+                A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
             
             
             count_m += 1
@@ -1183,7 +1224,7 @@ def main():
             if tab[pi][pj] == 7:
                 clip = VideoFileClip('outro.mp4')
                 clip.preview()
-                nome_tela = ""
+                sair = True
                 
 #--------------------------------------escritas---------------------------------------------------
 
