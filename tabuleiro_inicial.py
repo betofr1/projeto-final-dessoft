@@ -255,7 +255,7 @@ def main():
 
     #pygame functions
     key_pressed = pygame.key.get_pressed()
-    pygame.display.set_caption("M4D BETO")
+    pygame.display.set_caption("Lighs Out")
     relogio = pygame.time.Clock()
     nome_tela = ''
     tela_inicial = "inicio"
