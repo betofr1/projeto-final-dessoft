@@ -1,4 +1,7 @@
 import pygame
+from moviepy.editor import *
+import imageio
+imageio.plugins.ffmpeg.download()
 import tabuleiro
 import random 
 import ala_norte
@@ -185,7 +188,7 @@ class music:
                     musica_tabs = pygame.mixer.music.load("Desolate Part II.mp3")
                     pygame.mixer.music.play(-1)
                     pygame.mixer.music.set_volume(0.5)
-                                    
+
             
 def main():
     #definindo dimensoes
@@ -1170,7 +1173,11 @@ def main():
                 pi = 14
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)    
     
-
+#------------------------------------encerrando----------------------------------------
+            if tab[pi][pj] == 7:
+                clip = VideoFileClip('outro.mp4')
+                clip.preview()
+                nome_tela = ""
                 
 #--------------------------------------escritas---------------------------------------------------
 
