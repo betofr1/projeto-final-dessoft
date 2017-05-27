@@ -947,7 +947,9 @@ def main():
                         background_alaleste2_mask.set_colorkey(blue)
                         
                         tela.blit(background_alaleste2,[0,0])
+
                         tela.blit(background_alaleste2_mask,[0,0])
+
                         A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
                 
                 if MONSTRO1_LESTE2 == True: 
