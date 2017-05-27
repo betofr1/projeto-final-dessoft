@@ -160,7 +160,6 @@ def main():
     TILESIZE = 20
     MAPWIDTH = len(tab[0])
     MAPHEIGHT = len(tab)
-    
     #definindo cores: 
     BRANCO = (255,255,255)
     AZUL = (0,0,255)
@@ -389,6 +388,7 @@ def main():
     count_m = 0  
     count_a = 0 
     #backgorunds
+    carta = pygame.image.load("imagem_intro.png").convert_alpha()
     intro = pygame.image.load("intro.png").convert_alpha()
     background_hall= pygame.image.load("entrada.png").convert_alpha()
     background_alanorte = pygame.image.load("ala-norte.png").convert_alpha()
@@ -414,14 +414,6 @@ def main():
     img_inventario = pygame.image.load("inventario.png").convert_alpha()
     personagem = "right"
     
-    #Definindo musicas
-    
-    
-# para musica: 
-    
-        
-
-
 
 # definindo loop
 
@@ -430,6 +422,7 @@ def main():
             if event.type == pygame.QUIT:
                 sair = True
             if event.type == pygame.KEYDOWN:
+                
                 if event.key == pygame.K_f:
                     Fullscreen = not Fullscreen
                     if Fullscreen == True:
@@ -437,6 +430,11 @@ def main():
 
                     else:
                         tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
+                if event.key == pygame.K_SPACE:
+                    print("funciona cuzao")
+                    nome_tela = 'jogo'
+                    tela_inicial = ''
+                #if event.key == pygame.K_BACKSPACE:
         
         if tela_inicial == "inicio": 
             
@@ -460,18 +458,19 @@ def main():
             b4 = botao("Sair",35,22,8,5,VERMELHO,VERMELHO_DARK,tela,fonte_botao,exit1)
          
             if b3 == 3:
-                nome_tela = 'jogo'
+                tela_inicial = 'historia'
                 
             elif b4 == 2:
                 sair = True
             
+        if tela_inicial == 'historia':
+            tela.blit(carta, [0,0])
+            skip = fonte_inventario1.render("precione espaco para continuar", True, BRANCO)
+            tela.blit(skip, [31*TILESIZE,28*TILESIZE])
         
         
         if nome_tela == 'jogo':
-            
-          
 
-                
 #========================================================================================
              # CENARIOS:
 
