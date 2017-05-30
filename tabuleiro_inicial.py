@@ -410,6 +410,7 @@ def main():
     img_lanterna = pygame.image.load("Itens/lanterna.png").convert_alpha()
     img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
     img_inventario = pygame.image.load("inventario.png").convert_alpha()
+    img_instrucoes = pygame.image.load("instrucoes.png").convert_alpha()
     personagem = "right"
     
 
@@ -480,6 +481,8 @@ def main():
             if tab == tab_tutorial.TAB_6:
                 tela.blit(background_tutorial, [0,0])
                 tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
+                tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
+                tela.blit(img_instrucoes,[MAPWIDTH*TILESIZE,0])
                 
                 musica_atual = music(musica,musica2,nome_tela)
                 musica_atual.toca_musica2()
@@ -1226,46 +1229,47 @@ def main():
 #-------------------------------------------------------------------------------------
 
             if len(arma_dic) == 0:
+                if tab != tab_tutorial.TAB_6:
                 
-                tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
-                tela.blit(img_inventario,[MAPWIDTH*TILESIZE,0])
-                
-                label_inventario1 = fonte_inventario1.render("Inventário:", True, PRETO)
-                tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 40 ,0.3*TILESIZE]))
-                
-                if lanterna == False: 
-                
-                    label_inventario6 = fonte_inventario.render("- Vazio", True, PRETO)
-                    tela.blit(label_inventario6, ([MAPWIDTH*TILESIZE + 30 ,3*TILESIZE]))
+                    tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
+                    tela.blit(img_inventario,[MAPWIDTH*TILESIZE,0])
                     
-                if lanterna == True: 
-                
-                    label_inventario11 = fonte_inventario.render("- Lanterna", True, PRETO)
-                    tela.blit(label_inventario11, ([MAPWIDTH*TILESIZE + 30 ,3*TILESIZE]))
-               
-                if chave_norte == True:
-                        
-                    label_inventario7 = fonte_inventario.render("__________________", True, PRETO)
-                    tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 15 ,12*TILESIZE]))
-                        
-                    label_inventario12 = fonte_inventario.render("- Chaves :", True, PRETO)
-                    tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 30 ,13*TILESIZE]))
-                
-                        
-                    label_inventario12 = fonte_inventario.render("     Ala sul", True, PRETO)
-                    tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 5 ,15*TILESIZE]))
+                    label_inventario1 = fonte_inventario1.render("Inventário:", True, PRETO)
+                    tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 40 ,0.3*TILESIZE]))
                     
-                if chave_sul == True:
+                    if lanterna == False: 
                     
-                    label_inventario13 = fonte_inventario.render("   Ala leste", True, PRETO)
-                    tela.blit(label_inventario13, ([MAPWIDTH*TILESIZE + 5 ,17*TILESIZE]))
+                        label_inventario6 = fonte_inventario.render("- Vazio", True, PRETO)
+                        tela.blit(label_inventario6, ([MAPWIDTH*TILESIZE + 30 ,3*TILESIZE]))
                         
-                if chave_final == True:
+                    if lanterna == True: 
+                    
+                        label_inventario11 = fonte_inventario.render("- Lanterna", True, PRETO)
+                        tela.blit(label_inventario11, ([MAPWIDTH*TILESIZE + 30 ,3*TILESIZE]))
+                   
+                    if chave_norte == True:
+                            
+                        label_inventario7 = fonte_inventario.render("__________________", True, PRETO)
+                        tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 15 ,12*TILESIZE]))
+                            
+                        label_inventario12 = fonte_inventario.render("- Chaves :", True, PRETO)
+                        tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 30 ,13*TILESIZE]))
+                    
+                            
+                        label_inventario12 = fonte_inventario.render("     Ala sul", True, PRETO)
+                        tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 5 ,15*TILESIZE]))
                         
-                    label_inventario14 = fonte_inventario.render("    Chave da saída", True, PRETO)
-                    tela.blit(label_inventario14, ([MAPWIDTH*TILESIZE + 5 ,19*TILESIZE]))
+                    if chave_sul == True:
                         
-                
+                        label_inventario13 = fonte_inventario.render("   Ala leste", True, PRETO)
+                        tela.blit(label_inventario13, ([MAPWIDTH*TILESIZE + 5 ,17*TILESIZE]))
+                            
+                    if chave_final == True:
+                            
+                        label_inventario14 = fonte_inventario.render("    Chave da saída", True, PRETO)
+                        tela.blit(label_inventario14, ([MAPWIDTH*TILESIZE + 5 ,19*TILESIZE]))
+                            
+                    
                     
             if len(arma_dic) == 1:
                 
