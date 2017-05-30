@@ -106,7 +106,7 @@ class Monstro:
                 self.arma_dic = {}
                 self.quebrou = 1
         
-        if self.vida_m >= 0 : 
+        if self.vida_m > 0 : 
             
             self.tela.blit(self.tela_monstro,[self.MAPWIDTH*self.tamanho,20*self.tamanho])
             
@@ -118,6 +118,21 @@ class Monstro:
             
             label_inventario10 = self.fonte.render((" - vida máxima = {0}".format(str(self.a))), True, self.cor)
             self.tela.blit(label_inventario10, ([self.MAPWIDTH*self.tamanho + 10 ,25*self.tamanho]))
+            
+        if self.vida_m == 0 : 
+            
+            self.tela.blit(self.tela_monstro,[self.MAPWIDTH*self.tamanho,20*self.tamanho])
+            
+            label_inventario8 = self.fonte.render("MONSTRO :", True, self.cor)
+            self.tela.blit(label_inventario8, ([self.MAPWIDTH*self.tamanho + 10 ,23*self.tamanho]))
+            
+            label_inventario9 = self.fonte.render(" - Morreu", True, self.cor)
+            self.tela.blit(label_inventario9, ([self.MAPWIDTH*self.tamanho + 10 ,27*self.tamanho]))
+            
+            label_inventario10 = self.fonte.render((" - vida máxima = {0}".format(str(self.a))), True, self.cor)
+            self.tela.blit(label_inventario10, ([self.MAPWIDTH*self.tamanho + 10 ,25*self.tamanho]))
+            
+            
             
 class music: 
     def __init__(self,musica,musica1,nome_tela):
@@ -599,7 +614,6 @@ def main():
             if tab == ala_norte.TAB_2: 
                 tela.blit(background_alanorte, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
-                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
 
                 
                 if lanterna == True: 
@@ -723,7 +737,6 @@ def main():
             if tab == ala_sul.TAB_3: 
                 tela.blit(background_alasul, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
-                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
                 
                 if lanterna == True: 
                     tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
@@ -845,7 +858,6 @@ def main():
                 
                 tela.blit(background_alaleste1, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
-                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
                 
                 if lanterna == True: 
                     tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
@@ -953,7 +965,7 @@ def main():
                 
                 tela.blit(background_alaleste2, [0,0])
                 tela.blit(telag_8,[0*TILESIZE,0*TILESIZE])
-                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
+                
                 
                 if lanterna == True: 
                     tela.blit(aurea_objeto,[((pj*TILESIZE)-3*TILESIZE),((pi*TILESIZE)-3*TILESIZE)])
