@@ -699,7 +699,7 @@ def main():
                 if arma2_catana_norte == False:
                
                     if arma1_norte_pos.colliderect(A_LUZ) == True:
-                        tela.blit(martelo,[2*TILESIZE,2*TILESIZE])
+                        tela.blit(katana,[2*TILESIZE,2*TILESIZE])
                   
                 if pi == 27 and pj == 2: 
                     
