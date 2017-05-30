@@ -162,15 +162,10 @@ def main():
     MAPHEIGHT = len(tab)
     #definindo cores: 
     BRANCO = (255,255,255)
-    AZUL = (0,0,255)
     PRETO = (0,0,0)
     VERMELHO = (255,0,0)
     VERMELHO_DARK = (150,0,0)
-    VERDE = (0,255,0)
-    ROSA = (214,34,191)
-    white = (255,255,255,255)
     blue = (0,39,225,255)
-    CINZA = (114,114,144)
 
     # definindo telas: 
     tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
@@ -383,10 +378,13 @@ def main():
     MONSTRO5_LESTE2 = True
     MONSTRO6_LESTE2 = True
     
+    encostou = False
     
     count = 0  
     count_m = 0  
     count_a = 0 
+    count_tela_monstro = 0 
+    
     #backgorunds
     carta = pygame.image.load("imagem_intro.png").convert_alpha()
     intro = pygame.image.load("intro.png").convert_alpha()
@@ -412,6 +410,7 @@ def main():
     img_lanterna = pygame.image.load("Itens/lanterna.png").convert_alpha()
     img_chave = pygame.image.load("Itens/chave.png").convert_alpha()
     img_inventario = pygame.image.load("inventario.png").convert_alpha()
+    img_instrucoes = pygame.image.load("instrucoes.png").convert_alpha()
     personagem = "right"
     
 
@@ -469,6 +468,12 @@ def main():
         
         
         if nome_tela == 'jogo':
+            
+            
+            if count_tela_monstro == 0 or count_tela_monstro >= 36:
+                    tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
+                    count_tela_monstro = 0
+                    encostou = False
 
 #========================================================================================
              # CENARIOS:
@@ -476,6 +481,8 @@ def main():
             if tab == tab_tutorial.TAB_6:
                 tela.blit(background_tutorial, [0,0])
                 tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
+                tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
+                tela.blit(img_instrucoes,[MAPWIDTH*TILESIZE,0])
                 
                 musica_atual = music(musica,musica2,nome_tela)
                 musica_atual.toca_musica2()
@@ -489,12 +496,13 @@ def main():
                 musica3 = True
                 
             if tab == tabuleiro.TAB:
+                
 
                 tela.blit(background_hall,[0,0])
                 tela.blit(telag_5,[14*TILESIZE,0*TILESIZE])
                 tela.blit(telag_6,[9*TILESIZE,9*TILESIZE])
                 tela.blit(telag_7,[3*TILESIZE,26*TILESIZE])
-                tela.blit(tela_monstro_tutorial,[40*TILESIZE, 22*TILESIZE])
+                
    
                 if lanterna == False:  
 
@@ -550,7 +558,7 @@ def main():
                     arma_dic = monstro_hall.arma_dic
                     arma_atual = monstro_hall.arma
                     quebrou = monstro_hall.quebrou
-                    
+                    encostou = True
                         
                 if pi == monstro2_hall.y and pj ==monstro2_hall.x and MONSTRO2_HALL == True: 
                     
@@ -560,6 +568,7 @@ def main():
                     arma_dic = monstro2_hall.arma_dic
                     arma_atual = monstro2_hall.arma
                     quebrou = monstro2_hall.quebrou
+                    encostou = True
                     
                 
                 if pi == monstro3_hall.y and pj == monstro3_hall.x and MONSTRO3_HALL == True:
@@ -570,8 +579,9 @@ def main():
                     arma_dic = monstro3_hall.arma_dic
                     arma_atual = monstro3_hall.arma
                     quebrou = monstro3_hall.quebrou
+                    encostou = True
                     
-                        
+
                 if MONSTRO1_HALL == True: 
                     monstro_hall.anda(A_LUZ,count_m,lanterna,zombie)
                     
@@ -630,6 +640,7 @@ def main():
                     arma_dic = monstro_norte.arma_dic
                     arma_atual = monstro_norte.arma
                     quebrou = monstro_norte.quebrou
+                    encostou = True
                     
                 if pi == monstro2_norte.y and pj == monstro2_norte.x and MONSTRO2_NORTE == True: 
                     
@@ -639,6 +650,7 @@ def main():
                     arma_dic = monstro2_norte.arma_dic
                     arma_atual = monstro2_norte.arma
                     quebrou = monstro2_norte.quebrou 
+                    encostou = True
                     
                 if pi == monstro3_norte.y and pj == monstro3_norte.x and MONSTRO3_NORTE == True: 
                     
@@ -648,6 +660,7 @@ def main():
                     arma_dic = monstro3_norte.arma_dic
                     arma_atual = monstro3_norte.arma
                     quebrou = monstro3_norte.quebrou
+                    encostou = True
                     
                 if pi == monstro4_norte.y and pj == monstro4_norte.x and MONSTRO4_NORTE == True: 
                     
@@ -657,6 +670,7 @@ def main():
                     arma_dic = monstro4_norte.arma_dic
                     arma_atual = monstro4_norte.arma
                     quebrou = monstro4_norte.quebrou
+                    encostou = True
                     
                 if pi == 2 and pj == 2: 
                     
@@ -735,6 +749,7 @@ def main():
                     arma_dic = monstro_sul.arma_dic
                     arma_atual = monstro_sul.arma
                     quebrou = monstro_sul.quebrou
+                    encostou = True
                     
                 if pi == monstro2_sul.y and pj == monstro2_sul.x and MONSTRO2_SUL == True: 
                     
@@ -744,6 +759,7 @@ def main():
                     arma_dic = monstro2_sul.arma_dic
                     arma_atual = monstro2_sul.arma
                     quebrou = monstro2_sul.quebrou
+                    encostou = True
                    
                 if pi == monstro3_sul.y and pj == monstro3_sul.x and MONSTRO3_SUL == True: 
                     
@@ -753,6 +769,7 @@ def main():
                     arma_dic = monstro3_sul.arma_dic
                     arma_atual = monstro3_sul.arma
                     quebrou = monstro3_sul.quebrou
+                    encostou = True
                     
                 if pi == monstro4_sul.y and pj == monstro4_sul.x and MONSTRO4_SUL == True: 
                     
@@ -762,6 +779,7 @@ def main():
                     arma_dic = monstro4_sul.arma_dic
                     arma_atual = monstro4_sul.arma
                     quebrou = monstro4_sul.quebrou
+                    encostou = True
                     
                 if MONSTRO1_SUL == True: 
                     monstro_sul.anda(A_LUZ,count_m,lanterna,zombie)
@@ -865,6 +883,7 @@ def main():
                     arma_dic = monstro_leste1.arma_dic
                     arma_atual = monstro_leste1.arma
                     quebrou = monstro_leste1.quebrou
+                    encostou = True
                    
                 if pi == monstro2_leste1.y and pj == monstro2_leste1.x and MONSTRO2_LESTE1 == True: 
                     
@@ -874,6 +893,7 @@ def main():
                     arma_dic = monstro2_leste1.arma_dic
                     arma_atual = monstro2_leste1.arma
                     quebrou = monstro2_leste1.quebrou
+                    encostou = True
                     
                 if pi == monstro3_leste1.y and pj == monstro3_leste1.x and MONSTRO3_LESTE1 == True: 
                     
@@ -883,6 +903,7 @@ def main():
                     arma_dic = monstro3_leste1.arma_dic
                     arma_atual = monstro3_leste1.arma
                     quebrou = monstro3_leste1.quebrou
+                    encostou = True
                        
                 if pi == monstro4_leste1.y and pj == monstro4_leste1.x and MONSTRO4_LESTE1 == True: 
                     
@@ -892,6 +913,7 @@ def main():
                     arma_dic = monstro4_leste1.arma_dic
                     arma_atual = monstro4_leste1.arma
                     quebrou = monstro4_leste1.quebrou
+                    encostou = True
                     
                 if pi == 27 and pj == 6: 
                     
@@ -976,6 +998,7 @@ def main():
                     arma_dic = monstro_leste2.arma_dic
                     arma_atual = monstro_leste2.arma
                     quebrou = monstro_leste2.quebrou
+                    encostou = True
                     
                     if quebrou == 1: 
                         tela.blit(label10, (monstro_leste2.x, (monstro_leste2.y - 1)))
@@ -989,6 +1012,7 @@ def main():
                     arma_dic = monstro2_leste2.arma_dic
                     arma_atual = monstro2_leste2.arma
                     quebrou = monstro2_leste2.quebrou
+                    encostou = True
                        
                 if pi == monstro3_leste2.y and pj == monstro3_leste2.x and MONSTRO3_LESTE2 == True: 
                     
@@ -998,6 +1022,7 @@ def main():
                     arma_dic = monstro3_leste2.arma_dic
                     arma_atual = monstro3_leste2.arma
                     quebrou = monstro3_leste2.quebrou
+                    encostou = True
                       
                 if pi == monstro4_leste2.y and pj == monstro4_leste2.x and MONSTRO4_LESTE2 == True: 
                     
@@ -1007,6 +1032,7 @@ def main():
                     arma_dic = monstro4_leste2.arma_dic
                     arma_atual = monstro4_leste2.arma
                     quebrou = monstro4_leste2.quebrou
+                    encostou = True
                     
                 if pi == monstro5_leste2.y and pj == monstro5_leste2.x and MONSTRO5_LESTE2 == True: 
                     
@@ -1016,6 +1042,7 @@ def main():
                     arma_dic = monstro5_leste2.arma_dic
                     arma_atual = monstro5_leste2.arma
                     quebrou = monstro5_leste2.quebrou
+                    encostou = True
                       
                 if pi == monstro6_leste2.y and pj == monstro6_leste2.x and MONSTRO6_LESTE2 == True: 
                     
@@ -1025,6 +1052,7 @@ def main():
                     arma_dic = monstro6_leste2.arma_dic
                     arma_atual = monstro6_leste2.arma
                     quebrou = monstro6_leste2.quebrou
+                    encostou = True
                        
                 if pi == 23 and pj == 12: 
                     
@@ -1074,6 +1102,9 @@ def main():
                 if count_a == 30:
                     quebrou = 0
                     count_a = 0
+                    
+            if encostou == True: 
+                    count_tela_monstro += 1
 #======================================================================================
             
             if lanterna == True: 
@@ -1198,46 +1229,47 @@ def main():
 #-------------------------------------------------------------------------------------
 
             if len(arma_dic) == 0:
+                if tab != tab_tutorial.TAB_6:
                 
-                tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
-                tela.blit(img_inventario,[MAPWIDTH*TILESIZE,0])
-                
-                label_inventario1 = fonte_inventario1.render("Inventário:", True, PRETO)
-                tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 40 ,0.3*TILESIZE]))
-                
-                if lanterna == False: 
-                
-                    label_inventario6 = fonte_inventario.render("- Vazio", True, PRETO)
-                    tela.blit(label_inventario6, ([MAPWIDTH*TILESIZE + 30 ,3*TILESIZE]))
+                    tela.blit(tela_inventario,[MAPWIDTH*TILESIZE,0])
+                    tela.blit(img_inventario,[MAPWIDTH*TILESIZE,0])
                     
-                if lanterna == True: 
-                
-                    label_inventario11 = fonte_inventario.render("- Lanterna", True, PRETO)
-                    tela.blit(label_inventario11, ([MAPWIDTH*TILESIZE + 30 ,3*TILESIZE]))
-               
-                if chave_norte == True:
-                        
-                    label_inventario7 = fonte_inventario.render("__________________", True, PRETO)
-                    tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 15 ,12*TILESIZE]))
-                        
-                    label_inventario12 = fonte_inventario.render("- Chaves :", True, PRETO)
-                    tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 30 ,13*TILESIZE]))
-                
-                        
-                    label_inventario12 = fonte_inventario.render("     Ala sul", True, PRETO)
-                    tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 5 ,15*TILESIZE]))
+                    label_inventario1 = fonte_inventario1.render("Inventário:", True, PRETO)
+                    tela.blit(label_inventario1, ([MAPWIDTH*TILESIZE + 40 ,0.3*TILESIZE]))
                     
-                if chave_sul == True:
+                    if lanterna == False: 
                     
-                    label_inventario13 = fonte_inventario.render("   Ala leste", True, PRETO)
-                    tela.blit(label_inventario13, ([MAPWIDTH*TILESIZE + 5 ,17*TILESIZE]))
+                        label_inventario6 = fonte_inventario.render("- Vazio", True, PRETO)
+                        tela.blit(label_inventario6, ([MAPWIDTH*TILESIZE + 30 ,3*TILESIZE]))
                         
-                if chave_final == True:
+                    if lanterna == True: 
+                    
+                        label_inventario11 = fonte_inventario.render("- Lanterna", True, PRETO)
+                        tela.blit(label_inventario11, ([MAPWIDTH*TILESIZE + 30 ,3*TILESIZE]))
+                   
+                    if chave_norte == True:
+                            
+                        label_inventario7 = fonte_inventario.render("__________________", True, PRETO)
+                        tela.blit(label_inventario7, ([MAPWIDTH*TILESIZE + 15 ,12*TILESIZE]))
+                            
+                        label_inventario12 = fonte_inventario.render("- Chaves :", True, PRETO)
+                        tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 30 ,13*TILESIZE]))
+                    
+                            
+                        label_inventario12 = fonte_inventario.render("     Ala sul", True, PRETO)
+                        tela.blit(label_inventario12, ([MAPWIDTH*TILESIZE + 5 ,15*TILESIZE]))
                         
-                    label_inventario14 = fonte_inventario.render("    Chave da saída", True, PRETO)
-                    tela.blit(label_inventario14, ([MAPWIDTH*TILESIZE + 5 ,19*TILESIZE]))
+                    if chave_sul == True:
                         
-                
+                        label_inventario13 = fonte_inventario.render("   Ala leste", True, PRETO)
+                        tela.blit(label_inventario13, ([MAPWIDTH*TILESIZE + 5 ,17*TILESIZE]))
+                            
+                    if chave_final == True:
+                            
+                        label_inventario14 = fonte_inventario.render("    Chave da saída", True, PRETO)
+                        tela.blit(label_inventario14, ([MAPWIDTH*TILESIZE + 5 ,19*TILESIZE]))
+                            
+                    
                     
             if len(arma_dic) == 1:
                 
@@ -1363,6 +1395,7 @@ def main():
                 pi = 14
                 pj = 0
                 jogador = pygame.Rect(pj*TILESIZE,pi*TILESIZE,TILESIZE,TILESIZE)
+            
                 #definindo monstros
                 mi_hall = 15
                 mj_hall= 16
@@ -1370,6 +1403,7 @@ def main():
                 m2j_hall = 25
                 m3i_hall = 27
                 m3j_hall = 35
+                
                 mi_norte = 19
                 mj_norte = 6
                 m2i_norte = 17
@@ -1378,6 +1412,7 @@ def main():
                 m3j_norte = 17
                 m4i_norte = 3
                 m4j_norte = 21
+                
                 mi_sul = 2
                 mj_sul = 2
                 m2i_sul = 27
@@ -1386,6 +1421,7 @@ def main():
                 m3j_sul = 24
                 m4i_sul = 8
                 m4j_sul = 23
+                
                 mi_leste1 = 27
                 mj_leste1 = 2
                 m2i_leste1 = 2
@@ -1394,6 +1430,7 @@ def main():
                 m3j_leste1 = 23
                 m4i_leste1 = 10
                 m4j_leste1 = 25
+                
                 mi_leste2 = 27
                 mj_leste2 = 2
                 m2i_leste2 = 27
@@ -1406,12 +1443,37 @@ def main():
                 m5j_leste2 = 37
                 m6i_leste2 = 15
                 m6j_leste2 = 33
+                
                 vida_monstro_hall = 10
                 vida_monstro_norte = 15
                 vida_monstro_sul = 20
                 vida_monstro_leste1 = 25
                 vida_monstro_leste2 = 30
                 
+                monstro_hall = Monstro(mj_hall,mi_hall,BRANCO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall,tela_monstro,fonte_inventario)
+                monstro2_hall = Monstro(m2j_hall,m2i_hall,BRANCO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall,tela_monstro,fonte_inventario)
+                monstro3_hall = Monstro(m3j_hall,m3i_hall,BRANCO,TILESIZE,tela,tabuleiro.TAB,vida_monstro_hall,tela_monstro,fonte_inventario)
+                monstro_norte = Monstro(mj_norte,mi_norte,BRANCO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte,tela_monstro,fonte_inventario)
+                monstro2_norte = Monstro(m2j_norte,m2i_norte,BRANCO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte,tela_monstro,fonte_inventario)
+                monstro3_norte = Monstro(m3j_norte,m3i_norte,BRANCO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte,tela_monstro,fonte_inventario)
+                monstro4_norte = Monstro(m4j_norte,m4i_norte,BRANCO,TILESIZE,tela,ala_norte.TAB_2,vida_monstro_norte,tela_monstro,fonte_inventario)
+                monstro_sul = Monstro(mj_sul,mi_sul,BRANCO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul,tela_monstro,fonte_inventario)
+                monstro2_sul = Monstro(m2j_sul,m2i_sul,BRANCO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul,tela_monstro,fonte_inventario)
+                monstro3_sul= Monstro(m3j_sul,m3i_sul,BRANCO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul,tela_monstro,fonte_inventario)
+                monstro4_sul = Monstro(m4j_sul,m4i_sul,BRANCO,TILESIZE,tela,ala_sul.TAB_3,vida_monstro_sul,tela_monstro,fonte_inventario)
+                monstro_leste1 = Monstro(mj_leste1,mi_leste1,BRANCO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1,tela_monstro,fonte_inventario)
+                monstro2_leste1 = Monstro(m2j_leste1,m2i_leste1,BRANCO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1,tela_monstro,fonte_inventario)
+                monstro3_leste1 = Monstro(m3j_leste1,m3i_leste1,BRANCO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1,tela_monstro,fonte_inventario)
+                monstro4_leste1 = Monstro(m4j_leste1,m4i_leste1,BRANCO,TILESIZE,tela,ala_leste_1.TAB_5,vida_monstro_leste1,tela_monstro,fonte_inventario)
+                monstro_leste2 = Monstro(mj_leste2,mi_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+                monstro2_leste2 = Monstro(m2j_leste2,m2i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+                monstro3_leste2 = Monstro(m3j_leste2,m3i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+                monstro4_leste2 = Monstro(m4j_leste2,m4i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+                monstro5_leste2 = Monstro(m5j_leste2,m5i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+                monstro6_leste2 = Monstro(m6j_leste2,m6i_leste2,BRANCO,TILESIZE,tela,ala_leste_final.TAB_4,vida_monstro_leste2,tela_monstro,fonte_inventario)
+
+                
+            
                 armas = {'catana': [10,3], 'martelo': [5,4]}         # dicionario 
                 
                 arma_soco_hall = False
@@ -1432,7 +1494,7 @@ def main():
                 nome_arma = ''
                 quebrou = 0 
                 
-
+            
                 #BOOL
                 chave_norte = False
                 chave_sul = False
@@ -1440,9 +1502,11 @@ def main():
                 Fullscreen = False
                 sair = False
                 lanterna = False
-
-                key_pressed = pygame.key.get_pressed() 
-                
+                musica1 = False # se a musica esta rodando
+                musica = True
+                musica2 = False # se a musica esta rodando
+                musica3 = False
+            
                 luz = True
                 
                 QUIT = False
@@ -1473,8 +1537,12 @@ def main():
                 MONSTRO5_LESTE2 = True
                 MONSTRO6_LESTE2 = True
                 
+                encostou = False
+                
                 count = 0  
                 count_m = 0  
+                count_a = 0 
+                count_tela_monstro = 0 
 
             elif b2 == 2:
                 sair = True
