@@ -1222,18 +1222,20 @@ def main():
                 label4 = fonte_2.render("Ala Sul", True, BRANCO)
                 tela.blit(label4, (15*TILESIZE, 2*TILESIZE))
                 
-            if tab == tabuleiro.TAB and pj == 20 and pi == 1: 
-                label3 = fonte_2.render("Hall", True, BRANCO)
-                tela.blit(label3, (15*TILESIZE, 2*TILESIZE))
+            if tab == tabuleiro.TAB:
+                if pj == 38 and pi == 13:                
+                    label9 = fonte_2.render("Hall", True, BRANCO)
+                    tela.blit(label9, (36*TILESIZE, 12*TILESIZE))
+                elif pj == 20 and pi == 1: 
+                    label3 = fonte_2.render("Hall", True, BRANCO)
+                    tela.blit(label3, (15*TILESIZE, 2*TILESIZE))
+                elif pj == 20 and pi == 28:                
+                    label5 = fonte_2.render("Hall", True, BRANCO)
+                    tela.blit(label5, (15*TILESIZE, 27*TILESIZE))
+                elif tab[pi][pj] == 16:
+                    label11 = fonte_2.render("A porta se trancou. Ache outra saida",True, BRANCO)
+                    tela.blit(label11, (TILESIZE, 10*TILESIZE))
                 
-            if tab == tabuleiro.TAB and pj == 20 and pi == 28:                
-                label5 = fonte_2.render("Hall", True, BRANCO)
-                tela.blit(label5, (15*TILESIZE, 27*TILESIZE))
-                
-            if tab == tabuleiro.TAB and pj == 38 and pi == 13:                
-                label9 = fonte_2.render("Hall", True, BRANCO)
-                tela.blit(label9, (36*TILESIZE, 12*TILESIZE))
-            
             if tab == ala_leste_1 and pj == 1 and pi == 13:                
                 label9 = fonte_2.render("ala leste", True, BRANCO)
                 tela.blit(label9, (15*TILESIZE, 27*TILESIZE))
