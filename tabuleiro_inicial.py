@@ -431,7 +431,6 @@ def main():
                     else:
                         tela = pygame.display.set_mode([MAPWIDTH*TILESIZE + 200,MAPHEIGHT*TILESIZE])
                 if event.key == pygame.K_SPACE:
-                    print("funciona cuzao")
                     nome_tela = 'jogo'
                     tela_inicial = ''
                 #if event.key == pygame.K_BACKSPACE:
@@ -947,7 +946,6 @@ def main():
                         background_alaleste2_mask.set_colorkey(blue)
                         
                         tela.blit(background_alaleste2,[0,0])
-
                         tela.blit(background_alaleste2_mask,[0,0])
 
                         A_LUZ =  pygame.Rect((pj-3)*TILESIZE,(pi-3)*TILESIZE,TILESIZE*7,TILESIZE*7)
