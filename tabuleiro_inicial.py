@@ -478,7 +478,7 @@ def main():
             
         if tela_inicial == 'historia':
             tela.blit(carta, [0,0])
-            skip = fonte_inventario1.render("precione espaco para continuar", True, BRANCO)
+            skip = fonte_inventario1.render("pressione espaco para continuar", True, BRANCO)
             tela.blit(skip, [31*TILESIZE,28*TILESIZE])
         
         
